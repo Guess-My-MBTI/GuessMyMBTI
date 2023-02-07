@@ -1,0 +1,17 @@
+Controller에서 보낼 떄 try catch 문에 감싸서 보내기
+-> 안감싸면 서버터짐
+
+예시
+@PostMapping("/v1/post")
+public Header<CreatePostResponse> createPostV1(@RequestBody CreatePostRequest request){
+    try{
+        Post post = new Post();
+        post.setUser(userService.findOne(request.id));
+        post.setDate(request.date);
+
+        Post result = postService.createPost(post);
+        return Header.SUCCESS(new CreatePostResponse(result.getId()));
+    }catch (Exception e){
+        return Header.FAIL(e);
+    }
+}
