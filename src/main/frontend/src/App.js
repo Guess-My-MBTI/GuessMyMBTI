@@ -5,10 +5,11 @@ import OwnerLogin from "./pages/OwnerLogin";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App"></div>
-      <Routes>
-        <Route path="/login" element={<OwnerLogin />} />
-      </Routes>
+      <div className="App">
+        <Routes>
+          <Route path="/login" element={<OwnerLogin />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
