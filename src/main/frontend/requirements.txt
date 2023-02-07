@@ -1,1 +1,4 @@
 npm install 한 것들 여기다가 작성
+
+<frontend>
+npm install react-router-dom@6
