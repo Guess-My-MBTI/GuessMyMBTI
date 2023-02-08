@@ -2,7 +2,7 @@ package com.hsstudy.GuessMyMBTI.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserServiceImpl implements UserService {
+public class OwnerServiceImpl implements OwnerService {
     @Autowired
-    private UserService userService;
+    private OwnerService ownerService;
 }
