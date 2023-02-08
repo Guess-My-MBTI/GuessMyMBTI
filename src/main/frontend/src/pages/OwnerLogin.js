@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { BsQuestion } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import Notice from "../components/Notice";
+
 const OwnerLogin = () => {
+  const navigate = useNavigate();
   return (
     <div className="OwnerLogin">
       <div className="banner">
@@ -23,7 +29,16 @@ const OwnerLogin = () => {
         </p>
 
         <p className="guess">맞춰봐</p>
+        <div>
+          <BsQuestion
+            className="info"
+            onClick={() => {
+              navigate("/notice");
+            }}
+          />
+        </div>
       </div>
+
       <div className="login_wrapper"></div>
     </div>
   );
