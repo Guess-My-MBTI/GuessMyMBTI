@@ -68,7 +68,9 @@ target
 .flattened-pom.xml
 secrets.yml
 .gradletasknamecache
-logs
+./logs
+
+
 # react
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
@@ -109,3 +111,6 @@ src/main/frontend/.env.production.local
 src/main/frontend/npm-debug.log*
 src/main/frontend/yarn-debug.log*
 src/main/frontend/yarn-error.log*
+
+
+/logs/
