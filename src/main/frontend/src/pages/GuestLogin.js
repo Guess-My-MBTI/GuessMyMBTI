@@ -11,9 +11,12 @@ const GuestLogin = () => {
   const [state, setState] = useState({ nickName: "" });
 
   const handleChangeState = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
+    // console.log(state);
+    setState((state) => {
+      return {
+        ...state,
+        [e.target.name]: e.target.value,
+      };
     });
   };
 
@@ -36,18 +39,58 @@ const GuestLogin = () => {
       {/* 이상하게 나옴 */}
       {/* <h2>{`${dummyData}`}의 MBTI를 맞춰봐</h2> */}
 
-      <h2>MBTI를 맞춰봐</h2>
-      <div>NICKNAME을 입력해주세요</div>
-      <div>
-        <input
-          name="nickName"
-          ref={nickNameInput}
-          value={state.nickName}
-          onChange={handleChangeState}
-        />
+      <div className="banner">
+        <p className="me">
+          <img
+            src={process.env.PUBLIC_URL + `assets/pencil1.png`}
+            className="pencil1"
+          />
+          OO의
+        </p>
+
+        <div className="mbti">
+          <img
+            src={process.env.PUBLIC_URL + `assets/pencil2.png`}
+            className="pencil2"
+          />
+          <p className="m">M</p>
+          <p className="b">B</p>
+          <p className="t">T</p>
+          <p className="i">I</p>
+          <p className="r">를</p>
+        </div>
+
+        <p className="guess">맞춰봐</p>
       </div>
-      <div>
-        <button onClick={handleSubmit}>START</button>
+      <div className="Nick">
+        <div className="write_Nick">
+          <p className="N">N</p>
+          <p className="I">I</p>
+          <p className="C">C</p>
+          <p className="K">K</p>
+          <p className="N2">N</p>
+          <p className="A">A</p>
+          <p className="M">M</p>
+          <p className="E">E</p>
+
+          <p className="write"> 을 입력해주세요</p>
+        </div>
+
+        <form className="nickInput">
+          <input
+            placeholder="NICKNAME"
+            name="nickName"
+            ref={nickNameInput}
+            value={state.nickName}
+            onChange={handleChangeState}
+          />
+        </form>
+
+        <div className="submit">
+          <button className="submitBtn" onClick={handleSubmit}>
+            START
+          </button>
+        </div>
       </div>
     </div>
   );
