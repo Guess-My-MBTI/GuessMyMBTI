@@ -39,3 +39,81 @@ body {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/* --------------------------------수빈 css-------------------------------- */
+
+/* OwnerLogin */
+
+.OwnerLogin {
+  display: grid;
+}
+
+.OwnerLogin .banner {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+  color: rgba(240, 205, 186, 1);
+  text-shadow: -2px 0 rgb(255, 255, 255), 0 2px rgb(255, 255, 255),
+    2px 0 rgb(255, 255, 255), 0 -2px rgb(255, 255, 255);
+  line-height: 0%;
+}
+
+.OwnerLogin .me {
+  padding-top: 100px;
+  font-size: 50px;
+  margin: 0;
+  text-align: start;
+  transform: rotate(-9deg);
+}
+.OwnerLogin .pencil1 {
+  width: 180px;
+  position: absolute;
+  left: -30px;
+  top: 20px;
+}
+.OwnerLogin .mbti {
+  display: flex;
+  font-size: 80px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.OwnerLogin .m {
+  color: rgba(239, 194, 197, 1);
+}
+
+.OwnerLogin .b {
+  color: rgba(191, 205, 216, 1);
+}
+
+.OwnerLogin .t {
+  color: rgba(192, 216, 203, 1);
+}
+
+.OwnerLogin .i {
+  color: rgba(255, 232, 151, 1);
+}
+
+.OwnerLogin .r {
+  font-size: 40px;
+  transform: rotate(13deg);
+  padding-top: 90px;
+  margin: 0;
+  text-align: start;
+}
+.OwnerLogin .pencil2 {
+  position: absolute;
+  width: 350px;
+  top: 190px;
+}
+
+.OwnerLogin .guess {
+  margin: 0;
+  color: rgba(249, 153, 160, 1);
+  font-size: 60px;
+}
+
+/* --------------------------------수빈 css-------------------------------- */
