@@ -10,6 +10,6 @@ public class OwnerController {
 
     @GetMapping("hello")
     public List<String> hello() {
-        return Arrays.asList("안녕하세요", "Hello");
+        return Arrays.asList("안녕하세요 ㅌㅔ스트 중입니다", "Hello");
     }
 }
