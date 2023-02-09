@@ -347,4 +347,70 @@ body {
   font-size: 14px;
 }
 
+/* ==============================GuestResult=============================== */
+
+.GuestResult .goHome {
+  display: grid;
+  align-items: center;
+  white-space: pre-wrap;
+  color: rgba(240, 205, 186, 1);
+  text-shadow: -2px 0 #666666, 0 2px #666666, 2px 0 #666666, 0 -2px #666666;
+  line-height: 0%;
+}
+
+.GuestResult .home {
+  color: #ffffff;
+  font-size: 25px;
+  padding-left: 12px;
+}
+
+.GuestResult .home_img_wrapper {
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  background-color: #f999a0;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
+}
+
+.GuestResult .home_img {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  padding-bottom: 3px;
+}
+
+.GuestResult .goLink {
+  display: grid;
+  align-items: center;
+  white-space: pre-wrap;
+  color: rgba(240, 205, 186, 1);
+  text-shadow: -2px 0 #666666, 0 2px #666666, 2px 0 #666666, 0 -2px #666666;
+  line-height: 0%;
+}
+
+.GuestResult .link {
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.GuestResult .link_img_wrapper {
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  background-color: #ffe897;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
+}
+
+.GuestResult .link_img {
+  width: 55px;
+  height: 55px;
+  margin: auto;
+}
+
 /* --------------------------------아름 css-------------------------------- */

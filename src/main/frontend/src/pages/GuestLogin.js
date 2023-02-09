@@ -87,7 +87,11 @@ const GuestLogin = () => {
         </form>
 
         <div className="submit">
-          <button className="submitBtn" onClick={handleSubmit}>
+          <button
+            className="submitBtn"
+            onClick={handleSubmit}
+            style={{ cursor: "pointer" }}
+          >
             START
           </button>
         </div>

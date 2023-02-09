@@ -21,7 +21,7 @@ function App() {
           {/* ---------아름------------ */}
           <Route path="/question" element={<Question />} />
           <Route path="/guest-login" element={<GuestLogin />} />
-          <Route path="/guset-result" element={<GusetResult />} />
+          <Route path="/guest-result" element={<GusetResult />} />
         </Routes>
       </div>
     </BrowserRouter>
