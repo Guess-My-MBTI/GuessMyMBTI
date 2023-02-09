@@ -187,8 +187,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 80px;
-  text-shadow: -1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0),
-    0 -1px rgb(0, 0, 0);
+  text-shadow: -2px 0 rgb(0, 0, 0), 0 2px rgb(0, 0, 0), 2px 0 rgb(0, 0, 0),
+    0 -2px rgb(0, 0, 0);
 }
 
 .OwnerResult .m {
@@ -209,10 +209,10 @@ body {
   color: rgba(192, 216, 203, 1);
 
   letter-spacing: 0.09em;
-  margin-left: 20px;
 }
 
 .OwnerResult .mbti-sum {
+  margin-left: 20px;
   text-shadow: -2px 0 rgb(255, 255, 255), 0 2px rgb(255, 255, 255),
     2px 0 rgb(255, 255, 255), 0 -2px rgb(255, 255, 255);
 }
@@ -444,29 +444,33 @@ body {
 
 /* ==============================GuestResult=============================== */
 
+.GuestResult {
+  display: grid;
+}
+
 .GuestResult .answer,
 .choose {
-  padding-left: 10px;
   display: flex;
-  text-align: center;
   align-items: center;
   justify-content: left;
   white-space: pre-wrap;
-  text-shadow: -2px 0 #666666, 0 2px #666666, 2px 0 #666666, 0 -2px #666666;
+  text-shadow: -1px 0 #666666, 0 1px #666666, 1px 0 #666666, 0 -1px #666666;
   line-height: 0%;
-  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 20px;
 }
 
 .GuestResult .name,
 .c_name {
   color: #9e9e9e;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .GuestResult .mbti,
 .c_mbti {
   display: flex;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .GuestResult .m {
@@ -507,10 +511,12 @@ body {
 
 .GuestResult .answerCard .mbti,
 .chooseCard .mbti {
-  text-align: center;
-  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin-bottom: 15px;
-  margin-left: 55px;
   font-size: 80px;
   text-shadow: -2px 0 #000000, 0 2px #000000, 2px 0 #000000, 0 -2px #000000;
 }
