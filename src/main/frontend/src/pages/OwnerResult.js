@@ -1,7 +1,10 @@
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import { MdOutlineReplay } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const OwnerResult = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="OwnerResult">
       <div className="result">
@@ -32,7 +35,12 @@ const OwnerResult = () => {
             <MdOutlineReplay className="return" />
           </div>
           <div>
-            <AiFillHome className="home" />
+            <AiFillHome
+              className="home"
+              onClick={() => {
+                navigate("/owner-main");
+              }}
+            />
           </div>
           <div>
             <HiOutlineLink className="share" />

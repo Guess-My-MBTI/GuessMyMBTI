@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { BsQuestion } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import Notice from "../components/Notice";
 
 const OwnerLogin = () => {
   const navigate = useNavigate();
