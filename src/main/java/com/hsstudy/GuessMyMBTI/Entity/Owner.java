@@ -17,8 +17,10 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OWNER_ID")
     private Long id;
+
     @Column(name = "OWNER_NICKNAME")
     private String nickname; // 카톡 이름, 구글 이름
+
 
 
 
