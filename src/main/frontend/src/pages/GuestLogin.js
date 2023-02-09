@@ -36,9 +36,6 @@ const GuestLogin = () => {
 
   return (
     <div className="GuestLogin">
-      {/* 이상하게 나옴 */}
-      {/* <h2>{`${dummyData}`}의 MBTI를 맞춰봐</h2> */}
-
       <div className="banner">
         <p className="me">
           <img
