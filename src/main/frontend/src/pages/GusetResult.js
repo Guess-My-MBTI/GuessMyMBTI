@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import React, { useRef, useState } from "react";
+import { AiFillHome } from "react-icons/ai";
+import { HiOutlineLink } from "react-icons/hi";
 
 const GuestResult = () => {
   const navigate = useNavigate();
-  const goHome = () => navigate("/guest-login");
-  const copiedLink = () => alert("링크가 복사되었습니다!");
 
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
@@ -76,10 +76,21 @@ const GuestResult = () => {
         </div>
       </div>
 
+      <div className="accauracy">
+        <div className="percentage">
+          <p className="zero">0%</p>
+          <p className="standard">정확도</p>
+          <p className="perfect">100%</p>
+        </div>
+        <div className="graph">
+          <span>80%</span>
+        </div>
+      </div>
+      <br />
       <div className="sendMessage">
         <form className="message">
           <input
-            placeholder="상대에게 남기고 싶은 한마디 (20자 이내)"
+            placeholder="상대에게 남기고 싶은 한마디"
             name="message"
             ref={messageInput}
             value={state.message}
@@ -101,21 +112,21 @@ const GuestResult = () => {
       <div className="go">
         <div className="goHome">
           <p className="home">홈으로</p>
-          <div className="home_img_wrapper" onClick={goHome}>
-            <img
-              className="home_img"
-              src={process.env.PUBLIC_URL + `assets/Home.png`}
-            />
+          <div
+            className="home_img_wrapper"
+            onClick={() => navigate("/guest-login")}
+          >
+            <AiFillHome className="AiHome" />
           </div>
         </div>
 
         <div className="goLink">
           <p className="link">공유하기</p>
-          <div className="link_img_wrapper" onClick={copiedLink}>
-            <img
-              className="link_img"
-              src={process.env.PUBLIC_URL + `assets/Link.png`}
-            />
+          <div
+            className="link_img_wrapper"
+            onClick={() => alert("링크가 복사되었습니다!")}
+          >
+            <HiOutlineLink className="HiLink" />
           </div>
         </div>
       </div>
