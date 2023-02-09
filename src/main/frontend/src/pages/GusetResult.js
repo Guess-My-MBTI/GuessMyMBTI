@@ -9,6 +9,9 @@ const GuestResult = () => {
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
+  const goHome = () => navigate("/guest-login");
+  const share = () => alert("링크가 복사되었습니다!");
+
   const handleChangeState = (e) => {
     // console.log(state);
     setState((state) => {
@@ -109,24 +112,18 @@ const GuestResult = () => {
         </div>
       </div>
 
-      <div className="go">
-        <div className="goHome">
-          <p className="home">홈으로</p>
-          <div
-            className="home_img_wrapper"
-            onClick={() => navigate("/guest-login")}
-          >
-            <AiFillHome className="AiHome" />
-          </div>
+      <div className="button-wrapper">
+        <div className="text">
+          <div>홈으로</div>
+          <div>공유하기</div>
         </div>
 
-        <div className="goLink">
-          <p className="link">공유하기</p>
-          <div
-            className="link_img_wrapper"
-            onClick={() => alert("링크가 복사되었습니다!")}
-          >
-            <HiOutlineLink className="HiLink" />
+        <div className="icons">
+          <div onClick={goHome}>
+            <AiFillHome className="Home" />
+          </div>
+          <div onClick={share}>
+            <HiOutlineLink className="Link" />
           </div>
         </div>
       </div>
