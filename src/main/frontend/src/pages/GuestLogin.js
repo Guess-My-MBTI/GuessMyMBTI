@@ -45,7 +45,7 @@ const GuestLogin = () => {
             src={process.env.PUBLIC_URL + `assets/pencil1.png`}
             className="pencil1"
           />
-          OO의
+          00의
         </p>
 
         <div className="mbti">

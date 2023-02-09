@@ -1,29 +1,122 @@
 import { useNavigate } from "react-router-dom";
+import React, { useRef, useState } from "react";
 
 const GuestResult = () => {
   const navigate = useNavigate();
   const goHome = () => navigate("/guest-login");
   const copiedLink = () => alert("링크가 복사되었습니다!");
 
+  const messageInput = useRef();
+  const [state, setState] = useState({ message: "" });
+
+  const handleChangeState = (e) => {
+    // console.log(state);
+    setState((state) => {
+      return {
+        ...state,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  const handleSend = () => {
+    if (state.message.length < 1) {
+      messageInput.current.focus();
+      return;
+    } else if (state.message.length > 20) {
+      alert("20자 이내로 설정해주세요!");
+      setState({ message: "" });
+      return;
+    } else {
+      console.log(state.message);
+      if (window.confirm(`나랑 MBTI 검사하러 갈 사람!`)) {
+        navigate(`/`);
+      }
+    }
+  };
+
   return (
     <div className="GuestResult">
-      <div className="goHome">
-        <p className="home">홈으로</p>
-        <div className="home_img_wrapper" onClick={goHome}>
-          <img
-            className="home_img"
-            src={process.env.PUBLIC_URL + `assets/Home.png`}
-          />
+      <div className="answer">
+        <p className="name"> 00의 </p>
+
+        <div className="mbti">
+          <p className="m">M</p>
+          <p className="b">B</p>
+          <p className="t">T</p>
+          <p className="i">I</p>
         </div>
       </div>
 
-      <div className="goLink">
-        <p className="link">공유하기</p>
-        <div className="link_img_wrapper" onClick={copiedLink}>
-          <img
-            className="link_img"
-            src={process.env.PUBLIC_URL + `assets/Link.png`}
+      <div className="answerCard">
+        <div className="mbti">
+          <p className="m">M</p>
+          <p className="b">B</p>
+          <p className="t">T</p>
+          <p className="i">I</p>
+        </div>
+      </div>
+
+      <div className="choose">
+        <p className="c_name"> 당신이 생각한 00의 </p>
+        <div className="c_mbti">
+          <p className="m">M</p>
+          <p className="b">B</p>
+          <p className="t">T</p>
+          <p className="i">I</p>
+        </div>
+      </div>
+
+      <div className="chooseCard">
+        <div className="mbti">
+          <p className="m">M</p>
+          <p className="b">B</p>
+          <p className="t">T</p>
+          <p className="i">I</p>
+        </div>
+      </div>
+
+      <div className="sendMessage">
+        <form className="message">
+          <input
+            placeholder="상대에게 남기고 싶은 한마디 (20자 이내)"
+            name="message"
+            ref={messageInput}
+            value={state.message}
+            onChange={handleChangeState}
           />
+        </form>
+
+        <div className="send">
+          <button
+            className="sendBtn"
+            onClick={handleSend}
+            style={{ cursor: "pointer" }}
+          >
+            send
+          </button>
+        </div>
+      </div>
+
+      <div className="go">
+        <div className="goHome">
+          <p className="home">홈으로</p>
+          <div className="home_img_wrapper" onClick={goHome}>
+            <img
+              className="home_img"
+              src={process.env.PUBLIC_URL + `assets/Home.png`}
+            />
+          </div>
+        </div>
+
+        <div className="goLink">
+          <p className="link">공유하기</p>
+          <div className="link_img_wrapper" onClick={copiedLink}>
+            <img
+              className="link_img"
+              src={process.env.PUBLIC_URL + `assets/Link.png`}
+            />
+          </div>
         </div>
       </div>
     </div>
