@@ -273,6 +273,149 @@ body {
   cursor: pointer;
 }
 
+/* OwnerMain */
+.OwnerMain {
+  display: grid;
+}
+
+.OwnerMain .top {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  margin-left: 20px;
+  text-shadow: -1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0),
+    0 -1px rgb(0, 0, 0);
+}
+.OwnerMain .me {
+  letter-spacing: 0.09em;
+  color: rgba(191, 205, 216, 1);
+  padding-right: 10px;
+  flex-grow: 1;
+}
+.OwnerMain .mbtiresult {
+  display: flex;
+  letter-spacing: 0.09em;
+  flex-grow: 1;
+}
+
+.OwnerMain .m {
+  color: rgba(249, 153, 160, 1);
+}
+.OwnerMain .b {
+  color: rgba(192, 216, 203, 1);
+}
+.OwnerMain .t {
+  color: rgba(255, 232, 151, 1);
+}
+.OwnerMain .i {
+  color: rgba(239, 194, 197, 1);
+}
+
+.OwnerMain .menu {
+  text-align: end;
+  flex-grow: 80;
+  font-size: 40px;
+  color: rgb(191, 205, 216);
+  cursor: pointer;
+}
+
+.OwnerMain hr {
+  background-color: rgb(249, 231, 166);
+  border: 0px;
+  width: 100%;
+  height: 2px;
+}
+
+/* Menu */
+.Menu .menu-box {
+  height: 80%;
+  position: absolute;
+  background: rgba(230, 230, 230, 1);
+  border-radius: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+@media (min-width: 650px) {
+  .Menu .menu-box {
+    width: 400px;
+  }
+}
+
+@media (max-width: 650px) {
+  .Menu .menu-box {
+    width: 90vw;
+  }
+}
+
+.Menu .menuList {
+  width: 90%;
+  height: 18%;
+  background-color: rgba(243, 243, 243, 1);
+  border-radius: 30px;
+  display: flex;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  text-shadow: -1px 0 rgba(102, 102, 102, 1), 0 1px rgba(102, 102, 102, 1),
+    1px 0 rgba(102, 102, 102, 1), 0 -1px rgba(102, 102, 102, 1);
+  cursor: pointer;
+  align-items: center;
+  padding-left: 10px;
+}
+.Menu .m2 {
+  top: 40%;
+}
+
+.Menu .m3 {
+  top: 60%;
+}
+
+.Menu .m4 {
+  top: 80%;
+}
+.Menu .m5 {
+  background-color: rgba(243, 243, 243, 0);
+  flex-grow: 1;
+  padding-top: 5px;
+  padding-right: 10px;
+}
+
+.Menu .text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.Menu .mymbti {
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: rgba(234, 206, 205, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.Menu .return {
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: rgba(192, 216, 203, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.Menu .share {
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 232, 151, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.Menu .logout {
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: rgba(249, 153, 160, 1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 /* --------------------------------수빈 css-------------------------------- */
 /* ####################################################################### */
 /* ####################################################################### */
