@@ -464,7 +464,7 @@ body {
 .GuestResult .name,
 .c_name {
   color: #9e9e9e;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .GuestResult .mbti,
@@ -648,58 +648,40 @@ body {
   font-size: 14px;
 }
 
-.GuestResult .go {
-  margin-left: 50px;
-  margin-right: 50px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.GuestResult .goHome,
-.goLink {
+.GuestResult .button-wrapper {
   display: grid;
-  align-items: center;
-  text-shadow: -2px 0 #666666, 0 2px #666666, 2px 0 #666666, 0 -2px #666666;
-  line-height: 0%;
-}
-
-.GuestResult .home,
-.link {
+  text-align: center;
   font-size: 25px;
   color: white;
   text-shadow: -1px 0 rgba(102, 102, 102, 1), 0 1px rgba(102, 102, 102, 1),
     1px 0 rgba(102, 102, 102, 1), 0 -1px rgba(102, 102, 102, 1);
+  padding-top: 20px;
 }
 
-.GuestResult .home_img_wrapper {
-  margin: auto;
-  cursor: pointer;
-  padding: 3px;
+.GuestResult .text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 10px;
+}
+
+.GuestResult .icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 40px;
+  gap: 10px 10px;
+}
+
+.GuestResult .Home {
+  background-color: rgba(249, 153, 160, 1);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  background-color: #f999a0;
-  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
-}
-
-.GuestResult .link_img_wrapper {
-  margin: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  padding: 3px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  background-color: #ffe897;
-  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
 }
-
-.GuestResult .AiHome,
-.HiLink {
-  border-radius: 50px;
-  font-size: 55px;
-  color: #ffffff;
-  /* grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px 10px; */
+.GuestResult .Link {
+  background-color: rgba(255, 232, 151, 1);
+  border-radius: 50%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 /* --------------------------------아름 css-------------------------------- */
