@@ -600,7 +600,7 @@ body {
   text-shadow: -1px 0 #666666, 0 1px #666666, 1px 0 #666666, 0 -1px #666666;
   line-height: 0%;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-left: 20px;
 }
 
@@ -613,7 +613,7 @@ body {
 .GuestResult .mbti,
 .c_mbti {
   display: flex;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .GuestResult .m {
@@ -710,13 +710,16 @@ body {
   border-radius: 40px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border: 2px solid #666666;
 }
-@keyframes stack {
+
+/* 애니메이션 효과 (opacity: 투명도) */
+@keyframes graph {
   0% {
     width: 0;
     opacity: 0;
+    color: #f999a0;
   }
   100% {
     width: 80%;
@@ -734,12 +737,12 @@ body {
   color: #282828;
   font-weight: bold;
   white-space: pre-wrap;
-  /* text-shadow: -2px 0 #666666, 0 2px #666666, 2px 0 #666666, 0 -2px #666666; */
   background-color: #f999a0;
   border: 2px solid #000000;
   opacity: 0.8;
   margin-right: 20%;
-  animation: stack 3s 1;
+  /* 애니메이션 graph를 3초동안 실행시킴 (한번만 실행)*/
+  animation: graph 3s 1;
 }
 
 .GuestResult .sendMessage {
@@ -825,6 +828,157 @@ body {
   border-radius: 50%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+}
+
+/* ==============================Question=============================== */
+
+.Question {
+  display: grid;
+}
+
+.Question .ques-banner,
+.ans-banner {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  white-space: pre-wrap;
+  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
+  line-height: 0%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-size: 35px;
+}
+
+.Question .Q,
+.W {
+  color: #f999a0;
+}
+
+.Question .U,
+.ans-banner .S,
+.r {
+  color: #c0d8cb;
+}
+
+.Question .E,
+.I,
+.ques-mark {
+  color: #bfcdd8;
+}
+
+.Question .ques-banner .S,
+.ques-banner .N,
+.owner-name {
+  color: #ffe897;
+}
+
+.Question .T {
+  color: #95b2a3;
+}
+
+.Question .O,
+.ans-banner .N,
+.e {
+  color: #efc2c5;
+}
+
+.Question .R,
+.m {
+  color: #f0cdba;
+}
+
+.Question .ques-card {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  background: rgba(230, 230, 230, 0.65);
+  box-shadow: 7px 5px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 30px;
+  margin-bottom: 20px;
+  color: #666666;
+}
+
+.Question .ques-num {
+  font-size: 25px;
+  margin-left: 15px;
+}
+
+.Question .ques-text {
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+.Question .A {
+  color: #ffe897;
+}
+
+.Question .progress {
+  display: grid;
+}
+
+.Question .progress-graph {
+  background-color: rgba(230, 230, 230, 0.65);
+  border-radius: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border: 2px solid #666666;
+}
+
+.Question span {
+  display: flex;
+  height: 15px;
+  justify-content: end;
+  border-radius: 40px;
+  padding-right: 30px;
+  box-sizing: border-box;
+  color: #282828;
+  font-weight: bold;
+  white-space: pre-wrap;
+  background-color: #f999a0;
+  margin-right: 90%;
+}
+
+.Question .progress-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.Question button {
+  border: 2px solid #666666;
+  color: #282828;
+  margin-top: 15px;
+  background-color: rgba(230, 230, 230, 0.65);
+  border-radius: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-family: "UhBeeSe_hyun";
+  font-size: 10px;
+}
+
+.Question .answer-card-1,
+.answer-card-2 {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  background: rgba(230, 230, 230, 0.65);
+  box-shadow: 7px 5px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 30px;
+  margin-bottom: 20px;
+  color: #666666;
+}
+
+.Question .ans-text-1,
+.ans-text-2 {
+  margin-left: 15px;
+  top: 50%;
+  left: 0%;
+  transform: translate(0%, 70%);
 }
 
 /* --------------------------------아름 css-------------------------------- */
