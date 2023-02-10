@@ -1,8 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.entity.owner;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hsstudy.GuessMyMBTI.Oauth.Entity.ProviderType;
-import com.hsstudy.GuessMyMBTI.Oauth.Entity.RoleType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,15 +29,15 @@ public class Owner {
     @Size(max = 128)
     private String password;
 
-    @Column(name = "PROVIDER_TYPE", length = 20)
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private ProviderType providerType;
-
-    @Column(name = "ROLE_TYPE", length = 20)
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private RoleType roleType;
+//    @Column(name = "PROVIDER_TYPE", length = 20)
+//    @Enumerated(EnumType.STRING)
+//    @NotNull
+//    private ProviderType providerType;
+//
+//    @Column(name = "ROLE_TYPE", length = 20)
+//    @Enumerated(EnumType.STRING)
+//    @NotNull
+//    private RoleType roleType;
 
     @Column(name = "OWNER_NICKNAME")
     @NotNull
