@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.controller;
+package com.hsstudy.GuessMyMBTI.api.controller.guest;
 
 import org.springframework.web.bind.annotation.RestController;
 

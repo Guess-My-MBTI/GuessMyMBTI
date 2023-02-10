@@ -1,8 +1,8 @@
 package com.hsstudy.GuessMyMBTI.Repository;
 
-import com.hsstudy.GuessMyMBTI.api.entity.Owner;
+import com.hsstudy.GuessMyMBTI.api.entity.owner.Owner;
 import com.hsstudy.GuessMyMBTI.Oauth.Entity.RoleType;
-import com.hsstudy.GuessMyMBTI.api.repository.OwnerRepository;
+import com.hsstudy.GuessMyMBTI.api.repository.owner.OwnerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.entity;
+package com.hsstudy.GuessMyMBTI.api.entity.owner;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hsstudy.GuessMyMBTI.Oauth.Entity.ProviderType;

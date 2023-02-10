@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.repository;
+package com.hsstudy.GuessMyMBTI.api.repository.guest;
 
 import org.springframework.stereotype.Repository;
 

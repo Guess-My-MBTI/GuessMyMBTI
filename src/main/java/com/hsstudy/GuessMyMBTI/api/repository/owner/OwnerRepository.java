@@ -1,6 +1,6 @@
-package com.hsstudy.GuessMyMBTI.api.repository;
+package com.hsstudy.GuessMyMBTI.api.repository.owner;
 
-import com.hsstudy.GuessMyMBTI.api.entity.Owner;
+import com.hsstudy.GuessMyMBTI.api.entity.owner.Owner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

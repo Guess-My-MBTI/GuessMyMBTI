@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.service;
+package com.hsstudy.GuessMyMBTI.api.service.guest;
 
 import org.springframework.stereotype.Service;
 
