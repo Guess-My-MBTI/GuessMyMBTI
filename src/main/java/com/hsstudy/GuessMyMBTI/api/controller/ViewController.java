@@ -6,4 +6,5 @@ import org.springframework.stereotype.Controller;
 
 @Controller // JSON, Page 전달 컨트롤러
 public class ViewController {
+
 }

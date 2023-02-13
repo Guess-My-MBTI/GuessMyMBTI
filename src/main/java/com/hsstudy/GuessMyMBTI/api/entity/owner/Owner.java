@@ -12,13 +12,11 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor // no기본 생성자
-@AllArgsConstructor // @RequiredArgsConstructor는 초기화 되지않은 final 필드나, @NonNull 이 붙은 필드에 대해 생성자를 생성해 줍니다. -> @Autowired 생략
+//@AllArgsConstructor // @RequiredArgsConstructor는 초기화 되지않은 final 필드나, @NonNull 이 붙은 필드에 대해 생성자를 생성해 줍니다. -> @Autowired 생략
 @Entity
 @Builder
 @Table(name = "Owner")
 public class Owner {
-
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OWNER_ID")
@@ -31,7 +29,10 @@ public class Owner {
 
     @Column(name = "OWNER_NICKNAME")
     @NotNull
-    private String nickname; // 카톡 이름, 구글 이름 가져옴
+    private String ownerNickname; // 카톡 이름, 구글 이름 가져옴
+
+    @Column(name = "OWNER_EMAIL")
+    private String ownerEmail;
 
     @Column(name = "OWNER_ANS")
     @Size(max = 20)
@@ -39,8 +40,26 @@ public class Owner {
 
     @Column(name = "OWNER_MBTI")
     @Size(max = 4)
-    private String mbti; // 오너가 작성한 ans를 토대로 만들어 줄 MBTI
+    private String ownerMbti; // 오너가 작성한 ans를 토대로 만들어 줄 MBTI
 
-    // 생성자는 @AllArgsConstructor 에서 만들어줌
 
+//    @Column(name = "PROVIDER_TYPE", length = 20)
+//    @Enumerated(EnumType.STRING)
+//    @NotNull
+//    private ProviderType providerType;
+//
+//    @Column(name = "ROLE_TYPE", length = 20)
+//    @Enumerated(EnumType.STRING)
+//    @NotNull
+//    private RoleType roleType;
+
+    @Builder
+    public Owner(Long ownerId, Long ownerCode, String ownerNickname, String ownerEmail, String ownerAns, String ownerMbti) {
+        this.ownerId = ownerId;
+        this.ownerCode = ownerCode;
+        this.ownerNickname = ownerNickname;
+        this.ownerEmail = ownerEmail;
+        this.ownerAns = ownerAns;
+        this.ownerMbti = ownerMbti;
+    }
 }
