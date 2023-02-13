@@ -1,8 +1,10 @@
 import { BsQuestion } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { KAKAO_AUTH_URL } from "../components/OAuth";
 
 const OwnerLogin = () => {
   const navigate = useNavigate();
+
   return (
     <div className="OwnerLogin">
       <div className="banner">
@@ -37,7 +39,9 @@ const OwnerLogin = () => {
         </div>
       </div>
 
-      <div className="login_wrapper"></div>
+      <div className="login_wrapper">
+        <a href={KAKAO_AUTH_URL}>카카오로 시작하기</a>
+      </div>
     </div>
   );
 };
