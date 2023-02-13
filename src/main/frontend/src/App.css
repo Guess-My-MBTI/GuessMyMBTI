@@ -557,24 +557,27 @@ body {
   line-height: 0%;
 }
 
-.GuestLogin .me {
+.GuestLogin .banner-top {
   padding-top: 100px;
   font-size: 50px;
-  margin: 0;
+  margin-bottom: -30px;
+  margin-left: -50px;
   text-align: start;
+  align-items: left;
   transform: rotate(-9deg);
 }
+
 .GuestLogin .pencil1 {
   width: 200px;
   position: absolute;
   left: -30px;
   top: 10px;
+  padding-top: 55px;
 }
 .GuestLogin .mbti {
   display: flex;
   font-size: 80px;
   margin: 0;
-  padding-top: 10px;
   padding-bottom: 20px;
 }
 
@@ -605,6 +608,7 @@ body {
   position: absolute;
   width: 350px;
   top: 190px;
+  padding-top: 60px;
 }
 
 .GuestLogin .guess {
@@ -616,7 +620,7 @@ body {
 .GuestLogin .write_Nick {
   display: flex;
   font-size: 25px;
-  margin-top: 85px;
+  margin-top: 100px;
   text-align: center;
   align-items: center;
   justify-content: center;
