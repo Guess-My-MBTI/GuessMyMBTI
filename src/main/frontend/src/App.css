@@ -435,6 +435,7 @@ body {
 .Menu .menu-box {
   height: 80%;
   position: absolute;
+  z-index: 2;
   background: rgba(230, 230, 230, 1);
   border-radius: 30px;
   top: 50%;
