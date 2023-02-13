@@ -1,8 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.entity.owner;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hsstudy.GuessMyMBTI.Oauth.Entity.ProviderType;
-import com.hsstudy.GuessMyMBTI.Oauth.Entity.RoleType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +15,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor // @RequiredArgsConstructor는 초기화 되지않은 final 필드나, @NonNull 이 붙은 필드에 대해 생성자를 생성해 줍니다. -> @Autowired 생략
 @Entity
 @Builder
-@Table(name = "OWNER")
+@Table(name = "Owner")
 public class Owner {
 
     @JsonIgnore
@@ -31,23 +29,13 @@ public class Owner {
     @Size(max = 128)
     private String password;
 
-    @Column(name = "PROVIDER_TYPE", length = 20)
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private ProviderType providerType;
-
-    @Column(name = "ROLE_TYPE", length = 20)
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private RoleType roleType;
-
     @Column(name = "OWNER_NICKNAME")
     @NotNull
     private String nickname; // 카톡 이름, 구글 이름 가져옴
 
     @Column(name = "OWNER_ANS")
     @Size(max = 20)
-    private String ans; // 오너가 작성한 결과값 20개
+    private String answer; // 오너가 작성한 결과값 20개
 
     @Column(name = "OWNER_MBTI")
     @Size(max = 4)
