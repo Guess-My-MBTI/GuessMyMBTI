@@ -7,7 +7,6 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://localhost:3306/oauth_login_tutorial?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-#    url: jdbc:mysql://localhost:3306/GMM_DB?serverTimezone=Asia/Seoul
     url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
     username: root
     password: oA1bI1m5YtXOs7OKr8SD
@@ -29,12 +28,11 @@ spring:
   # JPA 설정
   jpa:
     generate-ddl: true
+    show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
-    show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -42,8 +40,6 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
         default_batch_fetch_size: ${chunkSize:100}
         jdbc.batch_size: 20
-        order_inserts: true
-        order_updates: true
         format_sql: true
   # Security OAuth
   security:

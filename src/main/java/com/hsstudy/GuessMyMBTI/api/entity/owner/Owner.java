@@ -14,15 +14,18 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor // no기본 생성자
 //@AllArgsConstructor // @RequiredArgsConstructor는 초기화 되지않은 final 필드나, @NonNull 이 붙은 필드에 대해 생성자를 생성해 줍니다. -> @Autowired 생략
 @Entity
-@Table(name = "OWNER")
+@Builder
+@Table(name = "Owner")
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OWNER_ID")
-    private Long ownerId; // DB에 저장될 개별 id값
+    private Long id; // DB에 저장될 개별 id값
 
-    @Column(name = "OWNER_CODE")
-    private Long ownerCode;
+    @JsonIgnore
+    @Column(name = "PASSWORD", length = 128)
+    @Size(max = 128)
+    private String password;
 
     @Column(name = "OWNER_NICKNAME")
     @NotNull
@@ -33,7 +36,7 @@ public class Owner {
 
     @Column(name = "OWNER_ANS")
     @Size(max = 20)
-    private String ownerAns; // 오너가 작성한 결과값 20개
+    private String answer; // 오너가 작성한 결과값 20개
 
     @Column(name = "OWNER_MBTI")
     @Size(max = 4)

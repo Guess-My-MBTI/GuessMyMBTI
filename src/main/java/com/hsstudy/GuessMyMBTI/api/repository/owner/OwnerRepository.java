@@ -9,8 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
-    // JPA findBy 규칙
-    // select * from user_master where kakao_email = ?
-    public Owner findByOwnerId(String ownerId);
-
+    Owner findById(String id);
 }
