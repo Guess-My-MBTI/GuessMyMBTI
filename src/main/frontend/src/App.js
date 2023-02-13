@@ -6,6 +6,7 @@ import OwnerResult from "./pages/OwnerResult";
 import Question from "./pages/Question";
 import GuestLogin from "./pages/GuestLogin";
 import GusetResult from "./pages/GusetResult";
+import Notice from "./components/Notice";
 
 function App() {
   return (
@@ -16,10 +17,11 @@ function App() {
           <Route path="/" element={<OwnerLogin />} />
           <Route path="/owner-main" element={<OwnerMain />} />
           <Route path="/owner-result" element={<OwnerResult />} />
+          <Route path="/notice" element={<Notice />} />
           {/* ---------아름------------ */}
           <Route path="/question" element={<Question />} />
           <Route path="/guest-login" element={<GuestLogin />} />
-          <Route path="/guset-result" element={<GusetResult />} />
+          <Route path="/guest-result" element={<GusetResult />} />
         </Routes>
       </div>
     </BrowserRouter>

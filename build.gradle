@@ -12,6 +12,10 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	all {
+		// log4j 사용을 위해 spring boot 기본 Default 자바 로깅 프레임워크인 logback 종속성 제거
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
 }
 
 repositories {
@@ -19,12 +23,32 @@ repositories {
 }
 
 dependencies {
+	// db
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// mysql
+	implementation 'mysql:mysql-connector-java'
+//	runtimeOnly 'com.mysql:mysql-connector-java'
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// oauth2 - social login
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// spring web prj - tomcat
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// devtools - 재부팅 없이 사용 -> application.properties 사용 여부 추가
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+	// jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+	// lombok
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
+	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
 }
