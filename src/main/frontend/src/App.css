@@ -98,6 +98,7 @@ body {
 }
 
 .OwnerLogin .r {
+  color: rgba(240, 205, 186, 1);
   font-size: 40px;
   transform: rotate(13deg);
   padding-top: 90px;
@@ -154,6 +155,22 @@ body {
 
 .OwnerLogin .info:hover {
   background-color: rgb(255, 83, 83);
+}
+
+.OwnerLogin .login_wrapper {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.OwnerLogin .kakaobtn {
+  margin: 10px auto;
+  color: transparent;
+  width: 200px;
+  height: 45px;
+  cursor: pointer;
 }
 
 /* OwnerResult */
