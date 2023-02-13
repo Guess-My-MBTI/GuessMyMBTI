@@ -7,8 +7,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://localhost:3306/oauth_login_tutorial?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-#    url: jdbc:mysql://localhost:3306/GMM_DB?serverTimezone=Asia/seoul
-    url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/seoul
+#    url: jdbc:mysql://localhost:3306/GMM_DB?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
     username: root
     password: oA1bI1m5YtXOs7OKr8SD
     hikari:
@@ -31,6 +31,9 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
     show-sql: true
     properties:
       hibernate:
@@ -57,12 +60,12 @@ spring:
           clientSecret: 'x2TJDMqr8vS7e20h5Tokr9iH3uWuYx7e'
           clientAuthenticationMethod: post
           authorizationGrantType: authorization_code
-          redirectUri: "http://localhost:8080/login/oauth2/code/kakao"
+          redirectUri: "http://localhost:8080/login/oauth2/callback/kakao"
 #          redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           scope:
             - profile_nickname
           #            - profile_image
-          #            - account_email
+            - account_email
           clientName: Kakao
 #        facebook:
 #          clientId: '{페이스북 client-id}'
@@ -84,16 +87,17 @@ spring:
 
       # Provider 설정
       provider:
-        naver:
-          authorizationUri: https://nid.naver.com/oauth2.0/authorize
-          tokenUri: https://nid.naver.com/oauth2.0/token
-          userInfoUri: https://openapi.naver.com/v1/nid/me
-          userNameAttribute: response
         kakao:
           authorizationUri: https://kauth.kakao.com/oauth/authorize
           tokenUri: https://kauth.kakao.com/oauth/token
           userInfoUri: https://kapi.kakao.com/v2/user/me
           userNameAttribute: id
+#        naver:
+#          authorizationUri: https://nid.naver.com/oauth2.0/authorize
+#          tokenUri: https://nid.naver.com/oauth2.0/token
+#          userInfoUri: https://openapi.naver.com/v1/nid/me
+#          userNameAttribute: response
+
 
 # cors 설정
 cors:

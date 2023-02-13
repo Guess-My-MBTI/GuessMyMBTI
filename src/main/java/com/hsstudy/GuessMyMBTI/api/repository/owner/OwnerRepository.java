@@ -1,10 +1,16 @@
 package com.hsstudy.GuessMyMBTI.api.repository.owner;
 
+import com.hsstudy.GuessMyMBTI.api.entity.owner.Owner;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 // Guest의 데이터 REPO
 // JPA 이용
 
 @Repository
-public interface OwnerRepository {
+public interface OwnerRepository extends JpaRepository<Owner, Long> {
+    // JPA findBy 규칙
+    // select * from user_master where kakao_email = ?
+    public Owner findByOwnerId(String ownerId);
+
 }
