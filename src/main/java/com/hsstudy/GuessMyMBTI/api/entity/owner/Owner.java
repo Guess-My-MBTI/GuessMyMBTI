@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor // no기본 생성자
 //@AllArgsConstructor // @RequiredArgsConstructor는 초기화 되지않은 final 필드나, @NonNull 이 붙은 필드에 대해 생성자를 생성해 줍니다. -> @Autowired 생략
 @Entity
-@Builder
 @Table(name = "Owner")
 public class Owner {
     @Id
@@ -53,13 +52,4 @@ public class Owner {
 //    @NotNull
 //    private RoleType roleType;
 
-    @Builder
-    public Owner(Long ownerId, Long ownerCode, String ownerNickname, String ownerEmail, String ownerAns, String ownerMbti) {
-        this.ownerId = ownerId;
-        this.ownerCode = ownerCode;
-        this.ownerNickname = ownerNickname;
-        this.ownerEmail = ownerEmail;
-        this.ownerAns = ownerAns;
-        this.ownerMbti = ownerMbti;
-    }
 }

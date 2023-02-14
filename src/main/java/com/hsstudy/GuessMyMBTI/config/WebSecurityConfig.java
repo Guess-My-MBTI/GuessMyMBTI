@@ -21,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+//@AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true) // @PreAuthorize 어노케이션을 메소드단위로 추가하기 위해 사용
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 

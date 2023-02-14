@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
     Owner findById(String id);
 
-    Owner findByNickname(String nickname);
+//    Owner findByNickname(String nickname);
 }
