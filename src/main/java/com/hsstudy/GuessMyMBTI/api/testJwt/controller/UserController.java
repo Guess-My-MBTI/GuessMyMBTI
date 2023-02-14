@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") // localhost:8080/api
 public class UserController {
     private final UserService userService;
 
@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/hello") // localhost:8080/api/hello
     public ResponseEntity<String> hello() {
         return ResponseEntity.ok("hello");
     }
@@ -34,7 +34,7 @@ public class UserController {
         response.sendRedirect("/api/user");
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup") // localhost:8080/api/signup
     public ResponseEntity<UserDto> signup(
             @Valid @RequestBody UserDto userDto
     ) {
