@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @RestController // JSON 형식으로만 넘기는 컨트롤러
+@RequestMapping("/api")
 public class OwnerController {
 
-    @GetMapping("hello")
-    public List<String> hello() {
-        return Arrays.asList("안녕하세요 ㅌㅔ스트 중입니다", "Hello");
+    @Autowired
+    private OwnerService ownerService;
+
+    @GetMapping("/oauth2/token")
+    public List<String> jwtTest() {
+        return Arrays.asList("안녕하세요 jwt 테스트 중입니다", "jwt test");
     }
 
 //    // 카카오 회원가입
