@@ -28,8 +28,9 @@ spring:
         rewriteBatchedStatements: true
   # JPA 설정
   jpa:
+    open-in-view: true
     generate-ddl: true
-    show-sql: true
+    show-sql: true # 콘솔에서 sql 보기
     hibernate:
       ddl-auto: none
       naming:
@@ -41,7 +42,7 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
         default_batch_fetch_size: ${chunkSize:100}
         jdbc.batch_size: 20
-        format_sql: true
+        format_sql: true # 콘솔에서 sql 보기
   # Security OAuth
   security:
     oauth2.client:
@@ -103,7 +104,12 @@ cors:
   max-age: 3600
 
 # jwt secret key 설정
-jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+jwt:
+  header: Authorization
+  # HS512 secret 알고리즘 사용 -> Secret Key = 64Byte 이상이어야 함
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
+
 
 # 토큰 관련 secret Key 및 RedirectUri 설정
 app:
