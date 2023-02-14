@@ -40,7 +40,9 @@ const OwnerLogin = () => {
       </div>
 
       <div className="login_wrapper">
-        <a href={KAKAO_AUTH_URL}>카카오로 시작하기</a>
+        <a href={KAKAO_AUTH_URL} className="kakaobtn">
+          <img src={process.env.PUBLIC_URL + `assets/Kakao.png`} />
+        </a>
       </div>
     </div>
   );

@@ -1,3 +1,8 @@
+// import ListName from "../components/ListName";
+
+// 'OO이 라면?'에 들어감
+// const dummyData = [{ ownerName: "아름" }];
+
 const Question = () => {
   return (
     <div className="Question">
@@ -36,7 +41,9 @@ const Question = () => {
           <p className="E">E</p>
           <p className="R">R</p>
 
-          {/* <p className="owner-name">00</p>
+          {/* <p className="owner-name">
+            <ListName data={dummyData} />
+          </p>
           <p className="e">이</p>
           <p className="r">라</p>
           <p className="m">면</p>
