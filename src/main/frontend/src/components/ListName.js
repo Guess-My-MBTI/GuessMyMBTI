@@ -4,7 +4,7 @@ const ListName = ({ data }) => {
       {data.map((it) => (
         <div key={it.id}>
           <div className="show-name">
-            <p className="ownerName">{it.ownerName}의</p>
+            <p className="ownerName">{it.ownerName}</p>
           </div>
         </div>
       ))}

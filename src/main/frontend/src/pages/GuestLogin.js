@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
 
-// 'OO의 MBTI를 맞춰봐' 에서 링크 주인의 이름 대신 dummyData 만들어서 넣어둠
+// 'OO의 MBTI를 맞춰봐'에 들어감
 const dummyData = [{ ownerName: "아름" }];
 
 const GuestLogin = () => {
@@ -44,6 +44,7 @@ const GuestLogin = () => {
             className="pencil1"
           />
           <ListName data={dummyData} />
+          <p>의</p>
         </div>
 
         <div className="mbti">

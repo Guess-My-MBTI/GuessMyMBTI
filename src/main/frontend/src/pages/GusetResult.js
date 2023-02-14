@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
+import ListName from "../components/ListName";
+
+// '당신이 생각한 OO의 MBTI'에 들어감
+const dummyData = [{ ownerName: "아름" }];
 
 const GuestResult = () => {
   const navigate = useNavigate();
@@ -41,7 +45,9 @@ const GuestResult = () => {
   return (
     <div className="GuestResult">
       <div className="answer">
-        <p className="name"> 00의 </p>
+        <p className="name">
+          <ListName data={dummyData} />의{" "}
+        </p>
 
         <div className="mbti">
           <p className="m">M</p>
@@ -61,7 +67,9 @@ const GuestResult = () => {
       </div>
 
       <div className="choose">
-        <p className="c_name"> 당신이 생각한 00의 </p>
+        <p className="c_name">
+          당신이 생각한 <ListName data={dummyData} />의{" "}
+        </p>
         <div className="c_mbti">
           <p className="m">M</p>
           <p className="b">B</p>
