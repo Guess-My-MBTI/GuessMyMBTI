@@ -208,6 +208,12 @@ body {
     0 -2px rgb(0, 0, 0);
 }
 
+@media (max-width: 350px) {
+  .OwnerResult .mbti {
+    font-size: 65px;
+  }
+}
+
 .OwnerResult .m {
   color: rgba(255, 246, 214, 1);
 }
@@ -578,10 +584,9 @@ body {
   display: flex;
   padding-top: 50px;
   font-size: 50px;
-  margin-bottom: -30px;
+  margin-bottom: -35px;
   margin-left: -20px;
   text-align: start;
-  align-items: left;
   transform: rotate(-9deg);
 }
 
@@ -613,6 +618,7 @@ body {
   display: flex;
   font-size: 80px;
   margin: 0;
+  padding-top: 10px;
   padding-bottom: 20px;
 }
 
@@ -640,6 +646,7 @@ body {
 }
 
 .GuestLogin .r {
+  color: rgba(240, 205, 186, 1);
   font-size: 40px;
   transform: rotate(13deg);
   padding-top: 90px;
@@ -652,6 +659,7 @@ body {
     padding-top: 70px;
     font-size: 30px;
     margin: 0;
+    color: rgba(240, 205, 186, 1);
   }
 }
 .GuestLogin .pencil2 {
@@ -687,12 +695,6 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-}
-
-@media (min-width: 650px) {
-  .GuestLogin .write_Nick {
-    font-size: 25px;
-  }
 }
 
 @media (max-width: 650px) {
@@ -957,7 +959,6 @@ body {
 /* ==============================GuestResult=============================== */
 
 .GuestResult {
-  display: grid;
 }
 
 .GuestResult .answer,
@@ -982,17 +983,31 @@ body {
 .GuestResult .name,
 .c_name {
   color: #9e9e9e;
-  font-size: 25px;
+  font-size: 30px;
   display: flex;
   align-items: center;
   margin: 0;
   margin-left: -10px;
 }
 
+@media (max-width: 350px) {
+  .GuestResult .name,
+  .GuestResult .c_name {
+    font-size: 20px;
+  }
+}
+
 .GuestResult .mbti,
 .c_mbti {
   display: flex;
-  font-size: 35px;
+  font-size: 40px;
+}
+
+@media (max-width: 350px) {
+  .GuestResult .mbti,
+  .GuestResult .c_mbti {
+    font-size: 35px;
+  }
 }
 
 .GuestResult .m {
@@ -1027,21 +1042,6 @@ body {
   background: rgba(230, 230, 230, 0.65);
   box-shadow: 7px 5px 4px rgba(0, 0, 0, 0.12);
   border-radius: 30px;
-  margin-bottom: 20px;
-}
-
-@media (max-width: 450px) {
-  .GuestResult .answerCard,
-  .GuestResult .chooseCard {
-    width: 90vw;
-  }
-}
-
-@media (min-width: 900px) {
-  .GuestResult .answerCard,
-  .GuestResult .chooseCard {
-    width: 600px;
-  }
 }
 
 .GuestResult .answerCard .mbti,
@@ -1051,36 +1051,36 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-bottom: 15px;
   font-size: 80px;
-  text-shadow: -2px 0 #000000, 0 2px #000000, 2px 0 #000000, 0 -2px #000000;
+  text-shadow: -2px 0 rgb(0, 0, 0), 0 2px rgb(0, 0, 0), 2px 0 rgb(0, 0, 0),
+    0 -2px rgb(0, 0, 0);
 }
 
-@media (max-width: 450px) {
+@media (max-width: 350px) {
   .GuestResult .answerCard .mbti,
   .GuestResult .chooseCard .mbti {
-    font-size: 60px;
+    font-size: 65px;
   }
 }
 
 .GuestResult .answerCard .m,
 .chooseCard .m {
-  color: #fff6d6;
+  color: rgba(255, 246, 214, 1);
 }
 
 .GuestResult .answerCard .b,
 .chooseCard .b {
-  color: #dbe8f4;
+  color: rgba(219, 232, 244, 1);
 }
 
 .GuestResult .answerCard .t,
 .chooseCard .t {
-  color: #fce9e9;
+  color: rgba(252, 233, 233, 1);
 }
 
 .GuestResult .answerCard .i,
 .chooseCard .i {
-  color: #c0d8cb;
+  color: rgba(192, 216, 203, 1);
 }
 
 .GuestResult .accuracy {
@@ -1095,6 +1095,7 @@ body {
   align-items: center;
   color: #666666;
   font-size: 13px;
+  padding-top: 20px;
 }
 
 .GuestResult .zero {
@@ -1153,7 +1154,7 @@ body {
   font-weight: bold;
   white-space: pre-wrap;
   background-color: #f999a0;
-  border: 2px solid #000000;
+  border: 1px solid #282828;
   opacity: 0.8;
   margin-right: 20%;
   /* 애니메이션 graph를 3초동안 실행시킴 (한번만 실행)*/
@@ -1192,9 +1193,6 @@ body {
   border: none;
   background-color: #e6e6e6;
   font-family: "UhBeeSe_hyun";
-  text-align: center;
-  align-items: center;
-  justify-content: center;
   position: relative;
   padding: 17px;
   color: #282828;
@@ -1208,7 +1206,7 @@ body {
 .GuestResult button {
   border: 2px solid #666666;
   color: #282828;
-  margin-top: 15px;
+  margin-top: 20px;
   margin-bottom: 20px;
   background-color: #e6e6e6;
   border-radius: 30px;
@@ -1233,14 +1231,14 @@ body {
 .GuestResult .text {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 10px;
+  gap: 10px;
 }
 
 .GuestResult .icons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 40px;
-  gap: 10px 10px;
+  gap: 10px;
 }
 
 .GuestResult .Home {
