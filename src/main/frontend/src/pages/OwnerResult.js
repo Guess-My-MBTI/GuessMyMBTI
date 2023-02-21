@@ -8,16 +8,18 @@ const OwnerResult = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const baseUrl = "http://localhost:8080/";
-  const result = "ESFJ";
+  const result = "ISTJ";
 
   useEffect(() => {
     axios({
       method: "GET",
       url: `${baseUrl}result/all`,
-    }).then((res) => setData(res.data));
-  });
-
-  console.log(data);
+    }).then((res) => {
+      console.log(res.data.data);
+      setData(res.data.data);
+    });
+  }, []);
+  const list = data.filter((it) => it.mbti == result);
   return (
     <div className="OwnerResult">
       <div className="result">
@@ -32,9 +34,9 @@ const OwnerResult = () => {
         </div>
       </div>
       <div className="mbti-description">
-        <p className="mbti-sum">새학기 인싸</p>
+        <p className="mbti-sum">{list.map((it) => it.name)}</p>
         <div className="mbti-des-box">
-          <p className="des">어쩌구 저쩌구 어쩔 뚱땡이 저쩔 냉장고</p>
+          <p className="des">{list.map((it) => it.charType)}</p>
         </div>
       </div>
       <div className="button-wrapper">
