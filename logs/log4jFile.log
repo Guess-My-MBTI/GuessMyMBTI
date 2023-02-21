@@ -1,38 +1,36 @@
-2023-02-15 00:08:59,016 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-02-15 00:08:59,136 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-02-15 00:09:00,939 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:132) - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-15 00:09:01,015 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:201) - Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
-2023-02-15 00:09:01,735 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
-2023-02-15 00:09:01,813 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:292) - Root WebApplicationContext: initialization completed in 2675 ms
-2023-02-15 00:09:05,629 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean(buildNativeEntityManagerFactory:437) - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-15 00:09:06,157 [restartedMain] WARN  org.springframework.security.config.annotation.web.builders.WebSecurity(performBuild:305) - You are asking Spring Security to ignore Ant [pattern='/h2 console/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-02-15 00:09:06,158 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain(<init>:52) - Will not secure Ant [pattern='/h2 console/**']
-2023-02-15 00:09:06,159 [restartedMain] WARN  org.springframework.security.config.annotation.web.builders.WebSecurity(performBuild:305) - You are asking Spring Security to ignore Ant [pattern='/favicon.ico']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-02-15 00:09:06,159 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain(<init>:52) - Will not secure Ant [pattern='/favicon.ico']
-2023-02-15 00:09:06,206 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain(<init>:55) - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@48df2ae5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@66b58dd5, org.springframework.security.web.context.SecurityContextPersistenceFilter@1820cc32, org.springframework.security.web.header.HeaderWriterFilter@4a71b1f1, org.springframework.security.web.authentication.logout.LogoutFilter@68e71aed, com.hsstudy.GuessMyMBTI.api.testJwt.jwt.JwtFilter@5ca75c2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@64c84102, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6cd208b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6bb6cefe, org.springframework.security.web.session.SessionManagementFilter@2df891b7, org.springframework.security.web.access.ExceptionTranslationFilter@3195e1b3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4b7e3046]
-2023-02-15 00:09:06,610 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:59) - LiveReload server is running on port 35729
-2023-02-15 00:09:06,643 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
-2023-02-15 00:09:09,566 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:525) - Initializing Servlet 'dispatcherServlet'
-2023-02-15 00:09:09,567 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:547) - Completed initialization in 1 ms
-2023-02-15 00:09:09,625 [http-nio-8080-exec-1] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver(logException:208) - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported]
-2023-02-15 00:21:40,773 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean(destroy:651) - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-02-15 00:27:02,821 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-02-15 00:27:02,824 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-02-15 00:27:03,443 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:132) - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-15 00:27:03,500 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:201) - Finished Spring Data repository scanning in 50 ms. Found 3 JPA repository interfaces.
-2023-02-15 00:27:04,053 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
-2023-02-15 00:27:04,129 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:292) - Root WebApplicationContext: initialization completed in 1304 ms
-2023-02-15 00:27:07,998 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean(buildNativeEntityManagerFactory:437) - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-15 00:27:08,887 [restartedMain] WARN  org.springframework.security.config.annotation.web.builders.WebSecurity(performBuild:305) - You are asking Spring Security to ignore Ant [pattern='/h2 console/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-02-15 00:27:08,887 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain(<init>:52) - Will not secure Ant [pattern='/h2 console/**']
-2023-02-15 00:27:08,888 [restartedMain] WARN  org.springframework.security.config.annotation.web.builders.WebSecurity(performBuild:305) - You are asking Spring Security to ignore Ant [pattern='/favicon.ico']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-02-15 00:27:08,888 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain(<init>:52) - Will not secure Ant [pattern='/favicon.ico']
-2023-02-15 00:27:08,921 [restartedMain] INFO  org.springframework.security.web.DefaultSecurityFilterChain(<init>:55) - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@400d018b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@85e54a4, org.springframework.security.web.context.SecurityContextPersistenceFilter@7cbb1473, org.springframework.security.web.header.HeaderWriterFilter@1181fede, org.springframework.security.web.authentication.logout.LogoutFilter@5ac3c4e7, com.hsstudy.GuessMyMBTI.api.testJwt.jwt.JwtFilter@2d53d5ff, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2dc14ac0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70b7dc7d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4b7e3046, org.springframework.security.web.session.SessionManagementFilter@3afb069c, org.springframework.security.web.access.ExceptionTranslationFilter@cc637b4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@ca89678]
-2023-02-15 00:27:09,508 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer(startServer:59) - LiveReload server is running on port 35729
-2023-02-15 00:27:09,538 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(start:220) - Tomcat started on port(s): 8080 (http) with context path ''
-2023-02-15 00:27:12,103 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:525) - Initializing Servlet 'dispatcherServlet'
-2023-02-15 00:27:12,104 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet(initServletBean:547) - Completed initialization in 1 ms
-2023-02-15 00:27:12,139 [http-nio-8080-exec-2] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver(logException:208) - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
-2023-02-15 00:27:42,842 [http-nio-8080-exec-3] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver(logException:208) - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
-2023-02-15 00:29:03,315 [http-nio-8080-exec-6] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver(logException:208) - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
-2023-02-15 00:43:13,990 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean(destroy:651) - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-21 15:17:43,209 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-21 15:17:43,220 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-21 15:17:44,550 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:132) - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-21 15:17:44,605 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:201) - Finished Spring Data repository scanning in 48 ms. Found 4 JPA repository interfaces.
+2023-02-21 15:17:45,713 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2023-02-21 15:17:46,061 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:292) - Root WebApplicationContext: initialization completed in 2839 ms
+2023-02-21 15:26:18,362 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-21 15:26:18,367 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor(logTo:255) - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-21 15:26:19,468 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:132) - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-21 15:26:19,521 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate(registerRepositoriesIn:201) - Finished Spring Data repository scanning in 46 ms. Found 4 JPA repository interfaces.
+2023-02-21 15:26:20,094 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer(initialize:108) - Tomcat initialized with port(s): 8080 (http)
+2023-02-21 15:26:20,166 [restartedMain] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext(prepareWebApplicationContext:292) - Root WebApplicationContext: initialization completed in 1797 ms
+2023-02-21 15:26:25,258 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean(buildNativeEntityManagerFactory:437) - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-21 15:26:25,268 [restartedMain] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext(refresh:591) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'explainMbtiController': Unsatisfied dependency expressed through field 'explainMbtiService'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.hsstudy.GuessMyMBTI.api.service.explainMbti.ExplainMbtiService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2023-02-21 15:26:25,268 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean(destroy:651) - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-21 15:26:25,718 [restartedMain] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener(logMessage:136) - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-02-21 15:26:25,742 [restartedMain] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter(report:40) - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field explainMbtiService in com.hsstudy.GuessMyMBTI.api.controller.ExplainMbtiController required a bean of type 'com.hsstudy.GuessMyMBTI.api.service.explainMbti.ExplainMbtiService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.hsstudy.GuessMyMBTI.api.service.explainMbti.ExplainMbtiService' in your configuration.
+

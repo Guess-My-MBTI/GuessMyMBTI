@@ -7,3 +7,6 @@ insert into authority (authority_name) values ('ROLE_ADMIN');
 insert into user_authority (user_id, authority_name) values (1, 'ROLE_USER');
 insert into user_authority (user_id, authority_name) values (1, 'ROLE_ADMIN');
 insert into user_authority (user_id, authority_name) values (2, 'ROLE_USER');
+
+
+insert into ExplainMbti (EXPLAINMBTI_MBTI, EXPLAINMBTI_NM, EXPLAINMBTI_CT) values ("ESFJ", "양종욱이랑 비슷한놈", "이친구는 아주 사교적이고 노는걸 좋아하는 뽀로로입니다");
