@@ -13,7 +13,7 @@ const OwnerResult = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `${baseUrl}/result/all`,
+      url: `${baseUrl}result/all`,
     }).then((res) => setData(res.data));
   });
 
