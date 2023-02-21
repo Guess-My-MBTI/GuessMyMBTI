@@ -5,7 +5,7 @@ import com.hsstudy.GuessMyMBTI.api.entity.ExplainMbtiDTO;
 import java.util.List;
 
 public interface ExplainMbtiService {
-    List<ExplainMbtiDTO> getAllExplainMbti();
+    List<ExplainMbtiDTO> getAllExplainMbtis();
 
 
 }

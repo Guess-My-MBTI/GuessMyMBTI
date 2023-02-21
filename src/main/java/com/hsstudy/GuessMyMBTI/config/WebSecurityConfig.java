@@ -46,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
+        // DB 때문에 사용함
         web
                 .ignoring()
                 .antMatchers("/h2 console/**", "/favicon.ico");
@@ -79,6 +80,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 로그인, 회원가입은 토큰이 없는 상태에서 요청이 들어오기 때문에 모두 permit all
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/api/signup").permitAll()
+                // MBTI 설명, 이름에 관련한 내용에 대해서는 모두 허용
+                .antMatchers("/result/all").permitAll()
+                .antMatchers("/token/**").permitAll() // 토큰 관련 부분
                 .anyRequest().authenticated() // 나머지 요청들에 대해서는 모두 인증을 받아야 한다는 의미
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 jwtSecurityConfig 클래스도 적용
