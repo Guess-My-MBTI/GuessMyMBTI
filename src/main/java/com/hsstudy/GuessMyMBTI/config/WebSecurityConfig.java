@@ -8,6 +8,7 @@ import com.hsstudy.GuessMyMBTI.api.testJwt.jwt.TokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -83,6 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // MBTI 설명, 이름에 관련한 내용에 대해서는 모두 허용
                 .antMatchers("/result/all").permitAll()
                 .antMatchers("/token/**").permitAll() // 토큰 관련 부분
+                .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated() // 나머지 요청들에 대해서는 모두 인증을 받아야 한다는 의미
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 jwtSecurityConfig 클래스도 적용

@@ -1,20 +1,33 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import { MdOutlineReplay } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 const OwnerResult = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const baseUrl = "http://localhost:8080/";
+  const result = "ESFJ";
 
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}/result/all`,
+    }).then((res) => setData(res.data));
+  });
+
+  console.log(data);
   return (
     <div className="OwnerResult">
       <div className="result">
         <p className="r">RESULT</p>
         <div className="mbti-box">
           <div className="mbti">
-            <p className="m">M</p>
-            <p className="b">B</p>
-            <p className="t">T</p>
-            <p className="i">I</p>
+            <p className="m">{result[0]}</p>
+            <p className="b">{result[1]}</p>
+            <p className="t">{result[2]}</p>
+            <p className="i">{result[3]}</p>
           </div>
         </div>
       </div>
