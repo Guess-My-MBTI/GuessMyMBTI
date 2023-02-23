@@ -6,10 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ExplainMbtiDTO {
-
     private String mbti;
-
     private String charType;
-
     private String name;
 }

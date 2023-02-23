@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface ExplainMbtiService {
     List<ExplainMbtiDTO> getAllExplainMbtis();
-
-
+    List<ExplainMbtiDTO> getOneExplainMbti();
 }
