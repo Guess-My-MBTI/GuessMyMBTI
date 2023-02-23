@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 //import javax.persistence.Entity;
 // DB테이블과 매핑
@@ -24,12 +25,15 @@ public class Guest {
     private Long id;
 
     @Column(name = "GUEST_NICKNAME")
+    @Size(max = 45)
     private String nickname;
 
     @Column(name = "GUEST_ANS")
+    @Size(max = 45)
     private String answer;
 
     @Column(name = "RESULT_MBTI")
+    @Size(max = 45)
     private String result;
 
 }

@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.hsstudy.GuessMyMBTI.api.service.oauth.KakaoOwnerService;
 import com.hsstudy.GuessMyMBTI.api.entity.owner.OwnerDTO;
 import com.hsstudy.GuessMyMBTI.api.service.owner.OwnerService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
@@ -23,6 +21,17 @@ public class OwnerController {
     @GetMapping("/oauth2/token")
     public List<String> jwtTest() {
         return Arrays.asList("안녕하세요 jwt 테스트 중입니다", "jwt test");
+    }
+
+    @PostMapping("/owner/result")
+    public void saveQuestion(@RequestBody OwnerRequest request) {
+        ownerService.save(request);
+    }
+
+    @Data
+    public static class OwnerRequest{
+        private String answer;
+        private String ownerMbti;
     }
 
     // 카카오 회원가입

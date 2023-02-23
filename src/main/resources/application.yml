@@ -6,7 +6,6 @@ spring:
   # 데이터 소스 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/oauth_login_tutorial?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
     url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
     username: root
     password: oA1bI1m5YtXOs7OKr8SD
@@ -42,6 +41,14 @@ spring:
         default_batch_fetch_size: ${chunkSize:100}
         jdbc.batch_size: 20
         format_sql: true # 콘솔에서 sql 보기
+  # data.sql로 DB에 내용 자동 삽입
+  defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
   # Security OAuth
   security:
     oauth2.client:
@@ -72,10 +79,7 @@ spring:
           tokenUri: https://kauth.kakao.com/oauth/token
           userInfoUri: https://kapi.kakao.com/v2/user/me
           userNameAttribute: id
-  # data.sql로 DB에 내용 자동 삽입
-  sql:
-    init:
-      data-locations=classpath:data.sql;
+
 # cors 설정
 cors:
   allowed-origins: 'http://localhost:3000'

@@ -11,9 +11,7 @@ import lombok.Data;
 @Builder
 public class Header<T> {
     private String resultCode;
-
     private String errorMessage;
-
     private T data;
 
     public static <T> Header<T> SUCCESS(T data) {
