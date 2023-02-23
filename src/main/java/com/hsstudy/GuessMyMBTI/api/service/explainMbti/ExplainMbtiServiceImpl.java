@@ -31,11 +31,4 @@ public class ExplainMbtiServiceImpl implements ExplainMbtiService{
         return result;
     }
 
-    @Override
-    public List<ExplainMbtiDTO> getOneExplainMbti() {
-        List<ExplainMbti> explainMbti = explainMbtiRepository.findOne();
-
-        return null;
-    }
-
 }

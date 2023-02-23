@@ -1,5 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.service.owner;
 
-public interface OwnerService {
+import com.hsstudy.GuessMyMBTI.api.controller.owner.OwnerController;
 
+public interface OwnerService {
+    void save(OwnerController.OwnerRequest ownerRequest);
 }

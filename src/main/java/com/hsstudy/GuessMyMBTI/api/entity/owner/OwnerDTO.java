@@ -9,7 +9,6 @@ import lombok.Setter;
 @Builder
 public class OwnerDTO {
     private Long id; // DB에 저장될 개별 id값
-    private String password;
     private String ownerNickname; // 카톡 이름, 구글 이름 가져옴
     private String ownerEmail;
     private String answer; // 오너가 작성한 결과값 20개

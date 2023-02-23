@@ -26,7 +26,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // @PreAuthorize 어노케이션을 메소드단위로 추가하기 위해 사용
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     /**
      * jwt 사용을 위해 추가한 것들
      */
@@ -48,9 +47,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         // DB 때문에 사용함
-        web
-                .ignoring()
-                .antMatchers("/h2 console/**", "/favicon.ico");
+//        web
+//                .ignoring()
+//                .antMatchers("/h2 console/**", "/favicon.ico");
     }
 
     @Override
@@ -62,12 +61,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
-
-                // h2 db를 위한 설정
-                .and()
-                .headers()
-                .frameOptions()
-                .sameOrigin()
 
                 // 세션을 사용하지 않기 때문에 Stateless 설정
                 .and()
@@ -81,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 로그인, 회원가입은 토큰이 없는 상태에서 요청이 들어오기 때문에 모두 permit all
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/api/signup").permitAll()
+                .antMatchers("/api/**").permitAll()
                 // MBTI 설명, 이름에 관련한 내용에 대해서는 모두 허용
                 .antMatchers("/result/all").permitAll()
                 // 토큰 관련 부분
@@ -94,15 +88,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));
     }
-
-    /**
-     * 윤형이가 한 부분
-     */
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        return http.httpBasic().disable().build();
-//    }
-
 
 }

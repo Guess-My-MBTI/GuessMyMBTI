@@ -34,11 +34,11 @@ public class Owner {
     private String ownerEmail;
 
     @Column(name = "OWNER_ANS")
-    @Size(max = 20)
+//    @Size(max = 20)
     private String answer; // 오너가 작성한 결과값 20개
 
     @Column(name = "OWNER_MBTI")
-    @Size(max = 4)
+//    @Size(max = 4)
     private String ownerMbti; // 오너가 작성한 ans를 토대로 만들어 줄 MBTI
 
     @Column(name = "OWNER_TOKEN")
