@@ -21,37 +21,21 @@ public class Owner {
     @Column(name = "OWNER_ID")
     private Long id; // DB에 저장될 개별 id값
 
-    @JsonIgnore
-    @Column(name = "PASSWORD", length = 128)
-    @Size(max = 128)
-    private String password;
-
     @Column(name = "OWNER_NICKNAME")
     @NotNull
+    @Size(max = 45)
     private String ownerNickname; // 카톡 이름, 구글 이름 가져옴
 
     @Column(name = "OWNER_EMAIL")
+    @Size(max = 45)
     private String ownerEmail;
 
     @Column(name = "OWNER_ANS")
-//    @Size(max = 20)
+    @Size(max = 45)
     private String answer; // 오너가 작성한 결과값 20개
 
     @Column(name = "OWNER_MBTI")
-//    @Size(max = 4)
+    @Size(max = 45)
     private String ownerMbti; // 오너가 작성한 ans를 토대로 만들어 줄 MBTI
-
-    @Column(name = "OWNER_TOKEN")
-    private String token;
-
-//    @Column(name = "PROVIDER_TYPE", length = 20)
-//    @Enumerated(EnumType.STRING)
-//    @NotNull
-//    private ProviderType providerType;
-//
-//    @Column(name = "ROLE_TYPE", length = 20)
-//    @Enumerated(EnumType.STRING)
-//    @NotNull
-//    private RoleType roleType;
 
 }

@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.entity.mbti;
+package com.hsstudy.GuessMyMBTI.api.entity;
 
 public enum Mbti {
     ISFP, ISFJ, ISTP, ISTJ, INFP, INFJ, INTP, INTJ,
