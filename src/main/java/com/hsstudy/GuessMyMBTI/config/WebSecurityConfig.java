@@ -83,7 +83,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/signup").permitAll()
                 // MBTI 설명, 이름에 관련한 내용에 대해서는 모두 허용
                 .antMatchers("/result/all").permitAll()
-                .antMatchers("/token/**").permitAll() // 토큰 관련 부분
+                // 토큰 관련 부분
+                .antMatchers("/token/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated() // 나머지 요청들에 대해서는 모두 인증을 받아야 한다는 의미
 

@@ -31,4 +31,13 @@ public class ExplainMbtiController {
         }
     }
 
+    @GetMapping("/one/{mbti}")
+    private Header<List<ExplainMbtiDTO>> getOneExplainMbti() {
+        try {
+            return Header.SUCCESS(explainMbtiService.getOneExplainMbti());
+        } catch (Exception e) {
+            return Header.FAIL(e);
+        }
+    }
+
 }

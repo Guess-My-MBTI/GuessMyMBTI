@@ -11,5 +11,8 @@ public interface ExplainMbtiRepository extends JpaRepository<ExplainMbti, Long> 
     @Query(value = "SELECT * FROM ExplainMbti", nativeQuery = true)
     List<ExplainMbti> findAll();
 
+    @Query(value = "SELECT * FROM ExplainMbti WHERE mbti = {mbti}", nativeQuery = true)
+    List<ExplainMbti> findOne();
+
 }
 

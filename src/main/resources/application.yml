@@ -64,23 +64,6 @@ spring:
           #            - profile_image
             - account_email
           clientName: Kakao
-#        facebook:
-#          clientId: '{페이스북 client-id}'
-#          clientSecret: '{페이스북 client-secret}'
-#          scope:
-#            - email
-#            - public_profile
-#        naver:
-#          clientId: '{네이버 client-id}'
-#          clientSecret: '{네이버 client-secret}'
-#          clientAuthenticationMethod: post
-#          authorizationGrantType: authorization_code
-#          redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-#          scope:
-#            - nickname
-#            - email
-#            - profile_image
-#          clientName: Naver
 
       # Provider 설정
       provider:
@@ -89,13 +72,10 @@ spring:
           tokenUri: https://kauth.kakao.com/oauth/token
           userInfoUri: https://kapi.kakao.com/v2/user/me
           userNameAttribute: id
-#        naver:
-#          authorizationUri: https://nid.naver.com/oauth2.0/authorize
-#          tokenUri: https://nid.naver.com/oauth2.0/token
-#          userInfoUri: https://openapi.naver.com/v1/nid/me
-#          userNameAttribute: response
-
-
+  # data.sql로 DB에 내용 자동 삽입
+  sql:
+    init:
+      data-locations=classpath:data.sql;
 # cors 설정
 cors:
   allowed-origins: 'http://localhost:3000'
@@ -121,5 +101,16 @@ app:
     authorizedRedirectUris:
       - http://localhost:3000/oauth/redirect
 
+# Log
+logging:
+  file:
+    name: ${user.dir}/logs/  # 로깅 파일 위치이다.
+  level:  # 각 package 별로 로깅 레벨을 지정할 수 있다.
+    com/hsstudy/GuessMyMBTI : debug
+#    com.project.study.controller : debug
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB
 
 # 테스트

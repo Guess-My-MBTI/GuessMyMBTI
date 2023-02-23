@@ -2,6 +2,7 @@ package com.hsstudy.GuessMyMBTI.api.controller.owner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.hsstudy.GuessMyMBTI.api.service.oauth.KakaoOwnerService;
+import com.hsstudy.GuessMyMBTI.api.entity.owner.OwnerDTO;
 import com.hsstudy.GuessMyMBTI.api.service.owner.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +25,13 @@ public class OwnerController {
         return Arrays.asList("안녕하세요 jwt 테스트 중입니다", "jwt test");
     }
 
-//    // 카카오 회원가입
+    // 카카오 회원가입
 //    @GetMapping("/login/oauth2/callback/kakao")
 //    public Long kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
 //        // code : 카카오 서버로부터 받은 인가 코드
-//        SignupSocialDto signupKakaoDto = KakaoOwnerService.kakaoLogin(code);
-//        response.addHeader(AUTH_HEADER, signupKakaoDto.getToken());
+//        OwnerDTO ownerDTO = OwnerService.kakaoLogin(code);
+//        response.addHeader(AUTH_HEADER, ownerDTO.getToken());
 //
-//        return signupKakaoDto.getUserId();
+//        return ownerDTO.getUserId();
 //    }
 }

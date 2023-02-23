@@ -41,6 +41,8 @@ public class Owner {
     @Size(max = 4)
     private String ownerMbti; // 오너가 작성한 ans를 토대로 만들어 줄 MBTI
 
+    @Column(name = "OWNER_TOKEN")
+    private String token;
 
 //    @Column(name = "PROVIDER_TYPE", length = 20)
 //    @Enumerated(EnumType.STRING)
