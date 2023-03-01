@@ -1,9 +1,9 @@
 package com.hsstudy.GuessMyMBTI.api.service.owner;
 
 
-import com.hsstudy.GuessMyMBTI.api.controller.owner.OwnerController;
+import com.hsstudy.GuessMyMBTI.api.controller.OwnerController;
 import com.hsstudy.GuessMyMBTI.api.entity.owner.Owner;
-import com.hsstudy.GuessMyMBTI.api.repository.owner.OwnerRepository;
+import com.hsstudy.GuessMyMBTI.api.repository.OwnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,8 +19,8 @@ public class OwnerServiceImpl implements OwnerService {
     private OwnerRepository ownerRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${spring.security.oauth2.client.registration.kakao.clientId}")
-    private String clientId;
+//    @Value("${security.oauth2.client.registration.kakao.clientId}")
+//    private String clientId;
 
     @Override
     @Transactional
