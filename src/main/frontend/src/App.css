@@ -173,6 +173,14 @@ body {
   cursor: pointer;
 }
 
+.OwnerLogin .googlebtn {
+  margin: 10px auto;
+  color: transparent;
+  width: 190px;
+  height: 45px;
+  cursor: pointer;
+}
+
 /* OwnerResult */
 
 .OwnerResult {
