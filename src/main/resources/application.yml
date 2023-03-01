@@ -64,11 +64,12 @@ spring:
           clientSecret: 'x2TJDMqr8vS7e20h5Tokr9iH3uWuYx7e'
           clientAuthenticationMethod: post
           authorizationGrantType: authorization_code
-          redirectUri: "http://localhost:8080/login/oauth2/callback/kakao"
-#          redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+          redirectUri: "http://localhost:8080/login/oauth2/code/kakao"
+          #        redirectUri: "http://localhost:8080/login/oauth2/callback/kakao"
+          #          redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           scope:
             - profile_nickname
-          #            - profile_image
+            #            - profile_image
             - account_email
           clientName: Kakao
 
@@ -87,23 +88,16 @@ cors:
   allowed-headers: '*'
   max-age: 3600
 
-# jwt secret key 설정
-jwt:
-  header: Authorization
-  # HS512 secret 알고리즘 사용 -> Secret Key = 64Byte 이상이어야 함
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  token-validity-in-seconds: 86400
 
-
-# 토큰 관련 secret Key 및 RedirectUri 설정
-app:
-  auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 1800000
-    refreshTokenExpiry: 604800000
-  oauth2:
-    authorizedRedirectUris:
-      - http://localhost:3000/oauth/redirect
+## 토큰 관련 secret Key 및 RedirectUri 설정
+#app:
+#  auth:
+#    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+#    tokenExpiry: 1800000
+#    refreshTokenExpiry: 604800000
+#  oauth2:
+#    authorizedRedirectUris:
+#      - http://localhost:3000/oauth/redirect
 
 # Log
 logging:
@@ -117,4 +111,17 @@ logging:
       max-history: 7
       max-file-size: 10MB
 
-# 테스트
+
+# jwt secret key 설정
+jwt:
+  # 터미널에 openssl rand -hex 64 입력하면 생성해줌
+  # base64로 인코딩된 암호 키, HS512를 사용할 것이기 때문에, 512비트(64바이트) 이상이 되어야 함
+  secretKey: dc7666c597d4536c8cfdb1b5f0010b928aba44f9f0624015276763b15db4956862e2dae61b3b489450b689070c3d7a3beb305a1912f6556e657cc2750bad6992
+
+  access:
+    expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
+    header: Authorization
+
+  refresh:
+    expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> 하루) * 14(2주))
+    header: Authorization-refresh
