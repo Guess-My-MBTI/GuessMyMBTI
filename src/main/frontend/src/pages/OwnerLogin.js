@@ -43,6 +43,10 @@ const OwnerLogin = () => {
         <a href={KAKAO_AUTH_URL} className="kakaobtn">
           <img src={process.env.PUBLIC_URL + `assets/Kakao.png`} />
         </a>
+        <img
+          className="googlebtn"
+          src={process.env.PUBLIC_URL + `assets/Google.png`}
+        />
       </div>
     </div>
   );
