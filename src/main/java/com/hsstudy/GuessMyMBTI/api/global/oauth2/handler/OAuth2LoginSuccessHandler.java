@@ -1,6 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.global.oauth2.handler;
 
 import com.hsstudy.GuessMyMBTI.api.domain.Role;
+import com.hsstudy.GuessMyMBTI.api.domain.User;
 import com.hsstudy.GuessMyMBTI.api.global.jwt.service.JwtService;
 import com.hsstudy.GuessMyMBTI.api.global.oauth2.CustomOAuth2User;
 import com.hsstudy.GuessMyMBTI.api.repository.UserRepository;
@@ -43,13 +44,18 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             if(oAuth2User.getRole() == Role.GUEST) {
                 String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
                 response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
-                response.sendRedirect("/"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+                // refresh Token 은 사용하면 안되나?
+                // String refreshToken = jwtService.createRefreshToken(oAuth2User.getEmail());
+                // response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken); ...
+//                response.sendRedirect("/"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 
                 jwtService.sendAccessAndRefreshToken(response, accessToken, null);
-//                User findUser = userRepository.findByEmail(oAuth2User.getEmail())
-//                                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
-//                findUser.authorizeUser();
+//                jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 
+                User findUser = userRepository.findByEmail(oAuth2User.getEmail())
+                                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+                findUser.authorizeUser(); // ROLE_GUEST -> ROLE_USER로 바꾸기
+                userRepository.save(findUser);
             } else {
                 loginSuccess(response, oAuth2User); // 로그인에 성공한 경우 access, refresh 토큰 생성
             }
@@ -66,7 +72,9 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
         response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
 
+        System.out.println("OAuth2LoginSuccessHandler -> loginSuccess 메소드 실행 : accessToken: " + accessToken + " refreshToken: " + refreshToken);
         jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
+        System.out.println("updateRefreshToken 실행");
         jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
     }
 }

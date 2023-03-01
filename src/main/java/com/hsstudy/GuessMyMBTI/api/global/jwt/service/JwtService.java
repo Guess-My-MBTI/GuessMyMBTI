@@ -2,6 +2,7 @@ package com.hsstudy.GuessMyMBTI.api.global.jwt.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.hsstudy.GuessMyMBTI.api.domain.User;
 import com.hsstudy.GuessMyMBTI.api.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -159,11 +160,18 @@ public class JwtService {
      * RefreshToken DB 저장(업데이트)
      */
     public void updateRefreshToken(String email, String refreshToken) {
-        userRepository.findByEmail(email)
-                .ifPresentOrElse(
-                        user -> user.updateRefreshToken(refreshToken),
-                        () -> new Exception("일치하는 회원이 없습니다.")
-                );
+        System.out.println("JwtService.java -> updateRefreshToken 메소드 실행");
+        System.out.println("email = " + email);
+        System.out.println("refreshToken = " + refreshToken);
+//        userRepository.findByEmail(email)
+//                .ifPresentOrElse(
+//                        user -> user.updateRefreshToken(refreshToken),
+//                        () -> new Exception("일치하는 회원이 없습니다.")
+//                );
+        User findUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        findUser.updateRefreshToken(refreshToken);
+        userRepository.save(findUser);
     }
 
     public boolean isTokenValid(String token) {

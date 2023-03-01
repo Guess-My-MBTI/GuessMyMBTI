@@ -38,7 +38,7 @@ public class User {
     private String refreshToken; // 리프레시 토큰
 
     // User 권한 설정
-    private void authorizeUser() {
+    public void authorizeUser() {
         this.role = Role.USER;
     }
 
@@ -48,6 +48,7 @@ public class User {
     }
 
     // refresh Token 업데이트
+    // 토큰 업데이트를 못하는 문제 지점
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;
     }
