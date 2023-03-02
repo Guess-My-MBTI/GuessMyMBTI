@@ -36,9 +36,8 @@ const GuestResult = () => {
       return;
     } else {
       console.log(state.message);
-      if (window.confirm(`나랑 MBTI 검사하러 갈 사람!`)) {
-        navigate(`/`);
-      }
+      alert("전달 완료!");
+      navigate(`/`);
     }
   };
 
