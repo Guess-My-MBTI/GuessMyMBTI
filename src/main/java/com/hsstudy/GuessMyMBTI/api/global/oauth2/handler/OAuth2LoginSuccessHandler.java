@@ -41,13 +41,14 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
             // User의 Role이 GUEST일 경우 처음 요청한 회원이므로 회원가입 페이지로 리다이렉트
-            if(oAuth2User.getRole() == Role.GUEST) {
+            if(oAuth2User.getRole() == Role.GUEST || oAuth2User.getRole() == Role.USER) {
                 String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
                 response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
                 // refresh Token 은 사용하면 안되나?
                 // String refreshToken = jwtService.createRefreshToken(oAuth2User.getEmail());
                 // response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken); ...
-//                response.sendRedirect("/"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+                System.out.println("request.getContextPath(): " + request.getContextPath());
+                response.sendRedirect("http://localhost:3000/logino/oauth2/callback/kakao"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 
                 jwtService.sendAccessAndRefreshToken(response, accessToken, null);
 //                jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
