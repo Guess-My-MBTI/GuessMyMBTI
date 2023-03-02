@@ -48,7 +48,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
                 // String refreshToken = jwtService.createRefreshToken(oAuth2User.getEmail());
                 // response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken); ...
                 System.out.println("request.getContextPath(): " + request.getContextPath());
-                response.sendRedirect("http://localhost:3000/logino/oauth2/callback/kakao"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+//                response.sendRedirect("http://localhost:3000/login/oauth2/callback/kakao"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 
                 jwtService.sendAccessAndRefreshToken(response, accessToken, null);
 //                jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
