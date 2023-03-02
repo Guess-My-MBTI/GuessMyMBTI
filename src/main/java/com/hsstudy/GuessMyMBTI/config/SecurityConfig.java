@@ -14,6 +14,7 @@ import com.hsstudy.GuessMyMBTI.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -65,6 +66,7 @@ public class SecurityConfig {
                 .antMatchers("/sign-up").permitAll() // 회원가입 접근 가능
                 .antMatchers("/kakao-login").permitAll() // 회원가입 접근 가능
                 .antMatchers("/question/all", "/result/all").permitAll() // 질문 목록, 설명 허용
+                .antMatchers(HttpMethod.GET, "/exception/**").permitAll()
                 .anyRequest().authenticated() // 위의 경로 이외에는 모두 인증된 사용자만 접근 가능
                 .and()
                 //== 소셜 로그인 설정 ==//
