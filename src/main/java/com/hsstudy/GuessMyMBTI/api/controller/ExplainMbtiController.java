@@ -22,7 +22,7 @@ public class ExplainMbtiController {
     @Autowired
     private ExplainMbtiService explainMbtiService;
 
-    @GetMapping("/all")
+    @GetMapping("/all") // /result/all
     private Header<List<ExplainMbtiDTO>> getAllExplainMbtis() {
         try {
             return Header.SUCCESS((explainMbtiService.getAllExplainMbtis()));

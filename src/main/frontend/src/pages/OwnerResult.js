@@ -8,7 +8,7 @@ const OwnerResult = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const baseUrl = "http://localhost:8080/";
-  const result = "ISTJ";
+  const result = "INFJ";
 
   useEffect(() => {
     axios({
