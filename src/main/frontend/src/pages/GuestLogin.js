@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
@@ -21,7 +22,7 @@ const GuestLogin = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     if (state.nickName.length < 1) {
       nickNameInput.current.focus();
       return;
@@ -30,8 +31,21 @@ const GuestLogin = () => {
       setState({ nickName: "" });
       return;
     } else {
-      console.log(state.nickName);
-      navigate("/Question");
+      e.preventDefault();
+      // 8080 (catch 수행됨) -> POST http://localhost:8080/ net::ERR_FAILED -> CORS policy에 의해서 차단되었다 (?)
+      // 3000 (then 수행됨) -> POST http://localhost:3000/ 404 (Not Found) -> 당연함
+      fetch("http://localhost:3000/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state.nickName),
+      })
+        .then(() => {
+          console.log(state.nickName);
+          navigate("/question");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
