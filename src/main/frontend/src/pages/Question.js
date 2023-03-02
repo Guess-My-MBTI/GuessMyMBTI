@@ -1,9 +1,52 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 // import ListName from "../components/ListName";
 
 // 'OO이 라면?'에 들어감
 // const dummyData = [{ ownerName: "아름" }];
 
 const Question = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [id, setId] = useState(1);
+  // 여기 이상함 ("http://localhost:8080/"으로 하면 CORS 에러)
+  const baseUrl = "http://localhost:3000/";
+  // let question_id = 1;
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}question/all`,
+    }).then((res) => {
+      console.log(res.data.data);
+      setData(res.data.data);
+    });
+  }, []);
+
+  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
+
+  const decreaseQuestion = () => {
+    if (id <= 1) {
+      alert("처음 질문입니다.");
+    } else {
+      setId(id - 1);
+    }
+  };
+
+  const increaseQuestion = () => {
+    if (id >= 20) {
+      if (window.confirm("결과를 확인하러 가시겠습니까?")) {
+        navigate("/guest-result");
+      } else {
+        alert("마지막 페이지입니다.");
+      }
+    } else {
+      setId(id + 1);
+    }
+  };
+
   return (
     <div className="Question">
       <div className="ques-banner">
@@ -18,17 +61,23 @@ const Question = () => {
       </div>
 
       <div className="ques-card">
-        <p className="ques-num">Q1.</p>
-        <p className="ques-text">여기엔 질문이 들어갑니다람쥐.</p>
+        <p className="ques-num">Q{id}.</p>
+        <p className="ques-text">{list.map((it) => it.content)}</p>
       </div>
 
       <div className="progress">
         <div className="progress-graph">
-          <span></span>
+          <span className={["proGraph", `proGraph_${id}`].join(" ")}></span>
         </div>
         <div className="progress-btn">
-          <button className="prev"> {"<"}PREV </button>
-          <button className="next"> NEXT{">"}</button>
+          <button className="prev" onClick={decreaseQuestion}>
+            {" "}
+            {"<"}PREV{" "}
+          </button>
+          <button className="next" onClick={increaseQuestion}>
+            {" "}
+            NEXT{">"}
+          </button>
         </div>
       </div>
 
@@ -51,15 +100,11 @@ const Question = () => {
         </div>
 
         <div className="answer-card-1">
-          <p className="ans-text-1">
-            여기엔 질문에 대한 답변이 들어갑니다람쥐.
-          </p>
+          <p className="ans-text-1">{list.map((it) => it.answer1)}</p>
         </div>
 
         <div className="answer-card-2">
-          <p className="ans-text-2">
-            여기엔 질문에 대한 답변이 들어갑니다람쥐.
-          </p>
+          <p className="ans-text-2">{list.map((it) => it.answer2)}</p>
         </div>
       </div>
     </div>
