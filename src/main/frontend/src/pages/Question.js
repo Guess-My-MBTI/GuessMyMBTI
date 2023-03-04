@@ -17,6 +17,8 @@ const Question = () => {
   // const baseUrl = "http://localhost:8080/"
   const baseUrl = "http://localhost:3000/";
 
+  console.log(answer);
+
   useEffect(() => {
     axios({
       method: "GET",
@@ -36,8 +38,6 @@ const Question = () => {
       // 뒤로 가면 선택됐던 값 삭제되도록 (다시 선택할거니까)
       answer.splice(answer.indexOf(answer.length - 1), 1);
       setAnswer([...answer]);
-
-      console.log(answer);
     }
   };
 
@@ -50,22 +50,14 @@ const Question = () => {
   };
 
   const answerHandler = (e) => {
+    // 첫 번째 보기 선택
     if (e.target.className == "answer-card-1") {
-      // if (answer.length == 0) {
-      //    setAnswer(answer.unshift(answer1));
-      // }
-
       setAnswer(answer.concat(list.map((it) => it.answer1).slice(0, 1)));
-      // setAnswer([...answer, list.map((it) => it.answer1).slice(0, 1)]);
-    } else {
-      // if (answer.length == 0) {
-      //    setAnswer(answer.unshift(answer2));
-      // }
-
-      setAnswer(answer.concat(list.map((it) => it.answer2).slice(0, 1)));
-      // setAnswer([...answer, list.map((it) => it.answer2).slice(0, 1)]);
     }
-    console.log(answer);
+    // 두 번째 보기 선택
+    else {
+      setAnswer(answer.concat(list.map((it) => it.answer2).slice(0, 1)));
+    }
 
     // 정답 중복 선택을 방지하기 위해 답을 선택하면 바로 다음 문제로 넘어가도록 함
     {
@@ -100,10 +92,10 @@ const Question = () => {
             {" "}
             {"<"}PREV{" "}
           </button>
-          <button className="next" onClick={increaseQuestion}>
+          {/* <button className="next" onClick={increaseQuestion}>
             {" "}
             NEXT{">"}
-          </button>
+          </button> */}
         </div>
       </div>
 
