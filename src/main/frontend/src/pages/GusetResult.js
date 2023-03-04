@@ -5,11 +5,12 @@ import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
 
 // '당신이 생각한 OO의 MBTI'에 들어감
-const dummyData = [{ ownerName: "아름" }];
+const dummyData = [{ ownerName: "아름", id: 1 }];
 
 const GuestResult = () => {
   const navigate = useNavigate();
-
+  const oResult = "INFJ";
+  const gResult = "INFP";
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
@@ -44,9 +45,9 @@ const GuestResult = () => {
   return (
     <div className="GuestResult">
       <div className="answer">
-        <p className="name">
-          <ListName data={dummyData} />의{" "}
-        </p>
+        <div className="name">
+          <ListName key={dummyData.id} data={dummyData} />의{" "}
+        </div>
 
         <div className="mbti">
           <p className="m">M</p>
@@ -58,17 +59,17 @@ const GuestResult = () => {
 
       <div className="answerCard">
         <div className="mbti">
-          <p className="m">M</p>
-          <p className="b">B</p>
-          <p className="t">T</p>
-          <p className="i">I</p>
+          <p className="m">{oResult[0]}</p>
+          <p className="b">{oResult[1]}</p>
+          <p className="t">{oResult[2]}</p>
+          <p className="i">{oResult[3]}</p>
         </div>
       </div>
 
       <div className="choose">
-        <p className="c_name">
-          당신이 생각한 <ListName data={dummyData} />의{" "}
-        </p>
+        <div className="c_name">
+          당신이 생각한 <ListName key={dummyData.id} data={dummyData} />의{" "}
+        </div>
         <div className="c_mbti">
           <p className="m">M</p>
           <p className="b">B</p>
@@ -79,10 +80,10 @@ const GuestResult = () => {
 
       <div className="chooseCard">
         <div className="mbti">
-          <p className="m">M</p>
-          <p className="b">B</p>
-          <p className="t">T</p>
-          <p className="i">I</p>
+          <p className="m">{gResult[0]}</p>
+          <p className="b">{gResult[1]}</p>
+          <p className="t">{gResult[2]}</p>
+          <p className="i">{gResult[3]}</p>
         </div>
       </div>
 
