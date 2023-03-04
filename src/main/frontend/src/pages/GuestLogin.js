@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
 
 // 'OO의 MBTI를 맞춰봐'에 들어감
-const dummyData = [{ ownerName: "아름" }];
+const dummyData = [{ ownerName: "아름", id: 1 }];
 
 const GuestLogin = () => {
   const navigate = useNavigate();
@@ -57,7 +56,7 @@ const GuestLogin = () => {
             src={process.env.PUBLIC_URL + `assets/pencil1.png`}
             className="pencil1"
           />
-          <ListName data={dummyData} />
+          <ListName key={dummyData.id} data={dummyData} />
           <p>의</p>
         </div>
 
