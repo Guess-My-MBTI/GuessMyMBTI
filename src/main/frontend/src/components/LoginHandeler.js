@@ -15,17 +15,33 @@ const LoginHandeler = (props) => {
     //     navigate("/question");
     //   });
 
-    const kakaoLogin = async () => {
-      await axios
-        .get(`${process.env.REACT_APP_REDIRECT_URL}?code=${code}`)
-        .then((res) => {
-          console.log(res);
-          localStorage.setItem("token", res.headers.authorization);
+    console.log("code : " + code);
+      fetch(`http://localhost:8080/login/oauth2/callback/kakao/?code=${code}`, {
+          method: "GET",
+          headers: {
+              'Content-Type' : 'application/json;charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+          }
+      }).then(response => {
+          console.log("fetch : " + response.headers.get('Authorization'));
+          localStorage.setItem("access_token", response.headers.get('Authorization'));
           navigate("/question");
-        });
-    };
-    kakaoLogin();
+      })
+
+  //   const kakaoLogin = async () => {
+  //     await axios
+  //       // .get(`${process.env.REACT_APP_REDIRECT_URL}?code=${code}`)
+  //       .get(`http://localhost:8080/login/oauth2/callback/kakao/?code=${code}`)
+  //       .then((res) => {
+  //         console.log(res);
+  //         localStorage.setItem("token", res.headers.authorization);
+  //         navigate("/question");
+  //       });
+  //   };
+  //   kakaoLogin();
   }, [props.history]);
+
+
   return <div></div>;
 };
 
