@@ -114,7 +114,7 @@ const Question = () => {
         </div>
       </div>
       {/* role에따라서 다르게 매핑 */}
-      {role != "ROLE_USER" ? (
+      {role == "ROLE_USER" ? (
         <>
           <div className="answer">
             <div className="ans-banner">
