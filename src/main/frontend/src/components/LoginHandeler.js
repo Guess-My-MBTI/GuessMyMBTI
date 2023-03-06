@@ -15,17 +15,24 @@ const LoginHandeler = (props) => {
           "Content-Type": "application/json;charset=utf-8",
           "Access-Control-Allow-Origin": "*",
         },
-      })
-        .then((res) => {
-          console.log(res); // todo : 나중에 삭제하기
-          localStorage.setItem("access_token", res.headers.authorization);
-          navigate("/question");
-        });
+      }).then((res) => {
+        console.log(res); // todo : 나중에 삭제하기
+        localStorage.setItem("access_token", res.headers.authorization);
+        navigate("/question");
+      });
     };
     kakaoLogin();
   }, [props.history]);
 
-  return <div></div>;
+  return (
+    <div className="LoginHandeler">
+      <div className="notice">
+        <p>로그인 중입니다.</p>
+        <p>잠시만 기다려주세요.</p>
+        <div className="spinner"></div>
+      </div>
+    </div>
+  );
 };
 
 export default LoginHandeler;
