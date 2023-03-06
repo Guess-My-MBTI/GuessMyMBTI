@@ -16,22 +16,21 @@ const Question = () => {
   const baseUrl = "http://localhost:8080/";
   // let question_id = 1;
 
- const list = data.filter((it) => parseInt(it.id) == parseInt(id));
- const [answer, setAnswer] = useState([]);
+  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
+  const [answer, setAnswer] = useState([]);
 
- console.log(answer);
-
+  console.log(answer);
 
   const accessToken = localStorage.getItem("access_token");
-  console.log(accessToken);
+  // console.log(accessToken);
 
   useEffect(() => {
     axios({
       method: "GET",
       url: `${baseUrl}question/all`,
-      headers:{
-        Authorization: "Bearer " + accessToken
-      }
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
     }).then((res) => {
       console.log(res.data.data);
       setData(res.data.data);
