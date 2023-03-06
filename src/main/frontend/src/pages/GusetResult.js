@@ -159,7 +159,8 @@ const GuestResult = () => {
     console.log("정확도: " + cal() + "%");
   }
 
-  const goHome = () => navigate("/guest-login");
+  const goHome = () => navigate("/owner-main");
+
   const share = () => alert("링크가 복사되었습니다!");
 
   const handleChangeState = (e) => {
