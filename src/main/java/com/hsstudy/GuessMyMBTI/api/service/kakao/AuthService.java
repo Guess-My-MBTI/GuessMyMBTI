@@ -2,9 +2,9 @@ package com.hsstudy.GuessMyMBTI.api.service.kakao;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.domain.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.Authority;
 import com.hsstudy.GuessMyMBTI.api.domain.RefreshToken;
@@ -16,6 +16,7 @@ import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoTokenDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
 import com.hsstudy.GuessMyMBTI.api.exception.CEmailLoginFailedException;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
+import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 
 /**
  * @sierrah 카카오 로그인 로직을 처리합니다.
@@ -46,6 +46,7 @@ public class AuthService {
     private final AccountRepository accountRepository;
     private final RefreshTokenRepository tokenRepository;
     private final SecurityService securityService;
+    private final GuestRepository guestRepository;
 
     /* 환경변수 가져오기 */
     @Value("${spring.security.oauth2.client.registration.kakao.clientId}")
@@ -193,6 +194,32 @@ public class AuthService {
             return ResponseEntity.ok(loginResponseDto);
         }
     }
+
+    /**
+     * Guest Login
+     *
+     * @param
+     * @return
+     */
+    public ResponseEntity<GuestDto> guestLogin(GuestDto requestDto) {
+        GuestDto newGuest = GuestDto.builder()
+                .guestId(null)
+                .nickname(requestDto.getNickname())
+                .role(Authority.ROLE_GUEST)
+                .ownerId(null)
+                .answer(null)
+                .result(null)
+                .build();
+
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("guest_nickname", newGuest.getNickname());
+        headers.add("guest_role", newGuest.getRole().toString());
+        //        headers.add("guest_role", Authority.ROLE_GUEST.toString());
+        return (ResponseEntity<GuestDto>) ResponseEntity.ok().headers(headers);
+    }
+
 
     /* 토큰을 헤더에 배치 */
     public HttpHeaders setTokenHeaders(TokenDto tokenDto) {
