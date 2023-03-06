@@ -161,12 +161,11 @@ public class SecurityService {
         return tokenDto;
     }
 
-    /*
-    회원가입 요청에 대해 Access Token 과 Refresh Token 을 발급하고,
-    Refresh Token 을 Token Repository 에 저장합니다.
-
-    try: account 가 저장되지 않은 상태에서 id 호출 불가능
-    -> refreshToken save 를 auth 단으로 올릴 것인가?
+    /**
+     * 회원가입 요청에 대해 Access Token 과 Refresh Token 을 발급하고,
+     * Refresh Token 을 Token Repository 에 저장합니다.
+     * try: account 가 저장되지 않은 상태에서 id 호출 불가능
+     * -> refreshToken save 를 auth 단으로 올릴 것인가?
      */
     public TokenDto signup(SignupRequestDto requestDto) {
         Account account = requestDto.getAccount();
