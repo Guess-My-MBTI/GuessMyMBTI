@@ -11,18 +11,31 @@ const Question = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [id, setId] = useState(1);
-  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
-  const [answer, setAnswer] = useState([]);
+
+  // 여기 이상함 ("http://localhost:8080/"으로 하면 CORS 에러)
+  // const baseUrl = "http://localhost:3000/";
+  const baseUrl = "http://localhost:8080/";
+  // let question_id = 1;
+
+//  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
+//  const [answer, setAnswer] = useState([]);
 
   // const baseUrl = "http://localhost:8080/"
-  const baseUrl = "http://localhost:3000/";
+//  const baseUrl = "http://localhost:3000/";
 
-  console.log(answer);
+//  console.log(answer);
+
+
+  const accessToken = localStorage.getItem("access_token");
+  console.log(accessToken);
 
   useEffect(() => {
     axios({
       method: "GET",
       url: `${baseUrl}question/all`,
+      headers:{
+        Authorization: "Bearer " + accessToken
+      }
     }).then((res) => {
       console.log(res.data.data);
       setData(res.data.data);
