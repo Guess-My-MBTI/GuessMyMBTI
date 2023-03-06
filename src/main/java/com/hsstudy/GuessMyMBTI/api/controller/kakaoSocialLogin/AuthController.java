@@ -33,6 +33,7 @@ public class AuthController {
      * - refresh token 만료시?
      */
 
+    // todo : 로그인 회원 정보 더 담기
 //    @GetMapping("/login/kakao")
     @GetMapping("/oauth2/callback/kakao")
     public ResponseEntity<LoginResponseDto> kakaoLogin(HttpServletRequest request) {
