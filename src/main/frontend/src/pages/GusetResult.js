@@ -14,6 +14,125 @@ const GuestResult = () => {
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
+  const owner_answer = [
+    "E",
+    "I",
+    "E",
+    "E",
+    "I",
+    "S",
+    "N",
+    "S",
+    "S",
+    "S",
+    "F",
+    "F",
+    "T",
+    "T",
+    "T",
+    "P",
+    "P",
+    "P",
+    "P",
+    "P",
+  ];
+
+  const guest_answer = [
+    "E",
+    "I",
+    "I",
+    "I",
+    "I",
+    "S",
+    "N",
+    "S",
+    "S",
+    "S",
+    "F",
+    "T",
+    "F",
+    "F",
+    "F",
+    "J",
+    "P",
+    "J",
+    "P",
+    "P",
+  ];
+  const o_EI = owner_answer.slice(0, 5);
+  const o_NS = owner_answer.slice(5, 10);
+  const o_FT = owner_answer.slice(10, 15);
+  const o_PJ = owner_answer.slice(15, 20);
+
+  const g_EI = guest_answer.slice(0, 5);
+  const g_NS = guest_answer.slice(5, 10);
+  const g_FT = guest_answer.slice(10, 15);
+  const g_PJ = guest_answer.slice(15, 20);
+
+  const cal = () => {
+    let o_E = 0;
+    let o_N = 0;
+    let o_F = 0;
+    let o_P = 0;
+
+    let g_E = 0;
+    let g_N = 0;
+    let g_F = 0;
+    let g_P = 0;
+
+    for (let i = 0; i < o_EI.length; i++) {
+      if (o_EI[i] == "E") {
+        o_E += 1;
+      }
+
+      if (g_EI[i] == "E") {
+        g_E += 1;
+      }
+    }
+    console.log("E의 개수(owner): ", o_E);
+    console.log("E의 개수(guest): ", g_E);
+
+    for (let i = 0; i < o_NS.length; i++) {
+      if (o_NS[i] == "N") {
+        o_N += 1;
+      }
+
+      if (g_NS[i] == "N") {
+        g_N += 1;
+      }
+    }
+    console.log("N의 개수(owner): ", o_N);
+    console.log("N의 개수(guest): ", g_N);
+
+    for (let i = 0; i < o_FT.length; i++) {
+      if (o_FT[i] == "F") {
+        o_F += 1;
+      }
+
+      if (g_FT[i] == "F") {
+        g_F += 1;
+      }
+    }
+    console.log("F의 개수(owner): ", o_F);
+    console.log("F의 개수(guest): ", g_F);
+
+    for (let i = 0; i < o_PJ.length; i++) {
+      if (o_PJ[i] == "P") {
+        o_P += 1;
+      }
+
+      if (g_PJ[i] == "P") {
+        g_P += 1;
+      }
+    }
+    console.log("P의 개수(owner): ", o_P);
+    console.log("P의 개수(guest): ", g_P);
+  };
+
+  {
+    cal();
+  }
+
   const goHome = () => navigate("/guest-login");
   const share = () => alert("링크가 복사되었습니다!");
 
