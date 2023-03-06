@@ -10,15 +10,21 @@ const OwnerResult = () => {
   const baseUrl = "http://localhost:8080/";
   const result = "INFJ";
 
+  const accessToken = localStorage.getItem("access_token");
+
   useEffect(() => {
     axios({
       method: "GET",
       url: `${baseUrl}result/all`,
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
     }).then((res) => {
       console.log(res.data.data);
       setData(res.data.data);
     });
   }, []);
+
   const list = data.filter((it) => it.mbti == result);
   return (
     <div className="OwnerResult">

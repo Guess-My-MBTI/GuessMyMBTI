@@ -14,7 +14,7 @@ const GuestResult = () => {
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
-  const goHome = () => navigate("/guest-login");
+  const goHome = () => navigate("/owner-main");
   const share = () => alert("링크가 복사되었습니다!");
 
   const handleChangeState = (e) => {
