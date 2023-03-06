@@ -13,17 +13,13 @@ const Question = () => {
   const [id, setId] = useState(1);
 
   // 여기 이상함 ("http://localhost:8080/"으로 하면 CORS 에러)
-  // const baseUrl = "http://localhost:3000/";
   const baseUrl = "http://localhost:8080/";
   // let question_id = 1;
 
-//  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
-//  const [answer, setAnswer] = useState([]);
+ const list = data.filter((it) => parseInt(it.id) == parseInt(id));
+ const [answer, setAnswer] = useState([]);
 
-  // const baseUrl = "http://localhost:8080/"
-//  const baseUrl = "http://localhost:3000/";
-
-//  console.log(answer);
+ console.log(answer);
 
 
   const accessToken = localStorage.getItem("access_token");
