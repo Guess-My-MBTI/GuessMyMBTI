@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
+import axios from "axios";
 
 // 'OO의 MBTI를 맞춰봐'에 들어감
 const dummyData = [{ ownerName: "아름", id: 1 }];
+
+const baseUrl = "http://localhost:8080/";
 
 const GuestLogin = () => {
   const navigate = useNavigate();
@@ -33,18 +36,34 @@ const GuestLogin = () => {
       e.preventDefault();
       // 8080 (catch 수행됨) -> POST http://localhost:8080/ net::ERR_FAILED -> CORS policy에 의해서 차단되었다 (?)
       // 3000 (then 수행됨) -> POST http://localhost:3000/ 404 (Not Found) -> 당연함
-      fetch("http://localhost:3000/", {
+      fetch(`${baseUrl}guest-login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify(state.nickName),
       })
-        .then(() => {
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
+        .then((res) => {
+          console.log(res);
           console.log(state.nickName);
           navigate("/question");
         })
         .catch((error) => {
           console.log(error);
         });
+      //   axios
+      //     .post(`${baseUrl}guest-login`, {
+      //       nickname: state.nickName,
+      //     })
+      //     .then(function (response) {
+      //       console.log(response);
+      //       console.log(state.nickName);
+      //     });
     }
   };
 
