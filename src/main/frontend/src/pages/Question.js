@@ -57,7 +57,9 @@ const Question = () => {
   };
 
   const increaseQuestion = () => {
-    if (id >= 20) {
+    if (id >= 20 && role == "ROLE_USER") {
+      navigate("/owner-result");
+    } else if (id >= 20 && role == "ROLE_GUEST") {
       navigate("/guest-result");
     } else {
       setId(id + 1);
