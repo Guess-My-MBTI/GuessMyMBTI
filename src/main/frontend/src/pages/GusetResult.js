@@ -14,51 +14,54 @@ const GuestResult = () => {
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
+  // INFJ
   const owner_answer = [
     "E",
     "I",
     "E",
-    "E",
     "I",
+    "I",
+    "N",
+    "N",
+    "S",
+    "N",
+    "N",
+    "F",
+    "F",
+    "F",
+    "F",
+    "F",
+    "P",
+    "P",
+    "J",
+    "J",
+    "J",
+  ];
+
+  // INFP
+  const guest_answer = [
+    "I",
+    "I",
+    "I",
+    "I",
+    "E",
+    "N",
     "S",
     "N",
     "S",
-    "S",
-    "S",
+    "N",
+    "F",
+    "T",
     "F",
     "F",
     "T",
-    "T",
-    "T",
-    "P",
+    "p",
     "P",
     "P",
     "P",
     "P",
   ];
 
-  const guest_answer = [
-    "E",
-    "I",
-    "I",
-    "I",
-    "I",
-    "S",
-    "N",
-    "S",
-    "S",
-    "S",
-    "F",
-    "T",
-    "F",
-    "F",
-    "F",
-    "J",
-    "P",
-    "J",
-    "P",
-    "P",
-  ];
   const o_EI = owner_answer.slice(0, 5);
   const o_NS = owner_answer.slice(5, 10);
   const o_FT = owner_answer.slice(10, 15);
@@ -69,17 +72,17 @@ const GuestResult = () => {
   const g_FT = guest_answer.slice(10, 15);
   const g_PJ = guest_answer.slice(15, 20);
 
-  const cal = () => {
-    let o_E = 0;
-    let o_N = 0;
-    let o_F = 0;
-    let o_P = 0;
+  let o_E = 0;
+  let o_N = 0;
+  let o_F = 0;
+  let o_P = 0;
 
-    let g_E = 0;
-    let g_N = 0;
-    let g_F = 0;
-    let g_P = 0;
+  let g_E = 0;
+  let g_N = 0;
+  let g_F = 0;
+  let g_P = 0;
 
+  const count_E = () => {
     for (let i = 0; i < o_EI.length; i++) {
       if (o_EI[i] == "E") {
         o_E += 1;
@@ -89,9 +92,11 @@ const GuestResult = () => {
         g_E += 1;
       }
     }
-    console.log("E의 개수(owner): ", o_E);
-    console.log("E의 개수(guest): ", g_E);
 
+    return 1 - Math.abs(o_E - g_E) / 5;
+  };
+
+  const count_N = () => {
     for (let i = 0; i < o_NS.length; i++) {
       if (o_NS[i] == "N") {
         o_N += 1;
@@ -101,9 +106,11 @@ const GuestResult = () => {
         g_N += 1;
       }
     }
-    console.log("N의 개수(owner): ", o_N);
-    console.log("N의 개수(guest): ", g_N);
 
+    return 1 - Math.abs(o_N - g_N) / 5;
+  };
+
+  const count_F = () => {
     for (let i = 0; i < o_FT.length; i++) {
       if (o_FT[i] == "F") {
         o_F += 1;
@@ -113,9 +120,11 @@ const GuestResult = () => {
         g_F += 1;
       }
     }
-    console.log("F의 개수(owner): ", o_F);
-    console.log("F의 개수(guest): ", g_F);
 
+    return 1 - Math.abs(o_F - g_F) / 5;
+  };
+
+  const count_P = () => {
     for (let i = 0; i < o_PJ.length; i++) {
       if (o_PJ[i] == "P") {
         o_P += 1;
@@ -125,12 +134,29 @@ const GuestResult = () => {
         g_P += 1;
       }
     }
-    console.log("P의 개수(owner): ", o_P);
-    console.log("P의 개수(guest): ", g_P);
+    return 1 - Math.abs(o_P - g_P) / 5;
   };
 
+  const cal = () => {
+    return parseInt(
+      ((count_E() + count_N() + count_F() + count_P()) / 4) * 100
+    );
+  };
+
+  // const cal = () => {
+  //   let count = 0;
+  //   for (let i = 0; i < owner_answer.length; i++) {
+  //     if (owner_answer[i] == guest_answer[i]) {
+  //       count += 5;
+  //     } else {
+  //       continue;
+  //     }
+  //   }
+  //   return count;
+  // };
+
   {
-    cal();
+    console.log("정확도: " + cal() + "%");
   }
 
   const goHome = () => navigate("/guest-login");
