@@ -1036,6 +1036,14 @@ body {
   color: #666666;
 }
 
+.Question .answer-card-1:active,
+.answer-card-2:active {
+  /* background-color: #efc2c5; */
+  background-color: #c0d8cb;
+  color: white;
+  opacity: 0.8;
+}
+
 .Question .ans-text-1,
 .ans-text-2 {
   margin-left: 15px;

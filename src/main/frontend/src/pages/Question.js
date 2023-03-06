@@ -11,10 +11,20 @@ const Question = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [id, setId] = useState(1);
+
   // 여기 이상함 ("http://localhost:8080/"으로 하면 CORS 에러)
   // const baseUrl = "http://localhost:3000/";
   const baseUrl = "http://localhost:8080/";
   // let question_id = 1;
+
+//  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
+//  const [answer, setAnswer] = useState([]);
+
+  // const baseUrl = "http://localhost:8080/"
+//  const baseUrl = "http://localhost:3000/";
+
+//  console.log(answer);
+
 
   const accessToken = localStorage.getItem("access_token");
   console.log(accessToken);
@@ -32,25 +42,39 @@ const Question = () => {
     });
   }, []);
 
-  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
-
   const decreaseQuestion = () => {
     if (id <= 1) {
-      alert("처음 질문입니다.");
+      navigate({ response: true });
     } else {
       setId(id - 1);
+
+      // 뒤로 가면 선택됐던 값 삭제되도록 (다시 선택할거니까)
+      answer.splice(answer.indexOf(answer.length - 1), 1);
+      setAnswer([...answer]);
     }
   };
 
   const increaseQuestion = () => {
     if (id >= 20) {
-      if (window.confirm("결과를 확인하러 가시겠습니까?")) {
-        navigate("/guest-result");
-      } else {
-        alert("마지막 페이지입니다.");
-      }
+      navigate("/guest-result");
     } else {
       setId(id + 1);
+    }
+  };
+
+  const answerHandler = (e) => {
+    // 첫 번째 보기 선택
+    if (e.target.className == "answer-card-1") {
+      setAnswer(answer.concat(list.map((it) => it.answer1).slice(0, 1)));
+    }
+    // 두 번째 보기 선택
+    else {
+      setAnswer(answer.concat(list.map((it) => it.answer2).slice(0, 1)));
+    }
+
+    // 정답 중복 선택을 방지하기 위해 답을 선택하면 바로 다음 문제로 넘어가도록 함
+    {
+      increaseQuestion();
     }
   };
 
@@ -81,10 +105,10 @@ const Question = () => {
             {" "}
             {"<"}PREV{" "}
           </button>
-          <button className="next" onClick={increaseQuestion}>
+          {/* <button className="next" onClick={increaseQuestion}>
             {" "}
             NEXT{">"}
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -107,11 +131,23 @@ const Question = () => {
         </div>
 
         <div className="answer-card-1">
-          <p className="ans-text-1">{list.map((it) => it.answer1)}</p>
+          <div
+            className="answer-card-1"
+            value="answer1"
+            onClick={answerHandler}
+          >
+            <p className="ans-text-1">{list.map((it) => it.answer1)}</p>
+          </div>
         </div>
 
         <div className="answer-card-2">
-          <p className="ans-text-2">{list.map((it) => it.answer2)}</p>
+          <div
+            className="answer-card-2"
+            value="answer2"
+            onClick={answerHandler}
+          >
+            <p className="ans-text-2">{list.map((it) => it.answer2)}</p>
+          </div>
         </div>
       </div>
     </div>
