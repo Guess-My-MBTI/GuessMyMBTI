@@ -11,6 +11,7 @@ const OwnerResult = () => {
   const result = "INFJ";
 
   const accessToken = localStorage.getItem("access_token");
+  console.log(accessToken);
 
   useEffect(() => {
     axios({
