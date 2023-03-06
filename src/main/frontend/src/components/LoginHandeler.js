@@ -18,6 +18,8 @@ const LoginHandeler = (props) => {
       }).then((res) => {
         console.log(res); // todo : 나중에 삭제하기
         localStorage.setItem("access_token", res.headers.authorization);
+        localStorage.setItem("role", res.data.account.authority);
+        localStorage.setItem("name", res.data.account.kakaoName);
         navigate("/question");
       });
     };
