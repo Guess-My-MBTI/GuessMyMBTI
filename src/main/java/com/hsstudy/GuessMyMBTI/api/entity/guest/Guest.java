@@ -1,5 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.entity.guest;
 
+import com.hsstudy.GuessMyMBTI.api.domain.Authority;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,10 @@ public class Guest {
     @Column(name = "GUEST_NICKNAME")
     @Size(max = 45)
     private String nickname;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
 
     @Column(name = "GUEST_ANS")
     @Size(max = 45)
