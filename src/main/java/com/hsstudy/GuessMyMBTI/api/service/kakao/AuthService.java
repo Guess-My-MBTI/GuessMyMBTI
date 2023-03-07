@@ -288,6 +288,7 @@ public class AuthService {
         // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
         // 없다면 저장한 후 실행
         try {
+            System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
             System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
             Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
             System.out.println("existGuest = " + existGuest);
@@ -306,15 +307,7 @@ public class AuthService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        GuestDto guestDto = GuestDto.builder()
-//                .guestId(null) // id는 자동 increase
-                .nickname(requestDto.getNickname())
-                .role(Authority.ROLE_GUEST)
-                .ownerId(null)
-                .answer(null)
-                .result(null)
-                .build();
-        System.out.println("guestDto = " + guestDto);
+
 
 
 
