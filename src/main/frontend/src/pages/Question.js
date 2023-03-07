@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
 
-// import ListName from "../components/ListName";
-
-// 'OO이 라면?'에 들어감
-// const dummyData = [{ ownerName: "아름" }];
+//localStorage에서 user name 불러오기
+const name = localStorage.getItem("name");
+// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+const nameData = [
+  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+];
 
 const Question = () => {
   const navigate = useNavigate();
@@ -14,7 +16,6 @@ const Question = () => {
   const [id, setId] = useState(1);
 
   const baseUrl = "http://localhost:8080/";
-  // let question_id = 1;
 
   const list = data.filter((it) => parseInt(it.id) == parseInt(id));
   const [answer, setAnswer] = useState([]);
@@ -24,13 +25,6 @@ const Question = () => {
   const accessToken = localStorage.getItem("access_token");
 
   // console.log(accessToken);
-
-  //owner인지 guest인지 판별 owner = ROLE_USER guest = ROLE_GUEST
-  const role = localStorage.getItem("role");
-  //user name 불러오기
-  const name = localStorage.getItem("name");
-
-  console.log(accessToken);
 
   useEffect(() => {
     axios({
@@ -59,9 +53,7 @@ const Question = () => {
   };
 
   const increaseQuestion = () => {
-    if (id >= 20 && role == "ROLE_USER") {
-      navigate("/owner-result");
-    } else if (id >= 20 && role == "ROLE_GUEST") {
+    if (id >= 20) {
       navigate("/guest-result");
     } else {
       setId(id + 1);
@@ -83,6 +75,8 @@ const Question = () => {
       increaseQuestion();
     }
   };
+
+  localStorage.setItem("guest_answer", JSON.stringify(answer));
 
   return (
     <div className="Question">
@@ -111,21 +105,17 @@ const Question = () => {
             {" "}
             {"<"}PREV{" "}
           </button>
-          {/* <button className="next" onClick={increaseQuestion}>
-            {" "}
-            NEXT{">"}
-          </button> */}
         </div>
       </div>
-
       <div className="answer">
         <div className="ans-banner">
-          <p className="A">A</p>
-          <p className="N">N</p>
-          <p className="S">S</p>
-          <p className="W">W</p>
-          <p className="E">E</p>
-          <p className="R">R</p>
+          <div className="owner-name">
+            <ListName key={nameData.id} data={nameData} />
+          </div>
+          <p className="e">이</p>
+          <p className="r">라</p>
+          <p className="m">면</p>
+          <p className="ques-mark">?</p>
         </div>
 
         <div className="answer-card-1">
@@ -148,76 +138,6 @@ const Question = () => {
           </div>
         </div>
       </div>
-
-      {/* role에따라서 다르게 매핑 */}
-      {/* {role == "ROLE_USER" ? (
-        <>
-          <div className="answer">
-            <div className="ans-banner">
-              <p className="A">A</p>
-              <p className="N">N</p>
-              <p className="S">S</p>
-              <p className="W">W</p>
-              <p className="E">E</p>
-              <p className="R">R</p>
-            </div>
-
-            <div className="answer-card-1">
-              <div
-                className="answer-card-1"
-                value="answer1"
-                onClick={answerHandler}
-              >
-                <p className="ans-text-1">{list.map((it) => it.answer1)}</p>
-              </div>
-            </div>
-
-            <div className="answer-card-2">
-              <div
-                className="answer-card-2"
-                value="answer2"
-                onClick={answerHandler}
-              >
-                <p className="ans-text-2">{list.map((it) => it.answer2)}</p>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="answer">
-            <div className="ans-banner">
-              <p className="owner-name">
-                {name.length == 3 ? name.substring(1) : name}
-              </p>
-              <p className="e">이</p>
-              <p className="r">라</p>
-              <p className="m">면</p>
-              <p className="ques-mark">?</p>
-            </div>
-
-            <div className="answer-card-1">
-              <div
-                className="answer-card-1"
-                value="answer1"
-                onClick={answerHandler}
-              >
-                <p className="ans-text-1">{list.map((it) => it.answer1)}</p>
-              </div>
-            </div>
-
-            <div className="answer-card-2">
-              <div
-                className="answer-card-2"
-                value="answer2"
-                onClick={answerHandler}
-              >
-                <p className="ans-text-2">{list.map((it) => it.answer2)}</p>
-              </div>
-            </div>
-          </div>
-        </>
-      )} */}
     </div>
   );
 };
