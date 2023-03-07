@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.domain.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.Authority;
@@ -201,24 +202,44 @@ public class AuthService {
      * @param
      * @return
      */
-    public ResponseEntity<GuestDto> guestLogin(GuestDto requestDto) {
-        GuestDto newGuest = GuestDto.builder()
-                .guestId(null)
-                .nickname(requestDto.getNickname())
-                .role(Authority.ROLE_GUEST)
-                .ownerId(null)
-                .answer(null)
-                .result(null)
-                .build();
+//    public ResponseEntity<GuestDto> guestLogin(String nickname) {
+//        // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
+//        // 없다면 저장한 후 실행
+//        GuestDto guestDto = GuestDto.builder()
+////                .guestId(null)
+//                .nickname(nickname)
+//                .role(Authority.ROLE_GUEST)
+//                .ownerId(null)
+//                .answer(null)
+//                .result(null)
+//                .build();
+//        System.out.println("guestDto = " + guestDto);
+//        Guest newGuest = Guest.builder()
+////                .id(guestDto.getGuestId())
+//                .nickname(guestDto.getNickname())
+//                .authority(guestDto.getRole())
+//                .answer(guestDto.getAnswer())
+//                .result(guestDto.getResult())
+//                .build();
+//        System.out.println("newGuest = " + newGuest);
+//
+//        try {
+//            System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
+//            Guest existGuest = guestRepository.findByNicknameAndId(newGuest.getNickname(), newGuest.getId()).orElse(null);
+//            System.out.println("existGuest = " + existGuest);
+//            if (existGuest == null) {
+//                System.out.println("처음 로그인 하는 회원입니다.");
+//                guestRepository.save(newGuest);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        //        headers.add("guest_role", Authority.ROLE_GUEST.toString());
+//        return ResponseEntity.ok().headers(headers).body(guestDto);
+//    }
 
-
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("guest_nickname", newGuest.getNickname());
-        headers.add("guest_role", newGuest.getRole().toString());
-        //        headers.add("guest_role", Authority.ROLE_GUEST.toString());
-        return (ResponseEntity<GuestDto>) ResponseEntity.ok().headers(headers);
-    }
 
 
     /* 토큰을 헤더에 배치 */
@@ -261,6 +282,44 @@ public class AuthService {
                 .orElseThrow(CEmailLoginFailedException::new));
         responseDto.setResult("회원가입이 완료되었습니다.");
         return ResponseEntity.ok().headers(headers).body(responseDto);
+    }
+
+    public ResponseEntity<GuestDto> guestLogin(@RequestBody GuestDto requestDto) {
+        // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
+        // 없다면 저장한 후 실행
+        GuestDto guestDto = GuestDto.builder()
+//                .guestId(null)
+                .nickname(requestDto.getNickname())
+                .role(Authority.ROLE_GUEST)
+                .ownerId(null)
+                .answer(null)
+                .result(null)
+                .build();
+        System.out.println("guestDto = " + guestDto);
+        Guest newGuest = Guest.builder()
+//                .id(guestDto.getGuestId())
+                .nickname(guestDto.getNickname())
+                .authority(guestDto.getRole())
+                .answer(guestDto.getAnswer())
+                .result(guestDto.getResult())
+                .build();
+        System.out.println("newGuest = " + newGuest);
+
+        try {
+            System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
+            Guest existGuest = guestRepository.findByNicknameAndId(newGuest.getNickname(), newGuest.getId()).orElse(null);
+            System.out.println("existGuest = " + existGuest);
+            if (existGuest == null) {
+                System.out.println("처음 로그인 하는 회원입니다.");
+                guestRepository.save(newGuest);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        //        headers.add("guest_role", Authority.ROLE_GUEST.toString());
+        return ResponseEntity.ok().headers(headers).body(guestDto);
     }
 
     /* Refresh Token 을 Repository 에 저장하는 메소드 */

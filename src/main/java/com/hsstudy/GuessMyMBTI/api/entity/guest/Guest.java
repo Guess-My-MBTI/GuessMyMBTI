@@ -1,8 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.entity.guest;
 
 import com.hsstudy.GuessMyMBTI.api.domain.Authority;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -18,6 +17,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "Guest")
 public class Guest {
 
@@ -29,7 +31,7 @@ public class Guest {
     @Size(max = 45)
     private String nickname;
 
-    @Column
+    @Column(name = "GUEST_AUTHORITY")
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
