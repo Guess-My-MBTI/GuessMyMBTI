@@ -14,19 +14,39 @@ values (2, "EI", "콘텐츠 쫠롸쏼롸", "E", "I");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
 values (3, "EI", "콘텐츠 쫠롸쏼롸", "E", "I");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
-values (4, "NS", "콘텐츠 쫠롸쏼롸", "N", "S");
+values (4, "NS", "콘텐츠 쫠롸쏼롸", "E", "I");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
-values (5, "NS", "콘텐츠 쫠롸쏼롸", "N", "S");
+values (5, "NS", "콘텐츠 쫠롸쏼롸", "E", "I");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
 values (6, "NS", "콘텐츠 쫠롸쏼롸", "N", "S");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
-values (7, "FT", "콘텐츠 쫠롸쏼롸", "F", "T");
+values (7, "FT", "콘텐츠 쫠롸쏼롸", "N", "S");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
-values (8, "FT", "콘텐츠 쫠롸쏼롸", "F", "T");
+values (8, "FT", "콘텐츠 쫠롸쏼롸", "N", "S");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
-values (9, "PJ", "콘텐츠 쫠롸쏼롸", "p", "J");
+values (9, "PJ", "콘텐츠 쫠롸쏼롸", "N", "S");
 insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
-values (10, "PJ", "콘텐츠 쫠롸쏼롸", "P", "J");
+values (10, "PJ", "콘텐츠 쫠롸쏼롸", "N", "S");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (11, "EI", "콘텐츠 쫠롸쏼롸", "F", "T");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (12, "EI", "콘텐츠 쫠롸쏼롸", "F", "T");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (13, "EI", "콘텐츠 쫠롸쏼롸", "F", "T");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (14, "NS", "콘텐츠 쫠롸쏼롸", "F", "T");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (15, "NS", "콘텐츠 쫠롸쏼롸", "F", "T");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (16, "NS", "콘텐츠 쫠롸쏼롸", "P", "J");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (17, "FT", "콘텐츠 쫠롸쏼롸", "P", "J");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (18, "FT", "콘텐츠 쫠롸쏼롸", "P", "J");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (19, "PJ", "콘텐츠 쫠롸쏼롸", "P", "J");
+insert into Question (QUESTION_ID, QUESTION_TYPE, QUESTION_CT, QUESTION_A1, QUESTION_A2)
+values (20, "PJ", "콘텐츠 쫠롸쏼롸", "P", "J");
 
 
 

@@ -284,36 +284,6 @@ public class AuthService {
         return ResponseEntity.ok().headers(headers).body(responseDto);
     }
 
-    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
-        // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
-        // 없다면 저장한 후 실행
-        try {
-            System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
-            System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
-            Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
-            System.out.println("existGuest = " + existGuest);
-            if (existGuest == null) {
-                System.out.println("처음 로그인 하는 회원입니다.");
-                Guest newGuest = Guest.builder()
-//                .id(guestDto.getGuestId())
-                        .nickname(requestDto.getNickname())
-                        .authority(requestDto.getRole())
-                        .answer(requestDto.getAnswer())
-                        .result(requestDto.getResult())
-                        .build();
-                guestRepository.save(newGuest);
-                System.out.println("newGuest = " + newGuest);
-            } else {
-                HttpHeaders headers = new HttpHeaders();
-                return ResponseEntity.ok().headers(headers).body(existGuest);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // 이미 있는 경우
-        HttpHeaders headers = new HttpHeaders();
-        return ResponseEntity.ok().headers(headers).body(null);
-    }
 
     /* Refresh Token 을 Repository 에 저장하는 메소드 */
     public void saveRefreshToken(Account account, TokenDto tokenDto) {

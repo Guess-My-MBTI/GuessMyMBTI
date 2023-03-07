@@ -53,14 +53,6 @@ public class AuthController {
         return authService.kakaoSignup(requestDto);
     }
 
-    @PostMapping("/guest-login")
-    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
-        System.out.println("requestDto = " + requestDto);
-        String nickname = requestDto.getNickname();
-        System.out.println("Guest Login parameter-> nickname = " + nickname);
-        return authService.guestLogin(requestDto);
-    }
-
 //    @GetMapping("/guest-login")
 //    public ResponseEntity<GuestDto> guestLogin(HttpServletRequest request) {
 //        String nickname = request.getParameter("nickname");
