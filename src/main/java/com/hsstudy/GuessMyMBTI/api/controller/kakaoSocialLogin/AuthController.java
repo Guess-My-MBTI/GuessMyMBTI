@@ -54,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/guest-login")
-    public ResponseEntity<GuestDto> guestLogin(@RequestBody GuestDto requestDto) {
+    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
         System.out.println("requestDto = " + requestDto);
         String nickname = requestDto.getNickname();
         System.out.println("Guest Login parameter-> nickname = " + nickname);

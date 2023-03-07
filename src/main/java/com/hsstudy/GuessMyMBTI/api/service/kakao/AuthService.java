@@ -284,7 +284,7 @@ public class AuthService {
         return ResponseEntity.ok().headers(headers).body(responseDto);
     }
 
-    public ResponseEntity<GuestDto> guestLogin(@RequestBody GuestDto requestDto) {
+    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
         // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
         // 없다면 저장한 후 실행
         try {
@@ -303,19 +303,16 @@ public class AuthService {
                         .build();
                 guestRepository.save(newGuest);
                 System.out.println("newGuest = " + newGuest);
+            } else {
+                HttpHeaders headers = new HttpHeaders();
+                return ResponseEntity.ok().headers(headers).body(existGuest);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
+        // 이미 있는 경우
         HttpHeaders headers = new HttpHeaders();
-        //        headers.add("guest_role", Authority.ROLE_GUEST.toString());
-        return ResponseEntity.ok().headers(headers).body(guestDto);
+        return ResponseEntity.ok().headers(headers).body(null);
     }
 
     /* Refresh Token 을 Repository 에 저장하는 메소드 */
