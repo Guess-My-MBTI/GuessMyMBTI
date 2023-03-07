@@ -8,6 +8,7 @@ import GuestLogin from "./pages/GuestLogin";
 import GusetResult from "./pages/GusetResult";
 import Notice from "./components/Notice";
 import LoginHandeler from "./components/LoginHandeler";
+import OwnerQuestion from "./pages/OwnerQuestion";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<OwnerLogin />} />
           <Route path="/owner-main" element={<OwnerMain />} />
           <Route path="/owner-result" element={<OwnerResult />} />
+          <Route path="/owner-question" element={<OwnerQuestion />} />
           <Route path="/notice" element={<Notice />} />
           <Route
             path="/login/oauth2/callback/kakao"
