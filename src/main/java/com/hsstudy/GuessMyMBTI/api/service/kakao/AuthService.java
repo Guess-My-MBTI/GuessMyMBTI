@@ -287,8 +287,27 @@ public class AuthService {
     public ResponseEntity<GuestDto> guestLogin(@RequestBody GuestDto requestDto) {
         // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
         // 없다면 저장한 후 실행
+        try {
+            System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
+            Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
+            System.out.println("existGuest = " + existGuest);
+            if (existGuest == null) {
+                System.out.println("처음 로그인 하는 회원입니다.");
+                Guest newGuest = Guest.builder()
+//                .id(guestDto.getGuestId())
+                        .nickname(requestDto.getNickname())
+                        .authority(requestDto.getRole())
+                        .answer(requestDto.getAnswer())
+                        .result(requestDto.getResult())
+                        .build();
+                guestRepository.save(newGuest);
+                System.out.println("newGuest = " + newGuest);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         GuestDto guestDto = GuestDto.builder()
-//                .guestId(null)
+//                .guestId(null) // id는 자동 increase
                 .nickname(requestDto.getNickname())
                 .role(Authority.ROLE_GUEST)
                 .ownerId(null)
@@ -296,26 +315,10 @@ public class AuthService {
                 .result(null)
                 .build();
         System.out.println("guestDto = " + guestDto);
-        Guest newGuest = Guest.builder()
-//                .id(guestDto.getGuestId())
-                .nickname(guestDto.getNickname())
-                .authority(guestDto.getRole())
-                .answer(guestDto.getAnswer())
-                .result(guestDto.getResult())
-                .build();
-        System.out.println("newGuest = " + newGuest);
 
-        try {
-            System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
-            Guest existGuest = guestRepository.findByNicknameAndId(newGuest.getNickname(), newGuest.getId()).orElse(null);
-            System.out.println("existGuest = " + existGuest);
-            if (existGuest == null) {
-                System.out.println("처음 로그인 하는 회원입니다.");
-                guestRepository.save(newGuest);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
+
 
         HttpHeaders headers = new HttpHeaders();
         //        headers.add("guest_role", Authority.ROLE_GUEST.toString());
