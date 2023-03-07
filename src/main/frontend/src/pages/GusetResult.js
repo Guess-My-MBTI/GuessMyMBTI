@@ -4,13 +4,17 @@ import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
 
-// '당신이 생각한 OO의 MBTI'에 들어감
-const dummyData = [{ ownerName: "아름", id: 1 }];
+//localStorage에서 user name 불러오기
+const name = localStorage.getItem("name");
+// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+const nameData = [
+  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+];
 
 const GuestResult = () => {
   const navigate = useNavigate();
   const oResult = "INFJ";
-  const gResult = "INFP";
+  const [gResult, setGResult] = useState("");
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
@@ -38,44 +42,22 @@ const GuestResult = () => {
     "J",
   ];
 
-  // INFP
-  const guest_answer = [
-    "I",
-    "I",
-    "I",
-    "I",
-    "E",
-    "N",
-    "S",
-    "N",
-    "S",
-    "N",
-    "F",
-    "T",
-    "F",
-    "F",
-    "T",
-    "p",
-    "P",
-    "P",
-    "P",
-    "P",
-  ];
+  const guest_answer = localStorage.getItem("guest_answer");
 
-  const o_EI = owner_answer.slice(0, 5);
-  const o_NS = owner_answer.slice(5, 10);
-  const o_FT = owner_answer.slice(10, 15);
-  const o_PJ = owner_answer.slice(15, 20);
+  // const o_EI = owner_answer.slice(0, 5);
+  // const o_NS = owner_answer.slice(5, 10);
+  // const o_FT = owner_answer.slice(10, 15);
+  // const o_PJ = owner_answer.slice(15, 20);
 
   const g_EI = guest_answer.slice(0, 5);
   const g_NS = guest_answer.slice(5, 10);
   const g_FT = guest_answer.slice(10, 15);
   const g_PJ = guest_answer.slice(15, 20);
 
-  let o_E = 0;
-  let o_N = 0;
-  let o_F = 0;
-  let o_P = 0;
+  // let o_E = 0;
+  // let o_N = 0;
+  // let o_F = 0;
+  // let o_P = 0;
 
   let g_E = 0;
   let g_N = 0;
@@ -83,81 +65,65 @@ const GuestResult = () => {
   let g_P = 0;
 
   const count_E = () => {
-    for (let i = 0; i < o_EI.length; i++) {
-      if (o_EI[i] == "E") {
-        o_E += 1;
-      }
-
+    for (let i = 0; i < g_EI.length; i++) {
       if (g_EI[i] == "E") {
         g_E += 1;
       }
     }
 
-    return 1 - Math.abs(o_E - g_E) / 5;
+    return g_E >= 3 ? "E" : "I";
   };
 
   const count_N = () => {
-    for (let i = 0; i < o_NS.length; i++) {
-      if (o_NS[i] == "N") {
-        o_N += 1;
-      }
-
+    for (let i = 0; i < g_NS.length; i++) {
       if (g_NS[i] == "N") {
         g_N += 1;
       }
     }
 
-    return 1 - Math.abs(o_N - g_N) / 5;
+    return g_N >= 3 ? "N" : "S";
   };
 
   const count_F = () => {
-    for (let i = 0; i < o_FT.length; i++) {
-      if (o_FT[i] == "F") {
-        o_F += 1;
-      }
-
+    for (let i = 0; i < g_FT.length; i++) {
       if (g_FT[i] == "F") {
         g_F += 1;
       }
     }
 
-    return 1 - Math.abs(o_F - g_F) / 5;
+    return g_F >= 3 ? "f" : "T";
   };
 
   const count_P = () => {
-    for (let i = 0; i < o_PJ.length; i++) {
-      if (o_PJ[i] == "P") {
-        o_P += 1;
-      }
-
+    for (let i = 0; i < g_PJ.length; i++) {
       if (g_PJ[i] == "P") {
         g_P += 1;
       }
     }
-    return 1 - Math.abs(o_P - g_P) / 5;
-  };
-
-  const cal = () => {
-    return parseInt(
-      ((count_E() + count_N() + count_F() + count_P()) / 4) * 100
-    );
+    return g_P >= 3 ? "P" : "J";
   };
 
   // const cal = () => {
-  //   let count = 0;
-  //   for (let i = 0; i < owner_answer.length; i++) {
-  //     if (owner_answer[i] == guest_answer[i]) {
-  //       count += 5;
-  //     } else {
-  //       continue;
-  //     }
-  //   }
-  //   return count;
+  //   return parseInt(
+  //     ((count_E() + count_N() + count_F() + count_P()) / 4) * 100
+  //   );
   // };
 
-  {
-    console.log("정확도: " + cal() + "%");
-  }
+  const cal = () => {
+    let count = 0;
+    for (let i = 0; i < owner_answer.length; i++) {
+      if (owner_answer[i] == guest_answer[i]) {
+        count += 5;
+      } else {
+        continue;
+      }
+    }
+    return count;
+  };
+
+  // {
+  //   console.log("정확도: " + cal() + "%");
+  // }
 
   const goHome = () => navigate("/owner-main");
 
@@ -192,7 +158,7 @@ const GuestResult = () => {
     <div className="GuestResult">
       <div className="answer">
         <div className="name">
-          <ListName key={dummyData.id} data={dummyData} />의{" "}
+          <ListName key={nameData.id} data={nameData} />의{" "}
         </div>
 
         <div className="mbti">
@@ -214,7 +180,7 @@ const GuestResult = () => {
 
       <div className="choose">
         <div className="c_name">
-          당신이 생각한 <ListName key={dummyData.id} data={dummyData} />의{" "}
+          당신이 생각한 <ListName key={nameData.id} data={nameData} />의{" "}
         </div>
         <div className="c_mbti">
           <p className="m">M</p>
@@ -226,10 +192,10 @@ const GuestResult = () => {
 
       <div className="chooseCard">
         <div className="mbti">
-          <p className="m">{gResult[0]}</p>
-          <p className="b">{gResult[1]}</p>
-          <p className="t">{gResult[2]}</p>
-          <p className="i">{gResult[3]}</p>
+          <p className="m">{count_E()}</p>
+          <p className="b">{count_N()}</p>
+          <p className="t">{count_F()}</p>
+          <p className="i">{count_P()}</p>
         </div>
       </div>
 
@@ -240,7 +206,7 @@ const GuestResult = () => {
           <p className="perfect">100%</p>
         </div>
         <div className="graph">
-          <span>80%</span>
+          <span>{cal() + "%"}</span>
         </div>
       </div>
       <br />
