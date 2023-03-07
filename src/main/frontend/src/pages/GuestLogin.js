@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
 import API from "../utils/API";
 
-// 'OO의 MBTI를 맞춰봐'에 들어감
-const dummyData = [{ ownerName: "아름", id: 1 }];
+//localStorage에서 user name 불러오기
+const name = localStorage.getItem("name");
+// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+const nameData = [
+  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+];
 
 // const baseUrl = "http://localhost:8080/";
 
@@ -36,42 +40,11 @@ const GuestLogin = () => {
       API.post("/guest-login", { nickname: state.nickName })
         .then((res) => {
           if (res.status === 200) {
-            console.log(state.nickName);
+            console.log(state);
             navigate("/question");
           }
         })
         .catch((error) => console.log(error.res));
-
-      // e.preventDefault();
-      // fetch(`${baseUrl}guest-login`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json;charset=utf-8",
-      //     "Access-Control-Allow-Origin": "*",
-      //   },
-      //   body: JSON.stringify(state.nickName),
-      // })
-      //   .then((res) => {
-      //     console.log(res);
-      //     return res.json();
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //     console.log(state.nickName);
-      //     navigate("/question");
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-
-      //   axios
-      //     .post(`${baseUrl}guest-login`, {
-      //       nickname: state.nickName,
-      //     })
-      //     .then(function (response) {
-      //       console.log(response);
-      //       console.log(state.nickName);
-      //     });
     }
   };
 
@@ -83,7 +56,7 @@ const GuestLogin = () => {
             src={process.env.PUBLIC_URL + `assets/pencil1.png`}
             className="pencil1"
           />
-          <ListName key={dummyData.id} data={dummyData} />
+          <ListName key={nameData.id} data={nameData} />
           <p>의</p>
         </div>
 
