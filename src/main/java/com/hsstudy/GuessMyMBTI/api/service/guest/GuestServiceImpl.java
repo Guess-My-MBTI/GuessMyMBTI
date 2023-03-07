@@ -1,5 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.service.guest;
 
+import com.hsstudy.GuessMyMBTI.api.domain.Authority;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
@@ -35,7 +36,7 @@ public class GuestServiceImpl implements GuestService {
                 Guest newGuest = Guest.builder()
 //                .id(guestDto.getGuestId())
                         .nickname(requestDto.getNickname())
-                        .authority(requestDto.getRole())
+                        .authority(Authority.ROLE_GUEST)
                         .answer(requestDto.getAnswer())
                         .result(requestDto.getResult())
                         .id(requestDto.getOwnerId())
