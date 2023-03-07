@@ -117,8 +117,40 @@ const Question = () => {
           </button> */}
         </div>
       </div>
+
+      <div className="answer">
+        <div className="ans-banner">
+          <p className="A">A</p>
+          <p className="N">N</p>
+          <p className="S">S</p>
+          <p className="W">W</p>
+          <p className="E">E</p>
+          <p className="R">R</p>
+        </div>
+
+        <div className="answer-card-1">
+          <div
+            className="answer-card-1"
+            value="answer1"
+            onClick={answerHandler}
+          >
+            <p className="ans-text-1">{list.map((it) => it.answer1)}</p>
+          </div>
+        </div>
+
+        <div className="answer-card-2">
+          <div
+            className="answer-card-2"
+            value="answer2"
+            onClick={answerHandler}
+          >
+            <p className="ans-text-2">{list.map((it) => it.answer2)}</p>
+          </div>
+        </div>
+      </div>
+
       {/* role에따라서 다르게 매핑 */}
-      {role == "ROLE_USER" ? (
+      {/* {role == "ROLE_USER" ? (
         <>
           <div className="answer">
             <div className="ans-banner">
@@ -185,7 +217,7 @@ const Question = () => {
             </div>
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 };
