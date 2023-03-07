@@ -16,7 +16,7 @@ const OwnerLogin = () => {
           나의
         </p>
 
-        <p className="mbti">
+        <div className="mbti">
           <img
             src={process.env.PUBLIC_URL + `assets/pencil2.png`}
             className="pencil2"
@@ -26,7 +26,7 @@ const OwnerLogin = () => {
           <p className="t">T</p>
           <p className="i">I</p>
           <p className="r">를</p>
-        </p>
+        </div>
 
         <p className="guess">맞춰봐</p>
         <div>
