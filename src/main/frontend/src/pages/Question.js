@@ -23,6 +23,8 @@ const Question = () => {
 
   const accessToken = localStorage.getItem("access_token");
 
+  // console.log(accessToken);
+
   //owner인지 guest인지 판별 owner = ROLE_USER guest = ROLE_GUEST
   const role = localStorage.getItem("role");
   //user name 불러오기
@@ -57,7 +59,9 @@ const Question = () => {
   };
 
   const increaseQuestion = () => {
-    if (id >= 20) {
+    if (id >= 20 && role == "ROLE_USER") {
+      navigate("/owner-result");
+    } else if (id >= 20 && role == "ROLE_GUEST") {
       navigate("/guest-result");
     } else {
       setId(id + 1);

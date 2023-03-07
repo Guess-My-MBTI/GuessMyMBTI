@@ -14,7 +14,153 @@ const GuestResult = () => {
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
+  // INFJ
+  const owner_answer = [
+    "E",
+    "I",
+    "E",
+    "I",
+    "I",
+    "N",
+    "N",
+    "S",
+    "N",
+    "N",
+    "F",
+    "F",
+    "F",
+    "F",
+    "F",
+    "P",
+    "P",
+    "J",
+    "J",
+    "J",
+  ];
+
+  // INFP
+  const guest_answer = [
+    "I",
+    "I",
+    "I",
+    "I",
+    "E",
+    "N",
+    "S",
+    "N",
+    "S",
+    "N",
+    "F",
+    "T",
+    "F",
+    "F",
+    "T",
+    "p",
+    "P",
+    "P",
+    "P",
+    "P",
+  ];
+
+  const o_EI = owner_answer.slice(0, 5);
+  const o_NS = owner_answer.slice(5, 10);
+  const o_FT = owner_answer.slice(10, 15);
+  const o_PJ = owner_answer.slice(15, 20);
+
+  const g_EI = guest_answer.slice(0, 5);
+  const g_NS = guest_answer.slice(5, 10);
+  const g_FT = guest_answer.slice(10, 15);
+  const g_PJ = guest_answer.slice(15, 20);
+
+  let o_E = 0;
+  let o_N = 0;
+  let o_F = 0;
+  let o_P = 0;
+
+  let g_E = 0;
+  let g_N = 0;
+  let g_F = 0;
+  let g_P = 0;
+
+  const count_E = () => {
+    for (let i = 0; i < o_EI.length; i++) {
+      if (o_EI[i] == "E") {
+        o_E += 1;
+      }
+
+      if (g_EI[i] == "E") {
+        g_E += 1;
+      }
+    }
+
+    return 1 - Math.abs(o_E - g_E) / 5;
+  };
+
+  const count_N = () => {
+    for (let i = 0; i < o_NS.length; i++) {
+      if (o_NS[i] == "N") {
+        o_N += 1;
+      }
+
+      if (g_NS[i] == "N") {
+        g_N += 1;
+      }
+    }
+
+    return 1 - Math.abs(o_N - g_N) / 5;
+  };
+
+  const count_F = () => {
+    for (let i = 0; i < o_FT.length; i++) {
+      if (o_FT[i] == "F") {
+        o_F += 1;
+      }
+
+      if (g_FT[i] == "F") {
+        g_F += 1;
+      }
+    }
+
+    return 1 - Math.abs(o_F - g_F) / 5;
+  };
+
+  const count_P = () => {
+    for (let i = 0; i < o_PJ.length; i++) {
+      if (o_PJ[i] == "P") {
+        o_P += 1;
+      }
+
+      if (g_PJ[i] == "P") {
+        g_P += 1;
+      }
+    }
+    return 1 - Math.abs(o_P - g_P) / 5;
+  };
+
+  const cal = () => {
+    return parseInt(
+      ((count_E() + count_N() + count_F() + count_P()) / 4) * 100
+    );
+  };
+
+  // const cal = () => {
+  //   let count = 0;
+  //   for (let i = 0; i < owner_answer.length; i++) {
+  //     if (owner_answer[i] == guest_answer[i]) {
+  //       count += 5;
+  //     } else {
+  //       continue;
+  //     }
+  //   }
+  //   return count;
+  // };
+
+  {
+    console.log("정확도: " + cal() + "%");
+  }
+
   const goHome = () => navigate("/owner-main");
+
   const share = () => alert("링크가 복사되었습니다!");
 
   const handleChangeState = (e) => {
