@@ -33,7 +33,7 @@ const GuestLogin = () => {
       e.preventDefault();
       // 8080 (catch 수행됨) -> POST http://localhost:8080/ net::ERR_FAILED -> CORS policy에 의해서 차단되었다 (?)
       // 3000 (then 수행됨) -> POST http://localhost:3000/ 404 (Not Found) -> 당연함
-      fetch("http://localhost:3000/", {
+      fetch("http://localhost:8080/guest-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(state.nickName),

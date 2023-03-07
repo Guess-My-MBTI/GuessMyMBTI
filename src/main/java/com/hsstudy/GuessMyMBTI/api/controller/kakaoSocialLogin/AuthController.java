@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
+//@RequestMapping("/login")
 public class AuthController {
 
     private final AuthService authService;
@@ -36,7 +36,7 @@ public class AuthController {
      */
 
     // todo : 로그인 회원 정보 더 담기
-    @GetMapping("/oauth2/callback/kakao")
+    @GetMapping("/login/oauth2/callback/kakao")
     public ResponseEntity<LoginResponseDto> kakaoLogin(HttpServletRequest request) {
         String code = request.getParameter("code");
         System.out.println("AuthController -> code : " + code);
@@ -48,17 +48,25 @@ public class AuthController {
 
     // todo : 로그아웃 만들기
 
-    @PostMapping("/signup")
+    @PostMapping("/login/signup")
     public ResponseEntity<SignupResponseDto> kakaoSignup(@RequestBody SignupRequestDto requestDto) {
         return authService.kakaoSignup(requestDto);
     }
 
     @PostMapping("/guest-login")
-    public ResponseEntity<GuestDto> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
-        String nickname = request.getParameter("nickname");
+    public ResponseEntity<GuestDto> guestLogin(@RequestBody GuestDto requestDto) {
+        System.out.println("requestDto = " + requestDto);
+        String nickname = requestDto.getNickname();
         System.out.println("Guest Login parameter-> nickname = " + nickname);
         return authService.guestLogin(requestDto);
     }
+
+//    @GetMapping("/guest-login")
+//    public ResponseEntity<GuestDto> guestLogin(HttpServletRequest request) {
+//        String nickname = request.getParameter("nickname");
+//        System.out.println("GET : guestLogin -> nickname = " + nickname);
+//        return authService.guestLogin(nickname);
+//    }
 
 //    @PostMapping("/guest-login")
 //    public ResponseEntity<GuestDto> guestLogin(HttpServletRequest request) {
