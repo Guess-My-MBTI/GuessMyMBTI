@@ -14,7 +14,6 @@ const nameData = [
 const GuestResult = () => {
   const navigate = useNavigate();
   const oResult = "INFJ";
-  const [gResult, setGResult] = useState("");
   const messageInput = useRef();
   const [state, setState] = useState({ message: "" });
 
@@ -42,7 +41,7 @@ const GuestResult = () => {
     "J",
   ];
 
-  const guest_answer = localStorage.getItem("guest_answer");
+  const guest_answer = JSON.parse(localStorage.getItem("guest_answer"));
 
   // const o_EI = owner_answer.slice(0, 5);
   // const o_NS = owner_answer.slice(5, 10);
@@ -91,7 +90,7 @@ const GuestResult = () => {
       }
     }
 
-    return g_F >= 3 ? "f" : "T";
+    return g_F >= 3 ? "F" : "T";
   };
 
   const count_P = () => {
@@ -120,10 +119,6 @@ const GuestResult = () => {
     }
     return count;
   };
-
-  // {
-  //   console.log("정확도: " + cal() + "%");
-  // }
 
   const goHome = () => navigate("/owner-main");
 
