@@ -8,9 +8,9 @@ const OwnerResult = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const baseUrl = "http://localhost:8080/";
-  const result = "INFJ";
 
   const accessToken = localStorage.getItem("access_token");
+  const mbti = localStorage.getItem("mbti");
   console.log(accessToken);
 
   useEffect(() => {
@@ -26,17 +26,17 @@ const OwnerResult = () => {
     });
   }, []);
 
-  const list = data.filter((it) => it.mbti == result);
+  const list = data.filter((it) => it.mbti == mbti);
   return (
     <div className="OwnerResult">
       <div className="result">
         <p className="r">RESULT</p>
         <div className="mbti-box">
           <div className="mbti">
-            <p className="m">{result[0]}</p>
-            <p className="b">{result[1]}</p>
-            <p className="t">{result[2]}</p>
-            <p className="i">{result[3]}</p>
+            <p className="m">{mbti[0]}</p>
+            <p className="b">{mbti[1]}</p>
+            <p className="t">{mbti[2]}</p>
+            <p className="i">{mbti[3]}</p>
           </div>
         </div>
       </div>
