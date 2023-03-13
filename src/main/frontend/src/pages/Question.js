@@ -13,14 +13,11 @@ const nameData = [
 const Question = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(0);
+  const [answer, setAnswer] = useState([]);
+  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
 
   const baseUrl = "http://localhost:8080/";
-
-  const list = data.filter((it) => parseInt(it.id) == parseInt(id));
-  const [answer, setAnswer] = useState([]);
-
-  console.log(answer);
 
   const accessToken = localStorage.getItem("access_token");
 
@@ -40,6 +37,42 @@ const Question = () => {
     });
   }, []);
 
+  useEffect(() => {
+    console.log(answer);
+    if (id == 20) {
+      calMbti(answer);
+    }
+    if (answer.length < 20) {
+      setId(id + 1);
+    }
+  }, [answer]);
+
+  const calMbti = (answer) => {
+    const EI = answer.slice(0, 5);
+    const NS = answer.slice(5, 10);
+    const FT = answer.slice(10, 15);
+    const PJ = answer.slice(15, 20);
+
+    const countE = EI.filter((e) => "E" === e).length;
+    const countI = EI.filter((e) => "I" === e).length;
+    const countN = NS.filter((e) => "N" === e).length;
+    const countS = NS.filter((e) => "S" === e).length;
+    const countF = FT.filter((e) => "F" === e).length;
+    const countT = FT.filter((e) => "T" === e).length;
+    const countP = PJ.filter((e) => "P" === e).length;
+    const countJ = PJ.filter((e) => "J" === e).length;
+
+    const guest_mbti =
+      (countE > countI ? "E" : "I") +
+      (countN > countS ? "N" : "S") +
+      (countF > countT ? "F" : "T") +
+      (countP > countJ ? "P" : "J");
+
+    console.log(guest_mbti);
+    localStorage.setItem("guest_mbti", guest_mbti);
+    navigate("/guest-result");
+  };
+
   const decreaseQuestion = () => {
     if (id <= 1) {
       navigate({ response: true });
@@ -52,27 +85,11 @@ const Question = () => {
     }
   };
 
-  const increaseQuestion = () => {
-    if (id >= 20) {
-      navigate("/guest-result");
-    } else {
-      setId(id + 1);
-    }
-  };
-
   const answerHandler = (e) => {
-    // 첫 번째 보기 선택
     if (e.target.className == "answer-card-1") {
       setAnswer(answer.concat(list.map((it) => it.answer1).slice(0, 1)));
-    }
-    // 두 번째 보기 선택
-    else {
+    } else {
       setAnswer(answer.concat(list.map((it) => it.answer2).slice(0, 1)));
-    }
-
-    // 정답 중복 선택을 방지하기 위해 답을 선택하면 바로 다음 문제로 넘어가도록 함
-    {
-      increaseQuestion();
     }
   };
 
