@@ -11,6 +11,7 @@ const OwnerQuestion = () => {
   const baseUrl = "http://localhost:8080/";
 
   const accessToken = localStorage.getItem("access_token");
+  const ownerId = localStorage.getItem("id");
 
   //question list 불러옴
   useEffect(() => {
@@ -80,8 +81,7 @@ const OwnerQuestion = () => {
 
     console.log(mbti);
     localStorage.setItem("mbti", mbti);
-    // storeDB(answer, mbti);
-    navigate("/owner-result");
+    storeDB(answer, mbti);
   };
 
   const storeDB = (answer, mbti) => {
@@ -89,12 +89,14 @@ const OwnerQuestion = () => {
       method: "POST",
       url: `${baseUrl}owner-result`,
       headers: {
+        Authorization: "Bearer " + accessToken,
         "Content-Type": "application/json;charset=utf-8",
         "Access-Control-Allow-Origin": "*",
       },
       body: {
+        id: ownerId,
         mbti: mbti,
-        result: answer,
+        result: answer.join(""),
       },
     }).then((res) => {
       navigate("/owner-result");
