@@ -51,6 +51,9 @@ const OwnerQuestion = () => {
     }
   };
 
+  // 테스트 후 삭제 (아름)
+  localStorage.setItem("owner_answer", answer);
+
   const calcMbti = (answer) => {
     const EI = answer.slice(0, 5);
     const NS = answer.slice(5, 10);
