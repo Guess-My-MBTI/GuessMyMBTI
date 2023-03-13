@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GuestServiceImpl implements GuestService {
@@ -34,12 +36,8 @@ public class GuestServiceImpl implements GuestService {
             if (existGuest == null) {
                 System.out.println("처음 로그인 하는 회원입니다.");
                 Guest newGuest = Guest.builder()
-//                .id(guestDto.getGuestId())
                         .nickname(requestDto.getNickname())
                         .authority(Authority.ROLE_GUEST)
-                        .answer(requestDto.getAnswer())
-                        .result(requestDto.getResult())
-                        .id(requestDto.getOwnerId())
                         .build();
 
                 System.out.println("newGuest = " +
@@ -59,6 +57,31 @@ public class GuestServiceImpl implements GuestService {
             e.printStackTrace();
         }
         // 위의 try catch문을 안 탄 경우
+        return ResponseEntity.ok().headers(headers).body(null);
+    }
+
+    @Override
+    public ResponseEntity<Guest> guestResult(GuestDto requestDto) {
+        Guest existGuest = guestRepository.findByNicknameAndResultIsNull(requestDto.getNickname()).orElse(null);
+        System.out.println("existGuest = " + existGuest.getNickname() + " " + existGuest.getId());
+        System.out.println("Guest의 requestDto");
+        System.out.println("requestDto : " +
+                requestDto.getGuestId() + " " +
+                requestDto.getNickname() + " " +
+                requestDto.getOwnerId() + " " +
+                requestDto.getAnswer() + " " +
+                requestDto.getResult() + " " +
+                requestDto.getComment() + " " +
+                requestDto.getAccuracy() + " " +
+                requestDto.getRole());
+
+        existGuest.setComment(requestDto.getComment());
+        existGuest.setResult(requestDto.getResult());
+
+        guestRepository.save(existGuest);
+
+        HttpHeaders headers = new HttpHeaders();
+
         return ResponseEntity.ok().headers(headers).body(null);
     }
 

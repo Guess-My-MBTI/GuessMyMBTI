@@ -59,15 +59,17 @@ const GuestResult = () => {
       setState({ message: "" });
       return;
     } else {
-      // API.post("/guest-result", { nickname: nickname, guest_ans: guest_mbti, accuracy: calAcc(), message: state.message })
-      //   .then((res) => {
-      //     if (res.status === 200) {
-      //       console.log(state.message);
-      //       // alert("전달 완료!");
-      //       navigate(`/`);
-      //     }
-      //   })
-      //   .catch((error) => console.log(error.res));
+      API.post(
+          "/guest-result",
+          { nickname: nickname, guest_ans: guest_mbti, accuracy: calAcc(), comment: state.message })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log(state.message);
+            // alert("전달 완료!");
+            navigate(`/`);
+          }
+        })
+        .catch((error) => console.log(error.res));
 
       console.log("nickname: " + nickname);
       console.log("guest_mbti: " + guest_mbti);

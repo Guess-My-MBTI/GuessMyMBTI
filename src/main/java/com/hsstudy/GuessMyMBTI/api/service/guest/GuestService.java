@@ -7,4 +7,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface GuestService {
     ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto);
+    ResponseEntity<Guest> guestResult(@RequestBody GuestDto requestDto);
 }

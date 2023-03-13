@@ -50,6 +50,9 @@ public class Guest {
     @Column(name = "GUEST_ACC") // 결과 % 정확도
     private int accuracy;
 
+    @Column(name = "GUEST_COMMENT")
+    private String comment;
+
     @ManyToOne()
     @JoinColumn(name = "account_id", insertable = false, updatable = false)
     private Account ownerId;

@@ -43,6 +43,7 @@ public class AuthController {
 
     // todo : 로그아웃 만들기
 
+    // todo : PutMapping으로 바꾸기
     @PostMapping("/login/signup")
     public ResponseEntity<SignupResponseDto> kakaoSignup(@RequestBody SignupRequestDto requestDto) {
         return authService.kakaoSignup(requestDto);

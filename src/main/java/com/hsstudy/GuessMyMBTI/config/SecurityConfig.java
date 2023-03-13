@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll() // 열어두어야 CORS Preflight 막을 수 있음
                 .antMatchers("/", "/login/**", "/guest-login/**").permitAll()
-                .antMatchers("/question","/question/guest-result").permitAll()
+                .antMatchers("/question","/question/all","/guest-result").permitAll()
                 .anyRequest().authenticated()
 
                 // JWT 토큰 예외처리부
