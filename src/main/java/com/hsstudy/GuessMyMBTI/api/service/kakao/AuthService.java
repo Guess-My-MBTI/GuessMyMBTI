@@ -162,6 +162,8 @@ public class AuthService {
                 .email(email)
                 .kakaoName(kakaoName)
                 .authority(Authority.ROLE_USER)
+                .mbti(existOwner.getMbti())
+                .result(existOwner.getResult())
                 .build();
     }
 
@@ -178,6 +180,7 @@ public class AuthService {
                 account.getId());
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
+        // todo : 카카오 엑세스 토큰은 db에만 저장하고 프론트에는 전달하지 않기
         loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
         System.out.println("loginResponseDto = " + loginResponseDto);
         loginResponseDto.setAccount(account);

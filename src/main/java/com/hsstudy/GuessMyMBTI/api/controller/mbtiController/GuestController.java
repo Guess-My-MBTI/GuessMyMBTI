@@ -23,5 +23,11 @@ public class GuestController {
     }
 
     // todo : guest에서 정보(send 누를 때)를 보내면 저장하기 @PostMapping("/guest-send")
-
+    @PostMapping("/guest-result")
+    public ResponseEntity<Guest> guestResult(@RequestBody GuestDto requestDto) {
+        System.out.println("requestDto = " + requestDto);
+        String nickname = requestDto.getNickname();
+        System.out.println("Guest Login parameter-> nickname = " + nickname);
+        return guestService.guestResult(requestDto);
+    }
 }

@@ -42,6 +42,7 @@ const GuestLogin = () => {
           if (res.status === 200) {
             console.log(state);
             localStorage.setItem("nickname", state.nickName);
+            
             navigate("/question");
           }
         })
