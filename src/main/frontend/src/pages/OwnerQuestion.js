@@ -37,6 +37,9 @@ const OwnerQuestion = () => {
     if (answer.length < 20) {
       setId(id + 1);
     }
+    if (answer.length < id) {
+      setId(id - 1);
+    }
   }, [answer]);
 
   //번호대로 불러온 질문과 답
@@ -48,6 +51,16 @@ const OwnerQuestion = () => {
       setAnswer(answer.concat(list?.map((it) => it.answer1).slice(0, 1)));
     } else {
       setAnswer(answer.concat(list?.map((it) => it.answer2).slice(0, 1)));
+    }
+  };
+
+  const decreaseQuestion = () => {
+    if (id <= 1) {
+      navigate({ response: true });
+    } else {
+      // 뒤로 가면 선택됐던 값 삭제되도록 (다시 선택할거니까)
+      answer.splice(answer.indexOf(answer.length - 1), 1);
+      setAnswer([...answer]);
     }
   };
 
@@ -126,7 +139,10 @@ const OwnerQuestion = () => {
           <span className={["proGraph", `proGraph_${id}`].join(" ")}></span>
         </div>
         <div className="progress-btn">
-          <button className="prev"> {"<"}PREV </button>
+          <button className="prev" onClick={decreaseQuestion}>
+            {" "}
+            {"<"}PREV{" "}
+          </button>
         </div>
       </div>
 
