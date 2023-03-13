@@ -1,10 +1,9 @@
 package com.hsstudy.GuessMyMBTI.api.controller.kakaoSocialLogin;
 
+import com.hsstudy.GuessMyMBTI.api.domain.dto.AccountDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.LoginResponseDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupRequestDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupResponseDto;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.AuthService;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.SecurityService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/login")
 public class AuthController {
 
     private final AuthService authService;
@@ -51,6 +49,12 @@ public class AuthController {
     @PostMapping("/login/signup")
     public ResponseEntity<SignupResponseDto> kakaoSignup(@RequestBody SignupRequestDto requestDto) {
         return authService.kakaoSignup(requestDto);
+    }
+
+    // todo : owner의 mbti 결과 -> EEEEJJJJ... , ESFJ 이거 두개 전달용
+    @PostMapping("owner-result")
+    public ResponseEntity<AccountDto> ownerResultSave(@RequestBody AccountDto requestDto) {
+        return authService.ownerResultSave(requestDto);
     }
 
 //    @GetMapping("/guest-login")
