@@ -155,7 +155,11 @@ public class AuthService {
         System.out.println("######## kakaoAccountDto에 담긴 정보 빼내서 Account 클래스에 builder 입력 #########");
         System.out.println("email: " + email + " kakaoName: " + kakaoName);
 
+        // todo: 처음 로그인인지 아닌지 분기 필요함
+        Account existOwner = accountRepository.findByEmail(email).orElse(null);
+
         return Account.builder()
+                .id(existOwner.getId())
                 .loginType("KAKAO")
                 .email(email)
                 .kakaoName(kakaoName)
@@ -174,6 +178,7 @@ public class AuthService {
                 account.getEmail() + " " +
                 account.getAuthority() + " " +
                 account.getId());
+
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
         System.out.println("loginResponseDto = " + loginResponseDto);
@@ -226,6 +231,7 @@ public class AuthService {
                 .nickname(requestDto.getNickname())
                 .picture(requestDto.getPicture())
                 .build();
+
         accountRepository.save(newAccount);
 
         // 회원가입 상황에 대해 토큰을 발급하고 헤더와 쿠키에 배치
@@ -254,7 +260,10 @@ public class AuthService {
         headers.add("result", requestDto.getResult());
         headers.add("mbti", requestDto.getMbti());
 
-        return ResponseEntity.ok().headers(headers).body(null);
+        AccountDto accountDto = new AccountDto();
+        accountDto.setAccount(existOwner);
+
+        return ResponseEntity.ok().headers(headers).body(accountDto);
     }
 
     /* Refresh Token 을 Repository 에 저장하는 메소드 */
