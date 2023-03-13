@@ -4,15 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.AccountDto;
+import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.domain.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.Authority;
 import com.hsstudy.GuessMyMBTI.api.domain.RefreshToken;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.LoginResponseDto;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupRequestDto;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupResponseDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoAccountDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoTokenDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
@@ -30,6 +27,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 /**
@@ -247,11 +245,8 @@ public class AuthService {
         return ResponseEntity.ok().headers(headers).body(responseDto);
     }
 
-    public ResponseEntity<AccountDto> ownerResultSave(@RequestBody AccountDto requestDto) {
-        // 받아온 정보 DB에 저장
-        // repo에서 누구인지 찾기
+    public ResponseEntity<SetOwnerResultDto> ownerResultSave(@RequestBody SetOwnerResultDto requestDto) {
         Account existOwner = accountRepository.findById(requestDto.getId()).orElse(null);
-        System.out.println("existOwner = " + existOwner.getEmail());
         existOwner.setMbti(requestDto.getMbti());
         existOwner.setResult(requestDto.getResult());
         accountRepository.save(existOwner);
@@ -260,11 +255,11 @@ public class AuthService {
         headers.add("result", requestDto.getResult());
         headers.add("mbti", requestDto.getMbti());
 
-        AccountDto accountDto = new AccountDto();
-        accountDto.setAccount(existOwner);
+        SetOwnerResultDto setOwnerResultDto = new SetOwnerResultDto();
 
-        return ResponseEntity.ok().headers(headers).body(accountDto);
+        return ResponseEntity.ok().headers(headers).body(setOwnerResultDto);
     }
+
 
     /* Refresh Token 을 Repository 에 저장하는 메소드 */
     public void saveRefreshToken(Account account, TokenDto tokenDto) {

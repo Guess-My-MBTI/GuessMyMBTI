@@ -106,7 +106,7 @@ const OwnerQuestion = () => {
         "Content-Type": "application/json;charset=utf-8",
         "Access-Control-Allow-Origin": "*",
       },
-      body: {
+      data: {
         id: ownerId,
         mbti: mbti,
         result: answer.join(""),
