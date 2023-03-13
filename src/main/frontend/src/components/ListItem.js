@@ -1,5 +1,4 @@
 const ListItem = ({ data }) => {
-  console.log(data);
   return (
     <div className="ListItem">
       {data.map((it) => (

@@ -49,15 +49,17 @@ const OwnerMain = () => {
     setIsOpen(!isOpen);
   };
 
+  const mbti = localStorage.getItem("mbti");
+
   return (
     <div className="OwnerMain">
       <div className="top">
         <p className="me">나는</p>
         <div className="mbtiresult">
-          <p className="m">M</p>
-          <p className="b">B</p>
-          <p className="t">T</p>
-          <p className="i">I</p>
+          <p className="m">{mbti[0]}</p>
+          <p className="b">{mbti[1]}</p>
+          <p className="t">{mbti[2]}</p>
+          <p className="i">{mbti[3]}</p>
         </div>
         <div className="menu">
           <AiOutlineMenu onClick={menuToggle} />
