@@ -16,7 +16,6 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     Optional<Guest> findById(String id);
     Optional<Guest> findByNicknameAndId(String nickname, Long id);
-    @Query(value = "SELECT * FROM GUEST WHERE RESULT_MBTI == null", nativeQuery = true)
     Optional<Guest> findByNickname(String nickname);
 
 //    @Query(value = "SELECT * FROM GUEST WHERE NICKNAME = ?1 AND RESULT_MBTI IS NULL", nativeQuery = true)
