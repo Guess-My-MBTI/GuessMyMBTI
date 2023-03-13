@@ -150,6 +150,7 @@ public class AuthService {
         // kakaoAccountDto 에서 필요한 정보 꺼내서 Account 객체로 매핑
         String email = kakaoAccountDto.getKakao_account().getEmail();
         String kakaoName = kakaoAccountDto.getKakao_account().getProfile().getNickname();
+
         System.out.println("######## kakaoAccountDto에 담긴 정보 빼내서 Account 클래스에 builder 입력 #########");
         System.out.println("email: " + email + " kakaoName: " + kakaoName);
 
@@ -183,6 +184,7 @@ public class AuthService {
         // todo : 카카오 엑세스 토큰은 db에만 저장하고 프론트에는 전달하지 않기
         loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
         System.out.println("loginResponseDto = " + loginResponseDto);
+
         loginResponseDto.setAccount(account);
         System.out.println("loginResponseDto = " + loginResponseDto);
         try {

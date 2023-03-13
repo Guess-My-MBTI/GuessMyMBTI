@@ -24,7 +24,6 @@ public class GuestServiceImpl implements GuestService {
     public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
         // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
         // 없다면 저장한 후 실행
-        HttpHeaders headers = new HttpHeaders();
         try {
             System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
             System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
@@ -50,14 +49,14 @@ public class GuestServiceImpl implements GuestService {
                 );
                 guestRepository.save(newGuest);
                 existGuest = newGuest;
-                return ResponseEntity.ok().headers(headers).body(existGuest);
+                return ResponseEntity.ok().body(existGuest);
             }
-            return ResponseEntity.ok().headers(headers).body(existGuest);
+            return ResponseEntity.ok().body(existGuest);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // 위의 try catch문을 안 탄 경우
-        return ResponseEntity.ok().headers(headers).body(null);
+        return ResponseEntity.ok().body(null);
     }
 
     @Override
@@ -80,9 +79,7 @@ public class GuestServiceImpl implements GuestService {
 
         guestRepository.save(existGuest);
 
-        HttpHeaders headers = new HttpHeaders();
-
-        return ResponseEntity.ok().headers(headers).body(existGuest);
+        return ResponseEntity.ok().body(existGuest);
     }
 
     @Override
