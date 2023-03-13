@@ -175,7 +175,9 @@ public class AuthService {
                 account.getId());
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
+        System.out.println("loginResponseDto = " + loginResponseDto);
         loginResponseDto.setAccount(account);
+        System.out.println("loginResponseDto = " + loginResponseDto);
         try {
             System.out.println("AccountRepository에 email로 유저 있는지 판단하기");
             Account existAccount = accountRepository.findByEmail(account.getEmail()).orElse(null);
