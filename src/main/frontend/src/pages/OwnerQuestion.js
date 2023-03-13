@@ -6,7 +6,6 @@ const OwnerQuestion = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [id, setId] = useState(0);
-  const [Qid, setQid] = useState(1);
   const [answer, setAnswer] = useState([]);
 
   const baseUrl = "http://localhost:8080/";
@@ -81,7 +80,25 @@ const OwnerQuestion = () => {
 
     console.log(mbti);
     localStorage.setItem("mbti", mbti);
+    // storeDB(answer, mbti);
     navigate("/owner-result");
+  };
+
+  const storeDB = (answer, mbti) => {
+    axios({
+      method: "POST",
+      url: `${baseUrl}owner-result`,
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: {
+        mbti: mbti,
+        result: answer,
+      },
+    }).then((res) => {
+      navigate("/owner-result");
+    });
   };
 
   return (
