@@ -22,5 +22,6 @@ public class GuestController {
         return guestService.guestLogin(requestDto);
     }
 
+    // todo : guest에서 정보(send 누를 때)를 보내면 저장하기 @PostMapping("/guest-send")
 
 }
