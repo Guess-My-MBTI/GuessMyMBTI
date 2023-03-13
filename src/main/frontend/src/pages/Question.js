@@ -45,6 +45,9 @@ const Question = () => {
     if (answer.length < 20) {
       setId(id + 1);
     }
+    if (answer.length < id) {
+      setId(id - 1);
+    }
   }, [answer]);
 
   const calMbti = (answer) => {
@@ -77,8 +80,6 @@ const Question = () => {
     if (id <= 1) {
       navigate({ response: true });
     } else {
-      setId(id - 1);
-
       // 뒤로 가면 선택됐던 값 삭제되도록 (다시 선택할거니까)
       answer.splice(answer.indexOf(answer.length - 1), 1);
       setAnswer([...answer]);
