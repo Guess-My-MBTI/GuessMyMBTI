@@ -1,10 +1,13 @@
 package com.hsstudy.GuessMyMBTI.api.entity.guest;
 
+import com.hsstudy.GuessMyMBTI.api.domain.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.Authority;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 //import javax.persistence.Entity;
 // DB테이블과 매핑
@@ -23,7 +26,8 @@ import javax.validation.constraints.Size;
 @Table(name = "Guest")
 public class Guest {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "GUEST_ID")
     private Long id;
 
@@ -35,12 +39,19 @@ public class Guest {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @Column(name = "GUEST_ANS")
+    @Column(name = "GUEST_ANS") // 결과 문자열
     @Size(max = 45)
     private String answer;
 
-    @Column(name = "RESULT_MBTI")
+    @Column(name = "RESULT_MBTI") // 게스트가 생각한 owner의 mbti
     @Size(max = 45)
     private String result;
+
+    @Column(name = "GUEST_ACC") // 결과 % 정확도
+    private int accuracy;
+
+    @ManyToOne()
+    @JoinColumn(name = "account_id", insertable = false, updatable = false)
+    private Account ownerId;
 
 }
