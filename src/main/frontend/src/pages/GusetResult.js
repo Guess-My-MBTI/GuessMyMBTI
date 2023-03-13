@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
+import API from "../utils/API";
 
 //localStorage에서 user name 불러오기
 const name = localStorage.getItem("name");
@@ -13,102 +14,17 @@ const nameData = [
 
 const GuestResult = () => {
   const navigate = useNavigate();
-  const oResult = "INFJ";
+  const mbti = localStorage.getItem("mbti");
+  const guest_mbti = localStorage.getItem("guest_mbti");
+  const nickname = localStorage.getItem("nickname");
   const messageInput = useRef();
+
   const [state, setState] = useState({ message: "" });
 
-  // INFJ
-  const owner_answer = [
-    "E",
-    "I",
-    "E",
-    "I",
-    "I",
-    "N",
-    "N",
-    "S",
-    "N",
-    "N",
-    "F",
-    "F",
-    "F",
-    "F",
-    "F",
-    "P",
-    "P",
-    "J",
-    "J",
-    "J",
-  ];
-
+  const owner_answer = JSON.parse(localStorage.getItem("owner_answer"));
   const guest_answer = JSON.parse(localStorage.getItem("guest_answer"));
 
-  // const o_EI = owner_answer.slice(0, 5);
-  // const o_NS = owner_answer.slice(5, 10);
-  // const o_FT = owner_answer.slice(10, 15);
-  // const o_PJ = owner_answer.slice(15, 20);
-
-  const g_EI = guest_answer.slice(0, 5);
-  const g_NS = guest_answer.slice(5, 10);
-  const g_FT = guest_answer.slice(10, 15);
-  const g_PJ = guest_answer.slice(15, 20);
-
-  // let o_E = 0;
-  // let o_N = 0;
-  // let o_F = 0;
-  // let o_P = 0;
-
-  let g_E = 0;
-  let g_N = 0;
-  let g_F = 0;
-  let g_P = 0;
-
-  const count_E = () => {
-    for (let i = 0; i < g_EI.length; i++) {
-      if (g_EI[i] == "E") {
-        g_E += 1;
-      }
-    }
-
-    return g_E >= 3 ? "E" : "I";
-  };
-
-  const count_N = () => {
-    for (let i = 0; i < g_NS.length; i++) {
-      if (g_NS[i] == "N") {
-        g_N += 1;
-      }
-    }
-
-    return g_N >= 3 ? "N" : "S";
-  };
-
-  const count_F = () => {
-    for (let i = 0; i < g_FT.length; i++) {
-      if (g_FT[i] == "F") {
-        g_F += 1;
-      }
-    }
-
-    return g_F >= 3 ? "F" : "T";
-  };
-
-  const count_P = () => {
-    for (let i = 0; i < g_PJ.length; i++) {
-      if (g_PJ[i] == "P") {
-        g_P += 1;
-      }
-    }
-    return g_P >= 3 ? "P" : "J";
-  };
-
-  // const cal = () => {
-  //   return parseInt(
-  //     ((count_E() + count_N() + count_F() + count_P()) / 4) * 100
-  //   );
-  // };
-
-  const cal = () => {
+  const calAcc = () => {
     let count = 0;
     for (let i = 0; i < owner_answer.length; i++) {
       if (owner_answer[i] == guest_answer[i]) {
@@ -134,7 +50,7 @@ const GuestResult = () => {
     });
   };
 
-  const handleSend = () => {
+  const handleSend = (e) => {
     if (state.message.length < 1) {
       messageInput.current.focus();
       return;
@@ -143,7 +59,20 @@ const GuestResult = () => {
       setState({ message: "" });
       return;
     } else {
-      console.log(state.message);
+      // API.post("/guest-result", { nickname: nickname, guest_ans: guest_mbti, accuracy: calAcc(), message: state.message })
+      //   .then((res) => {
+      //     if (res.status === 200) {
+      //       console.log(state.message);
+      //       // alert("전달 완료!");
+      //       navigate(`/`);
+      //     }
+      //   })
+      //   .catch((error) => console.log(error.res));
+
+      console.log("nickname: " + nickname);
+      console.log("guest_mbti: " + guest_mbti);
+      console.log("accuracy: " + calAcc());
+      console.log("message: " + state.message);
       alert("전달 완료!");
       navigate(`/`);
     }
@@ -166,10 +95,10 @@ const GuestResult = () => {
 
       <div className="answerCard">
         <div className="mbti">
-          <p className="m">{oResult[0]}</p>
-          <p className="b">{oResult[1]}</p>
-          <p className="t">{oResult[2]}</p>
-          <p className="i">{oResult[3]}</p>
+          <p className="m">{mbti[0]}</p>
+          <p className="b">{mbti[1]}</p>
+          <p className="t">{mbti[2]}</p>
+          <p className="i">{mbti[3]}</p>
         </div>
       </div>
 
@@ -187,10 +116,10 @@ const GuestResult = () => {
 
       <div className="chooseCard">
         <div className="mbti">
-          <p className="m">{count_E()}</p>
-          <p className="b">{count_N()}</p>
-          <p className="t">{count_F()}</p>
-          <p className="i">{count_P()}</p>
+          <p className="m">{guest_mbti[0]}</p>
+          <p className="b">{guest_mbti[1]}</p>
+          <p className="t">{guest_mbti[2]}</p>
+          <p className="i">{guest_mbti[3]}</p>
         </div>
       </div>
 
@@ -201,7 +130,9 @@ const GuestResult = () => {
           <p className="perfect">100%</p>
         </div>
         <div className="graph">
-          <span>{cal() + "%"}</span>
+          <span className={["graphAni", `graphAni_${calAcc()}`].join(" ")}>
+            {calAcc() + "%"}
+          </span>
         </div>
       </div>
       <br />

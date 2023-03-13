@@ -1284,7 +1284,7 @@ body {
     color: #f999a0;
   }
   100% {
-    width: 80%;
+    width: 100%;
     opacity: 0.8;
   }
 }
@@ -1302,9 +1302,63 @@ body {
   background-color: #f999a0;
   border: 1px solid #282828;
   opacity: 0.8;
-  margin-right: 20%;
+
   /* 애니메이션 graph를 3초동안 실행시킴 (한번만 실행)*/
-  animation: graph 3s 1;
+  animation: graph 2s 1;
+}
+
+.GuestResult .graphAni_0 {
+  margin-right: 100%;
+}
+
+.GuestResult .graphAni_5,
+.GuestResult .graphAni_10 {
+  margin-right: 90%;
+}
+
+.GuestResult .graphAni_15,
+.GuestResult .graphAni_20 {
+  margin-right: 80%;
+}
+
+.GuestResult .graphAni_25,
+.GuestResult .graphAni_30 {
+  margin-right: 70%;
+}
+
+.GuestResult .graphAni_35,
+.GuestResult .graphAni_40 {
+  margin-right: 60%;
+}
+
+.GuestResult .graphAni_45,
+.GuestResult .graphAni_50 {
+  margin-right: 50%;
+}
+
+.GuestResult .graphAni_55,
+.GuestResult .graphAni_60 {
+  margin-right: 40%;
+}
+
+.GuestResult .graphAni_65,
+.GuestResult .graphAni_70 {
+  margin-right: 30%;
+}
+
+.GuestResult .graphAni_75,
+.GuestResult .graphAni_80 {
+  margin-right: 20%;
+}
+
+.GuestResult .graphAni_85,
+.GuestResult .graphAni_90,
+.GuestResult .graphAni_95 {
+  margin-right: 10%;
+}
+
+.GuestResult .graphAni_100 {
+  margin-right: 0%;
 }
 
 .GuestResult .sendMessage {
