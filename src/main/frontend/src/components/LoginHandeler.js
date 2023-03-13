@@ -20,6 +20,7 @@ const LoginHandeler = (props) => {
         localStorage.setItem("access_token", res.headers.authorization);
         localStorage.setItem("role", res.data.account.authority);
         localStorage.setItem("name", res.data.account.kakaoName);
+        localStorage.setItem("id", res.data.account.id);
         navigate("/owner-question");
       });
     };
