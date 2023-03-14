@@ -62,7 +62,7 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public ResponseEntity<Guest> guestResult(GuestDto requestDto) {
-        Guest existGuest = guestRepository.findByNicknameAndResultIsNull(requestDto.getNickname()).orElse(null);
+        Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
         System.out.println("existGuest = " + existGuest.getNickname() + " " + existGuest.getId());
         System.out.println("Guest의 requestDto");
         System.out.println("requestDto : " +
@@ -82,7 +82,14 @@ public class GuestServiceImpl implements GuestService {
 
         HttpHeaders headers = new HttpHeaders();
 
-        return ResponseEntity.ok().headers(headers).body(null);
+        return ResponseEntity.ok().headers(headers).body(existGuest);
+    }
+
+    @Override
+    public ResponseEntity<Guest> guestInfo(GuestDto requestDto) {
+        Guest currentGuest = guestRepository.findByNickname(requestDto.getNickname()).orElse(null);
+        System.out.println(currentGuest.getId());
+        return ResponseEntity.ok().body(currentGuest);
     }
 
 }
