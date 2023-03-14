@@ -1,7 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.service.explainMbti;
 
-import com.hsstudy.GuessMyMBTI.api.entity.ExplainMbti;
-import com.hsstudy.GuessMyMBTI.api.entity.ExplainMbtiDTO;
+import com.hsstudy.GuessMyMBTI.api.entity.explainMbti.ExplainMbti;
+import com.hsstudy.GuessMyMBTI.api.entity.explainMbti.ExplainMbtiDTO;
 import com.hsstudy.GuessMyMBTI.api.repository.ExplainMbtiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

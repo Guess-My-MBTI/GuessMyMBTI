@@ -5,11 +5,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
-import com.hsstudy.GuessMyMBTI.api.domain.RefreshToken;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoAccountDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoTokenDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
@@ -27,7 +25,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 /**
@@ -154,18 +151,27 @@ public class AuthService {
         System.out.println("######## kakaoAccountDto에 담긴 정보 빼내서 Account 클래스에 builder 입력 #########");
         System.out.println("email: " + email + " kakaoName: " + kakaoName);
 
-        // todo: 처음 로그인인지 아닌지 분기 필요함
+        // todo: 처음 로그인인지 아닌지 분기 필요함 -> 해결했나?
         Account existOwner = accountRepository.findByEmail(email).orElse(null);
-
-        return Account.builder()
-                .id(existOwner.getId())
-                .loginType("KAKAO")
-                .email(email)
-                .kakaoName(kakaoName)
-                .authority(Authority.ROLE_USER)
-                .mbti(existOwner.getMbti())
-                .result(existOwner.getResult())
-                .build();
+        if (existOwner != null) {
+            return Account.builder()
+                    .id(kakaoAccountDto.getId())
+                    .loginType("KAKAO")
+                    .email(email)
+                    .kakaoName(kakaoName)
+                    .authority(Authority.ROLE_USER)
+                    .mbti(existOwner.getMbti())
+                    .result(existOwner.getResult())
+                    .build();
+        } else {
+            return Account.builder()
+                    .id(kakaoAccountDto.getId())
+                    .loginType("KAKAO")
+                    .email(email)
+                    .kakaoName(kakaoName)
+                    .authority(Authority.ROLE_USER)
+                    .build();
+        }
     }
 
     /* login 요청 보내는 회원가입 유무 판단해 분기 처리 */

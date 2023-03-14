@@ -1,10 +1,9 @@
 package com.hsstudy.GuessMyMBTI.api.controller.kakaoSocialLogin;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.AccountService;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.SecurityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;

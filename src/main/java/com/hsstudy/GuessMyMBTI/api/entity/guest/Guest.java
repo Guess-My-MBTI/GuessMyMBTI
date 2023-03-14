@@ -1,13 +1,11 @@
 package com.hsstudy.GuessMyMBTI.api.entity.guest;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 //import javax.persistence.Entity;
 // DB테이블과 매핑

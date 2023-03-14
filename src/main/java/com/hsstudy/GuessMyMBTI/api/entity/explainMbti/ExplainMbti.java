@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.entity;
+package com.hsstudy.GuessMyMBTI.api.entity.explainMbti;
 
 import lombok.Getter;
 import lombok.Setter;

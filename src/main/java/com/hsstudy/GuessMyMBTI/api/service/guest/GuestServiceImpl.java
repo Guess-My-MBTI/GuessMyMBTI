@@ -1,17 +1,14 @@
 package com.hsstudy.GuessMyMBTI.api.service.guest;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
