@@ -6,9 +6,10 @@ spring:
   # 데이터 소스 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://root:TXZVo1ibfZGqoN0cAlHF@containers-us-west-49.railway.app:6599/railway?serverTimezone=Asia/Seoul
     username: root
-    password: oA1bI1m5YtXOs7OKr8SD
+    password: TXZVo1ibfZGqoN0cAlHF
     hikari:
       pool-name: jpa-hikari-pool
       maximum-pool-size: 10

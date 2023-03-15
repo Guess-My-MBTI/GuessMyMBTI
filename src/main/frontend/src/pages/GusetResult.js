@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
 import API from "../utils/API";
+import axios from "axios";
 
 //localStorage에서 user name 불러오기
 const name = localStorage.getItem("name");
@@ -15,14 +16,39 @@ const nameData = [
 const GuestResult = () => {
   const navigate = useNavigate();
   const mbti = localStorage.getItem("mbti");
-  const guest_mbti = localStorage.getItem("guest_mbti");
+  const result = localStorage.getItem("guest_mbti");
   const nickname = localStorage.getItem("nickname");
   const messageInput = useRef();
 
-  const [state, setState] = useState({ message: "" });
+  const guestId = localStorage.getItem("id");
+  const role = localStorage.getItem("role");
+
+  // const [guestId, setGuestId] = useState("");
+  // const [nickname, setNickname] = useState("");
 
   const owner_answer = JSON.parse(localStorage.getItem("owner_answer"));
   const guest_answer = JSON.parse(localStorage.getItem("guest_answer"));
+
+  // const search = () => {
+  //   return axios.create({
+  //     baseURL: "http://localhost:8080/guest-info",
+  //     headers: {
+  //       "Content-Type": "application/json;charset=utf-8",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //   });
+  // };
+
+  // async function fetchData() {
+  //   try {
+  //     const res = await search().get();
+  //     setGuestId(res.data);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // fetchData();
 
   const calAcc = () => {
     let count = 0;
@@ -36,9 +62,30 @@ const GuestResult = () => {
     return count;
   };
 
+  const accuracy = calAcc();
+
+  const [state, setState] = useState({
+    result: result,
+    accuracy: accuracy,
+    comment: "",
+  });
+
   const goHome = () => navigate("/owner-main");
 
   const share = () => alert("링크가 복사되었습니다!");
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await API.get("/guest-info");
+  //       setGuestId(response.data);
+  //       console.log(guestId);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const handleChangeState = (e) => {
     // console.log(state);
@@ -51,32 +98,37 @@ const GuestResult = () => {
   };
 
   const handleSend = (e) => {
-    if (state.message.length < 1) {
+    if (state.comment.length < 1) {
       messageInput.current.focus();
       return;
-    } else if (state.message.length > 20) {
+    } else if (state.comment.length > 20) {
       alert("20자 이내로 설정해주세요!");
-      setState({ message: "" });
+      setState({ comment: "" });
       return;
     } else {
-      API.post(
-          "/guest-result",
-          { nickname: nickname, guest_ans: guest_mbti, accuracy: calAcc(), comment: state.message })
+      API.post("/guest-result", {
+        nickname: nickname,
+        result: state.result,
+        accuracy: state.accuracy,
+        comment: state.comment,
+        guestId: guestId,
+        role: state.role,
+      })
         .then((res) => {
           if (res.status === 200) {
-            console.log(state.message);
-            // alert("전달 완료!");
+            console.log(res);
+            alert("전달 완료!");
             navigate(`/`);
           }
         })
         .catch((error) => console.log(error.res));
 
-      console.log("nickname: " + nickname);
-      console.log("guest_mbti: " + guest_mbti);
-      console.log("accuracy: " + calAcc());
-      console.log("message: " + state.message);
-      alert("전달 완료!");
-      navigate(`/`);
+      // console.log("nickname: " + state.nickname);
+      // console.log("result: " + state.result);
+      // console.log("accuracy: " + state.accuracy);
+      // console.log("message: " + state.comment);
+      // alert("전달 완료!");
+      // navigate(`/`);
     }
   };
 
@@ -118,10 +170,10 @@ const GuestResult = () => {
 
       <div className="chooseCard">
         <div className="mbti">
-          <p className="m">{guest_mbti[0]}</p>
-          <p className="b">{guest_mbti[1]}</p>
-          <p className="t">{guest_mbti[2]}</p>
-          <p className="i">{guest_mbti[3]}</p>
+          <p className="m">{result[0]}</p>
+          <p className="b">{result[1]}</p>
+          <p className="t">{result[2]}</p>
+          <p className="i">{result[3]}</p>
         </div>
       </div>
 
@@ -132,8 +184,8 @@ const GuestResult = () => {
           <p className="perfect">100%</p>
         </div>
         <div className="graph">
-          <span className={["graphAni", `graphAni_${calAcc()}`].join(" ")}>
-            {calAcc() + "%"}
+          <span className={["graphAni", `graphAni_${accuracy}`].join(" ")}>
+            {accuracy + "%"}
           </span>
         </div>
       </div>
@@ -142,19 +194,15 @@ const GuestResult = () => {
         <form className="message">
           <input
             placeholder="상대에게 남기고 싶은 한마디"
-            name="message"
+            name="comment"
             ref={messageInput}
-            value={state.message}
+            value={state.comment}
             onChange={handleChangeState}
           />
         </form>
 
         <div className="send">
-          <button
-            className="sendBtn"
-            onClick={handleSend}
-            style={{ cursor: "pointer" }}
-          >
+          <button className="sendBtn" onClick={handleSend}>
             send
           </button>
         </div>
