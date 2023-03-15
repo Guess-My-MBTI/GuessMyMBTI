@@ -16,7 +16,10 @@ const GuestLogin = () => {
   const navigate = useNavigate();
 
   const nickNameInput = useRef();
-  const [state, setState] = useState({ nickName: "" });
+  const [state, setState] = useState({
+    nickName: "",
+    role: "ROLE_GUEST",
+  });
 
   const handleChangeState = (e) => {
     // console.log(state);
@@ -37,12 +40,12 @@ const GuestLogin = () => {
       setState({ nickName: "" });
       return;
     } else {
-      API.post("/guest-login", { nickname: state.nickName })
+      API.post("/guest-login", { nickname: state.nickName, role: state.role })
         .then((res) => {
           if (res.status === 200) {
-            console.log(state);
             localStorage.setItem("nickname", state.nickName);
-            
+            localStorage.setItem("role", state.role);
+            console.log(state);
             navigate("/question");
           }
         })
