@@ -20,14 +20,45 @@ const GuestResult = () => {
   const nickname = localStorage.getItem("nickname");
   const messageInput = useRef();
 
-  const guestId = localStorage.getItem("id");
+  // const guestId = localStorage.getItem("id");
   const role = localStorage.getItem("role");
 
-  // const [guestId, setGuestId] = useState("");
+  const [guestId, setGuestId] = useState("");
   // const [nickname, setNickname] = useState("");
 
   const owner_answer = JSON.parse(localStorage.getItem("owner_answer"));
   const guest_answer = JSON.parse(localStorage.getItem("guest_answer"));
+
+  const accessToken = localStorage.getItem("access_token");
+  const baseUrl = "http://localhost:8080/";
+
+  // 닉네임 포함해서 보내기
+  // token 필요없음 (지금은 headers 필요없음)
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}guest-info`,
+      params: { nickname: nickname },
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setGuestId(res.data.id);
+        localStorage.setItem("guest_id", res.data.id);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  // // fetch는 메서드 지정하지 않으면 GET으로 처리
+  // fetch("http://localhost:8080/guest-info")
+  //   // 응답 데이터 JSON 형식 변환
+  //   .then((response) => response.json())
+  //   // 응답 데이터 처리
+  //   .then((data) => console.log(data));
 
   // const search = () => {
   //   return axios.create({
@@ -35,13 +66,14 @@ const GuestResult = () => {
   //     headers: {
   //       "Content-Type": "application/json;charset=utf-8",
   //       "Access-Control-Allow-Origin": "*",
+  //       Authorization: "Bearer " + accessToken,
   //     },
   //   });
   // };
 
   // async function fetchData() {
   //   try {
-  //     const res = await search().get();
+  //     const res = await search().get("http://localhost:8080/guest-info");
   //     setGuestId(res.data);
   //     console.log(res.data);
   //   } catch (error) {
@@ -49,6 +81,19 @@ const GuestResult = () => {
   //   }
   // }
   // fetchData();
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await API.get("/guest-info");
+  //       setGuestId(response.data);
+  //       console.log(guestId);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const calAcc = () => {
     let count = 0;
@@ -73,19 +118,6 @@ const GuestResult = () => {
   const goHome = () => navigate("/owner-main");
 
   const share = () => alert("링크가 복사되었습니다!");
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await API.get("/guest-info");
-  //       setGuestId(response.data);
-  //       console.log(guestId);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
 
   const handleChangeState = (e) => {
     // console.log(state);
@@ -112,7 +144,7 @@ const GuestResult = () => {
         accuracy: state.accuracy,
         comment: state.comment,
         guestId: guestId,
-        role: state.role,
+        role: role,
       })
         .then((res) => {
           if (res.status === 200) {
@@ -123,7 +155,22 @@ const GuestResult = () => {
         })
         .catch((error) => console.log(error.res));
 
-      // console.log("nickname: " + state.nickname);
+      // axios
+      //   .post("http://localhost:8080/guest-result", {
+      //     id: 1,
+      //     nickname: nickname,
+      //     guestId: guestId,
+      //     role: role,
+      //     accuracy: state.accuracy,
+      //     comment: state.comment,
+      //     result: state.result,
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+
+      // console.log("role: " + role);
+      // console.log("nickname: " + nickname);
       // console.log("result: " + state.result);
       // console.log("accuracy: " + state.accuracy);
       // console.log("message: " + state.comment);
