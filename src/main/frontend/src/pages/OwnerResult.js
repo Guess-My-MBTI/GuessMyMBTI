@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import { MdOutlineReplay } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const OwnerResult = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -11,6 +11,7 @@ const OwnerResult = () => {
 
   const accessToken = localStorage.getItem("access_token");
   const mbti = localStorage.getItem("mbti");
+  const ownerId = localStorage.getItem("id");
   console.log(accessToken);
 
   useEffect(() => {
@@ -27,6 +28,35 @@ const OwnerResult = () => {
   }, []);
 
   const list = data.filter((it) => it.mbti == mbti);
+
+  const shareLink = () => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}share`,
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+      params: {
+        id: ownerId,
+      },
+    }).then((res) => {
+      console.log(res.data);
+
+      copyLink(res.data);
+    });
+  };
+
+  const copyLink = async (link) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      alert("클립보드에 링크가 복사되었습니다.");
+    } catch (e) {
+      alert("실패 다시시도해주세요");
+    }
+  };
+
   return (
     <div className="OwnerResult">
       <div className="result">
@@ -65,7 +95,7 @@ const OwnerResult = () => {
             />
           </div>
           <div>
-            <HiOutlineLink className="share" />
+            <HiOutlineLink className="share" onClick={shareLink} />
           </div>
         </div>
       </div>
