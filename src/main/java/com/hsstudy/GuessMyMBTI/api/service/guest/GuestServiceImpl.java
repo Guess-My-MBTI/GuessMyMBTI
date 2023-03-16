@@ -60,8 +60,6 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public ResponseEntity<Guest> guestResult(GuestDto requestDto) {
-        Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
-        System.out.println("existGuest = " + existGuest.getNickname() + " " + existGuest.getId());
         System.out.println("Guest의 requestDto");
         System.out.println("requestDto : " +
                 requestDto.getGuestId() + " " +
@@ -72,6 +70,9 @@ public class GuestServiceImpl implements GuestService {
                 requestDto.getComment() + " " +
                 requestDto.getAccuracy() + " " +
                 requestDto.getRole());
+
+        Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
+        System.out.println("existGuest = " + existGuest.getNickname() + " " + existGuest.getId());
 
         existGuest.setComment(requestDto.getComment());
         existGuest.setResult(requestDto.getResult());

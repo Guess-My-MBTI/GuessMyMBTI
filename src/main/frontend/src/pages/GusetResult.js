@@ -18,6 +18,7 @@ const GuestResult = () => {
   const mbti = localStorage.getItem("mbti");
   const result = localStorage.getItem("guest_mbti");
   const nickname = localStorage.getItem("nickname");
+
   const messageInput = useRef();
 
   // const guestId = localStorage.getItem("id");
@@ -138,6 +139,9 @@ const GuestResult = () => {
       setState({ comment: "" });
       return;
     } else {
+      console.log(state);
+      console.log(nickname);
+      console.log(guestId);
       API.post("/guest-result", {
         nickname: nickname,
         result: state.result,
