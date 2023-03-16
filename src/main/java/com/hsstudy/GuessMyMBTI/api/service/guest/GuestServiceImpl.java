@@ -1,17 +1,16 @@
 package com.hsstudy.GuessMyMBTI.api.service.guest;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 @RequiredArgsConstructor
@@ -83,8 +82,9 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public ResponseEntity<Guest> guestInfo(GuestDto requestDto) {
-        Guest currentGuest = guestRepository.findByNickname(requestDto.getNickname()).orElse(null);
+    public ResponseEntity<Guest> guestInfo(HttpServletRequest request) {
+        String nickname = request.getParameter("nickname");
+        Guest currentGuest = guestRepository.findByNickname(nickname).orElse(null);
         System.out.println(currentGuest.getId());
         return ResponseEntity.ok().body(currentGuest);
     }

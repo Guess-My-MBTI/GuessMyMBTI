@@ -1,6 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.service.explainMbti;
 
-import com.hsstudy.GuessMyMBTI.api.entity.ExplainMbtiDTO;
+import com.hsstudy.GuessMyMBTI.api.entity.explainMbti.ExplainMbtiDTO;
 
 import java.util.List;
 

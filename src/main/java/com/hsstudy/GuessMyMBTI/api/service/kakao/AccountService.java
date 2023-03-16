@@ -1,6 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.service.kakao;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
