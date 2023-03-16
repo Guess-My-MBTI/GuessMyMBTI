@@ -1,21 +1,18 @@
 package com.hsstudy.GuessMyMBTI.api.service.kakao;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
-import com.hsstudy.GuessMyMBTI.api.domain.RefreshToken;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupRequestDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
 import com.hsstudy.GuessMyMBTI.api.exception.CEmailLoginFailedException;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.RefreshTokenRepository;
 import com.hsstudy.GuessMyMBTI.config.jwt.JwtProvider;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.security.Key;
 
 /*
 

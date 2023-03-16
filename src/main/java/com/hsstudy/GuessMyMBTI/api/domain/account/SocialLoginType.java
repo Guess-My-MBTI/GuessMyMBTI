@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.domain;
+package com.hsstudy.GuessMyMBTI.api.domain.account;
 
 public enum SocialLoginType {
     GOOGLE,

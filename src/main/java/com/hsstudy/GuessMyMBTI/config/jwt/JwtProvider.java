@@ -1,6 +1,6 @@
 package com.hsstudy.GuessMyMBTI.config.jwt;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

@@ -1,17 +1,16 @@
 package com.hsstudy.GuessMyMBTI.api.service.guest;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +23,6 @@ public class GuestServiceImpl implements GuestService {
     public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
         // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
         // 없다면 저장한 후 실행
-        HttpHeaders headers = new HttpHeaders();
         try {
             System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
             System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
@@ -50,14 +48,14 @@ public class GuestServiceImpl implements GuestService {
                 );
                 guestRepository.save(newGuest);
                 existGuest = newGuest;
-                return ResponseEntity.ok().headers(headers).body(existGuest);
+                return ResponseEntity.ok().body(existGuest);
             }
-            return ResponseEntity.ok().headers(headers).body(existGuest);
+            return ResponseEntity.ok().body(existGuest);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // 위의 try catch문을 안 탄 경우
-        return ResponseEntity.ok().headers(headers).body(null);
+        return ResponseEntity.ok().body(null);
     }
 
     @Override
@@ -80,14 +78,13 @@ public class GuestServiceImpl implements GuestService {
 
         guestRepository.save(existGuest);
 
-        HttpHeaders headers = new HttpHeaders();
-
-        return ResponseEntity.ok().headers(headers).body(existGuest);
+        return ResponseEntity.ok().body(existGuest);
     }
 
     @Override
-    public ResponseEntity<Guest> guestInfo(GuestDto requestDto) {
-        Guest currentGuest = guestRepository.findByNickname(requestDto.getNickname()).orElse(null);
+    public ResponseEntity<Guest> guestInfo(HttpServletRequest request) {
+        String nickname = request.getParameter("nickname");
+        Guest currentGuest = guestRepository.findByNickname(nickname).orElse(null);
         System.out.println(currentGuest.getId());
         return ResponseEntity.ok().body(currentGuest);
     }

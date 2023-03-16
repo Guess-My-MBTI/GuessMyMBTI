@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.domain;
+package com.hsstudy.GuessMyMBTI.api.domain.account;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
