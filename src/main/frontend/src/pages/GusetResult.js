@@ -55,6 +55,7 @@ const GuestResult = () => {
     API.post("/guest-result", {
       nickname: nickname,
       result: state.result,
+      // todo : accuracy가 항상 0 값입니다. 수정해야 할 것 같아요
       accuracy: state.accuracy,
       comment: state.comment,
       guestId: guestId,

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ListName from "../components/ListName";
 import API from "../utils/API";
 
@@ -30,9 +30,15 @@ const GuestLogin = () => {
     });
   };
 
+  // todo : url 파라미터에서 id 값을 빼와서 post 요청할 때 ownerId를 포함해서 수행하도록 했습니다.
+  const ownerId = new URL(window.location.href).searchParams.get("id");
+  console.log(ownerId);
   const handleLogin = () => {
     setIsLoading(true);
-    API.post("/guest-login", { nickname: state.nickName, role: state.role })
+    API.post(
+        "/guest-login/?id=" + ownerId,
+        { nickname: state.nickName, role: state.role }
+    )
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem("nickname", state.nickName);
