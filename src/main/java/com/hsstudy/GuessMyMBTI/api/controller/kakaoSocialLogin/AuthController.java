@@ -1,5 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.controller.kakaoSocialLogin;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.AuthService;
@@ -64,7 +65,7 @@ public class AuthController {
 
     // todo : 오너가 guest 정보 받아오기
     @GetMapping("/main-page")
-    public ResponseEntity<Account> mainPage(HttpServletRequest request){
+    public ResponseEntity<String> mainPage(HttpServletRequest request) throws JsonProcessingException {
         return authService.mainPage(request);
     }
 

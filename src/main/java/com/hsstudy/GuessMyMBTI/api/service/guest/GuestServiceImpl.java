@@ -27,20 +27,22 @@ public class GuestServiceImpl implements GuestService {
     public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
         Long ownerId = Long.parseLong(request.getParameter("id")); // ownerId를 가져와서 같이 저장하기
         System.out.println("ownerId = " + ownerId);
-        // 닉네임을 꺼내서 그 값이 repo에 있다면 저장 그냥 실행
-        // 없다면 저장한 후 실행
         try {
             System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
             System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
+
             Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
+
             System.out.println("existGuest = " + existGuest);
 
             Account sharedOwner = accountRepository.findById(ownerId).orElse(null);
 
-            System.out.println("sharedOwner = " + sharedOwner.getId());
+            if (sharedOwner == null) {
+                throw new IllegalArgumentException("Owner가 존재하지 않습니다.");
+            }
 
             // DB에 현재 닉네임과 id가 일치하는 Guest가 없다면 if 수행
-            if (existGuest == null && sharedOwner != null) {
+            if (existGuest == null) {
                 System.out.println("처음 로그인 하는 회원입니다.");
                 Guest newGuest = Guest.builder()
                         .nickname(requestDto.getNickname())
@@ -48,35 +50,36 @@ public class GuestServiceImpl implements GuestService {
                         .owner(sharedOwner)
                         .build();
 
-                System.out.println("newGuest = " +
-                        newGuest.getId() + " " +
-                        newGuest.getNickname() + " " +
-                        newGuest.getAuthority() + " " +
-                        newGuest.getAnswer() + " " +
-                        newGuest.getResult() + " " +
-                        newGuest.getOwner().getId()
-                );
+//                System.out.println("newGuest = " +
+//                        newGuest.getId() + " " +
+//                        newGuest.getNickname() + " " +
+//                        newGuest.getAuthority() + " " +
+//                        newGuest.getAnswer() + " " +
+//                        newGuest.getResult() + " " +
+//                        newGuest.getOwner().getId()
+//                );
 
                 guestRepository.save(newGuest);
-
-                System.out.println("Owner 삽입 후 newGuest = " +
-                        newGuest.getId() + " " +
-                        newGuest.getNickname() + " " +
-                        newGuest.getAuthority() + " " +
-                        newGuest.getAnswer() + " " +
-                        newGuest.getResult() + " " +
-                        newGuest.getOwner().getId()
-                );
-                existGuest = newGuest;
+//
+//                System.out.println("Owner 삽입 후 newGuest = " +
+//                        newGuest.getId() + " " +
+//                        newGuest.getNickname() + " " +
+//                        newGuest.getAuthority() + " " +
+//                        newGuest.getAnswer() + " " +
+//                        newGuest.getResult() + " " +
+//                        newGuest.getOwner().getId()
+//                );
+                System.out.println("save 수행 완료");
+                return ResponseEntity.ok().body(newGuest);
+            } else {
                 return ResponseEntity.ok().body(existGuest);
             }
-            return ResponseEntity.ok().body(existGuest);
         } catch (Exception e) {
             System.out.println("게스트 로그인 실패");
             e.printStackTrace();
         }
-        // 위의 try catch문을 안 탄 경우
-        return ResponseEntity.ok().body(null);
+
+        return ResponseEntity.badRequest().build();
     }
 
     @Override

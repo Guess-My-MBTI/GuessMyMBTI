@@ -1,5 +1,8 @@
 package com.hsstudy.GuessMyMBTI.api.entity.guest;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import lombok.*;
@@ -9,11 +12,6 @@ import javax.validation.constraints.Size;
 
 //import javax.persistence.Entity;
 // DB테이블과 매핑
-
-// 예시
-// @Column(name = "GUEST_ID")
-// @Id @GeneratedValue
-// private Long id;
 
 @Entity
 @Getter
@@ -53,6 +51,7 @@ public class Guest {
 
     @ManyToOne()
     @JoinColumn(name = "account_id")
+    @JsonIgnore
     private Account owner;
 
 }

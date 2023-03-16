@@ -11,6 +11,7 @@ import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoAccountDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoTokenDto;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
+import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.exception.CEmailLoginFailedException;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
@@ -27,6 +28,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @sierrah 카카오 로그인 로직을 처리합니다.
@@ -265,13 +269,9 @@ public class AuthService {
         existOwner.setResult(requestDto.getResult());
         accountRepository.save(existOwner);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("result", requestDto.getResult());
-        headers.add("mbti", requestDto.getMbti());
-
         SetOwnerResultDto setOwnerResultDto = new SetOwnerResultDto();
 
-        return ResponseEntity.ok().headers(headers).body(setOwnerResultDto);
+        return ResponseEntity.ok().body(setOwnerResultDto);
     }
 
 
@@ -297,11 +297,31 @@ public class AuthService {
         return sb.toString();
     }
 
-    public ResponseEntity<Account> mainPage(HttpServletRequest request) {
+    public ResponseEntity<String> mainPage(HttpServletRequest request) throws JsonProcessingException {
         Long id = Long.parseLong(request.getParameter("id"));
         Account account = accountRepository.findById(id).orElse(null);
-        return ResponseEntity.ok().body(account);
+
+        // todo : guest가 결과 완료하지 않았따면 출력하지 않기
+        if (account == null) {
+            // 예외 처리 등
+        }
+
+        List<Guest> guests = account.getGuests();
+
+        if (guests == null) {
+            // 예외 처리 등
+        }
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("account", account);
+        resultMap.put("guests", guests);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String result = objectMapper.writeValueAsString(resultMap);
+
+        return ResponseEntity.ok().body(result);
     }
+
 
 //    /* 회원가입 */
 //    public Long kakaoSignUp(SignupRequestDto requestDto) {

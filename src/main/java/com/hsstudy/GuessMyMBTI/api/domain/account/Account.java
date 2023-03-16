@@ -1,6 +1,8 @@
 package com.hsstudy.GuessMyMBTI.api.domain.account;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
 import lombok.*;
 
@@ -54,8 +56,9 @@ public class Account extends BaseTimeEntity { // 예약어가 이미 존재하�
     private String result;
 
     // Guest의 아이디
-    @OneToMany
-    @JoinColumn(name = "account_id")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Guest> guests = new ArrayList<>();
 
 }
+
