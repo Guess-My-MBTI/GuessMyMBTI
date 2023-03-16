@@ -52,7 +52,7 @@ public class Guest {
     private String comment;
 
     @ManyToOne()
-    @JoinColumn(name = "account_id", insertable = false, updatable = false)
-    private Account ownerId;
+    @JoinColumn(name = "account_id")
+    private Account owner;
 
 }

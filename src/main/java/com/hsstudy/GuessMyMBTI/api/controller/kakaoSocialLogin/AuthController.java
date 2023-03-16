@@ -1,5 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.controller.kakaoSocialLogin;
 
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.AuthService;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.SecurityService;
@@ -50,9 +51,21 @@ public class AuthController {
     }
 
     // todo : owner의 mbti 결과 -> EEEEJJJJ... , ESFJ 이거 두개 전달용
-    @PostMapping("owner-result")
+    @PostMapping("/owner-result")
     public ResponseEntity<SetOwnerResultDto> ownerResultSave(@RequestBody SetOwnerResultDto requestDto) {
         return authService.ownerResultSave(requestDto);
+    }
+
+    // Todo : 공유하기
+    @GetMapping("/share")
+    public String share(HttpServletRequest request) {
+        return authService.share(request);
+    }
+
+    // todo : 오너가 guest 정보 받아오기
+    @GetMapping("/main-page")
+    public ResponseEntity<Account> mainPage(HttpServletRequest request){
+        return authService.mainPage(request);
     }
 
 

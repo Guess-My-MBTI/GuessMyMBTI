@@ -19,19 +19,13 @@ public class GuestController {
     private final GuestService guestService;
 
     @PostMapping("/guest-login")
-    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto) {
-        System.out.println("requestDto = " + requestDto);
-        String nickname = requestDto.getNickname();
-        System.out.println("Guest Login parameter-> nickname = " + nickname);
-        return guestService.guestLogin(requestDto);
+    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
+        return guestService.guestLogin(requestDto, request);
     }
 
     // todo : guest에서 정보(send 누를 때)를 보내면 저장하기 @PostMapping("/guest-send")
     @PostMapping("/guest-result")
     public ResponseEntity<Guest> guestResult(@RequestBody GuestDto requestDto) {
-        System.out.println("requestDto = " + requestDto);
-        String nickname = requestDto.getNickname();
-        System.out.println("Guest Login parameter-> nickname = " + nickname);
         return guestService.guestResult(requestDto);
     }
 

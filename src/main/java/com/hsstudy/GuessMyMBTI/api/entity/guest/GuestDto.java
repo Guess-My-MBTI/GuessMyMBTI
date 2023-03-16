@@ -11,7 +11,7 @@ public class GuestDto {
     private Long guestId;
     private String nickname;
     private Authority role;
-    private Account ownerId;
+    private Account owner;
     private String answer;
     private String comment;
     private int accuracy;

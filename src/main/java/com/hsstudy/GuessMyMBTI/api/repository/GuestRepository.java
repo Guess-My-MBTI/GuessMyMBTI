@@ -18,6 +18,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     Optional<Guest> findByNicknameAndId(String nickname, Long id);
     Optional<Guest> findByNickname(String nickname);
 
+    Optional<Guest> findByNicknameAndOwnerId(String nickname, Long id);
+
 //    @Query(value = "SELECT * FROM GUEST WHERE NICKNAME = ?1 AND RESULT_MBTI IS NULL", nativeQuery = true)
     Optional<Guest> findByNicknameAndResultIsNull(String nickname);
 }

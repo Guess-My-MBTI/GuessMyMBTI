@@ -25,6 +25,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 /**
@@ -257,7 +258,9 @@ public class AuthService {
     }
 
     public ResponseEntity<SetOwnerResultDto> ownerResultSave(@RequestBody SetOwnerResultDto requestDto) {
+        System.out.println("requestDto.getId() = " + requestDto.getId());
         Account existOwner = accountRepository.findById(requestDto.getId()).orElse(null);
+        System.out.println("existOwner = " + existOwner.getId() + " " + existOwner.getEmail());
         existOwner.setMbti(requestDto.getMbti());
         existOwner.setResult(requestDto.getResult());
         accountRepository.save(existOwner);
@@ -280,6 +283,24 @@ public class AuthService {
                 .build();
         tokenRepository.save(refreshToken);
         System.out.println("토큰 저장이 완료되었습니다 : 계정 아이디 - " + account.getId() + ", refresh token - " + tokenDto.getRefreshToken());
+    }
+
+    public String share(HttpServletRequest request) {
+        String share = "http://localhost:3000/guest-login";
+        String ownerId = request.getParameter("id");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(share);
+        sb.append("?id=");
+        sb.append(ownerId);
+
+        return sb.toString();
+    }
+
+    public ResponseEntity<Account> mainPage(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Account account = accountRepository.findById(id).orElse(null);
+        return ResponseEntity.ok().body(account);
     }
 
 //    /* 회원가입 */
