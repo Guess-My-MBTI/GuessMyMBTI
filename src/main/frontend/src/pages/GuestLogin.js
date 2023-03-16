@@ -10,25 +10,39 @@ const nameData = [
   { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
 ];
 
-// const baseUrl = "http://localhost:8080/";
-
 const GuestLogin = () => {
   const navigate = useNavigate();
-
   const nickNameInput = useRef();
+
+  // 중복 클릭 방지 (isLoding이 false면 disabled)
+  const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState({
     nickName: "",
     role: "ROLE_GUEST",
   });
 
   const handleChangeState = (e) => {
-    // console.log(state);
     setState((state) => {
       return {
         ...state,
         [e.target.name]: e.target.value,
       };
     });
+  };
+
+  const handleLogin = () => {
+    setIsLoading(true);
+    API.post("/guest-login", { nickname: state.nickName, role: state.role })
+      .then((res) => {
+        if (res.status === 200) {
+          localStorage.setItem("nickname", state.nickName);
+          localStorage.setItem("role", state.role);
+          console.log(state);
+          navigate("/question");
+        }
+      })
+      .catch((error) => console.log(error.res))
+      .finally(() => setIsLoading(false));
   };
 
   const handleSubmit = (e) => {
@@ -40,16 +54,7 @@ const GuestLogin = () => {
       setState({ nickName: "" });
       return;
     } else {
-      API.post("/guest-login", { nickname: state.nickName, role: state.role })
-        .then((res) => {
-          if (res.status === 200) {
-            localStorage.setItem("nickname", state.nickName);
-            localStorage.setItem("role", state.role);
-            console.log(state);
-            navigate("/question");
-          }
-        })
-        .catch((error) => console.log(error.res));
+      handleLogin();
     }
   };
 
@@ -107,7 +112,7 @@ const GuestLogin = () => {
           <button
             className="submitBtn"
             onClick={handleSubmit}
-            style={{ cursor: "pointer" }}
+            disabled={isLoading}
           >
             START
           </button>
