@@ -4,7 +4,6 @@ import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
 import API from "../utils/API";
-import axios from "axios";
 
 //localStorage에서 user name 불러오기
 const name = localStorage.getItem("name");
@@ -15,86 +14,21 @@ const nameData = [
 
 const GuestResult = () => {
   const navigate = useNavigate();
+  const messageInput = useRef();
+
   const mbti = localStorage.getItem("mbti");
   const result = localStorage.getItem("guest_mbti");
   const nickname = localStorage.getItem("nickname");
-
-  const messageInput = useRef();
-
-  // const guestId = localStorage.getItem("id");
+  const guestId = localStorage.getItem("guest_id");
   const role = localStorage.getItem("role");
-
-  const [guestId, setGuestId] = useState("");
-  // const [nickname, setNickname] = useState("");
-
   const owner_answer = JSON.parse(localStorage.getItem("owner_answer"));
   const guest_answer = JSON.parse(localStorage.getItem("guest_answer"));
 
-  const accessToken = localStorage.getItem("access_token");
-  const baseUrl = "http://localhost:8080/";
+  // 중복 클릭 방지 (isLoding이 false면 disabled)
+  const [isLoading, setIsLoading] = useState(false);
 
-  // 닉네임 포함해서 보내기
-  // token 필요없음 (지금은 headers 필요없음)
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: `${baseUrl}guest-info`,
-      params: { nickname: nickname },
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        setGuestId(res.data.id);
-        localStorage.setItem("guest_id", res.data.id);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
-  // // fetch는 메서드 지정하지 않으면 GET으로 처리
-  // fetch("http://localhost:8080/guest-info")
-  //   // 응답 데이터 JSON 형식 변환
-  //   .then((response) => response.json())
-  //   // 응답 데이터 처리
-  //   .then((data) => console.log(data));
-
-  // const search = () => {
-  //   return axios.create({
-  //     baseURL: "http://localhost:8080/guest-info",
-  //     headers: {
-  //       "Content-Type": "application/json;charset=utf-8",
-  //       "Access-Control-Allow-Origin": "*",
-  //       Authorization: "Bearer " + accessToken,
-  //     },
-  //   });
-  // };
-
-  // async function fetchData() {
-  //   try {
-  //     const res = await search().get("http://localhost:8080/guest-info");
-  //     setGuestId(res.data);
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  // fetchData();
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await API.get("/guest-info");
-  //       setGuestId(response.data);
-  //       console.log(guestId);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
+  const goHome = () => navigate("/owner-main");
+  const share = () => alert("링크가 복사되었습니다!");
 
   const calAcc = () => {
     let count = 0;
@@ -116,12 +50,28 @@ const GuestResult = () => {
     comment: "",
   });
 
-  const goHome = () => navigate("/owner-main");
-
-  const share = () => alert("링크가 복사되었습니다!");
+  const handleSend = () => {
+    setIsLoading(true);
+    API.post("/guest-result", {
+      nickname: nickname,
+      result: state.result,
+      accuracy: state.accuracy,
+      comment: state.comment,
+      guestId: guestId,
+      role: role,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res);
+          alert("전달 완료!");
+          navigate(`/`);
+        }
+      })
+      .catch((error) => console.log(error.res))
+      .finally(() => setIsLoading(false));
+  };
 
   const handleChangeState = (e) => {
-    // console.log(state);
     setState((state) => {
       return {
         ...state,
@@ -130,7 +80,7 @@ const GuestResult = () => {
     });
   };
 
-  const handleSend = (e) => {
+  const handleSubmit = (e) => {
     if (state.comment.length < 1) {
       messageInput.current.focus();
       return;
@@ -139,47 +89,7 @@ const GuestResult = () => {
       setState({ comment: "" });
       return;
     } else {
-      console.log(state);
-      console.log(nickname);
-      console.log(guestId);
-      API.post("/guest-result", {
-        nickname: nickname,
-        result: state.result,
-        accuracy: state.accuracy,
-        comment: state.comment,
-        guestId: guestId,
-        role: role,
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log(res);
-            alert("전달 완료!");
-            navigate(`/`);
-          }
-        })
-        .catch((error) => console.log(error.res));
-
-      // axios
-      //   .post("http://localhost:8080/guest-result", {
-      //     id: 1,
-      //     nickname: nickname,
-      //     guestId: guestId,
-      //     role: role,
-      //     accuracy: state.accuracy,
-      //     comment: state.comment,
-      //     result: state.result,
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
-
-      // console.log("role: " + role);
-      // console.log("nickname: " + nickname);
-      // console.log("result: " + state.result);
-      // console.log("accuracy: " + state.accuracy);
-      // console.log("message: " + state.comment);
-      // alert("전달 완료!");
-      // navigate(`/`);
+      handleSend();
     }
   };
 
@@ -253,7 +163,11 @@ const GuestResult = () => {
         </form>
 
         <div className="send">
-          <button className="sendBtn" onClick={handleSend}>
+          <button
+            className="sendBtn"
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
             send
           </button>
         </div>
