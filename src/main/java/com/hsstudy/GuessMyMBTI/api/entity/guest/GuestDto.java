@@ -1,7 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.entity.guest;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
-import com.hsstudy.GuessMyMBTI.api.domain.Authority;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import lombok.Builder;
 import lombok.Data;
 

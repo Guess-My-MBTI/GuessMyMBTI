@@ -1,9 +1,8 @@
 package com.hsstudy.GuessMyMBTI.api.repository;
 
-import com.hsstudy.GuessMyMBTI.api.domain.RefreshToken;
+import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

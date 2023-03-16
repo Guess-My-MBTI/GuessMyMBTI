@@ -1,12 +1,10 @@
 package com.hsstudy.GuessMyMBTI.api.controller.mbtiController;
 
-import com.hsstudy.GuessMyMBTI.api.entity.ExplainMbtiDTO;
-import com.hsstudy.GuessMyMBTI.api.entity.question.QuestionDTO;
+import com.hsstudy.GuessMyMBTI.api.entity.explainMbti.ExplainMbtiDTO;
 import com.hsstudy.GuessMyMBTI.api.service.explainMbti.ExplainMbtiService;
 import com.hsstudy.GuessMyMBTI.utils.Header;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

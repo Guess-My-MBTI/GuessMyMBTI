@@ -1,6 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.domain.dto;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import lombok.Data;
 
 @Data

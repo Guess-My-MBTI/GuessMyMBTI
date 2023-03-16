@@ -1,6 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.repository;
 
-import com.hsstudy.GuessMyMBTI.api.domain.Account;
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
