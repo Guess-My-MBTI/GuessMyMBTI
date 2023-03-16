@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 @RequiredArgsConstructor
 public class GuestServiceImpl implements GuestService {
@@ -80,8 +82,9 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public ResponseEntity<Guest> guestInfo(GuestDto requestDto) {
-        Guest currentGuest = guestRepository.findByNickname(requestDto.getNickname()).orElse(null);
+    public ResponseEntity<Guest> guestInfo(HttpServletRequest request) {
+        String nickname = request.getParameter("nickname");
+        Guest currentGuest = guestRepository.findByNickname(nickname).orElse(null);
         System.out.println(currentGuest.getId());
         return ResponseEntity.ok().body(currentGuest);
     }

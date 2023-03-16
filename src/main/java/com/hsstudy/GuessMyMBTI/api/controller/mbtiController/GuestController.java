@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequiredArgsConstructor
 public class GuestController {
@@ -34,8 +36,8 @@ public class GuestController {
     }
 
     @GetMapping("/guest-info")
-    public ResponseEntity<Guest> guestInfo(@RequestBody GuestDto requestDto) {
-        return guestService.guestInfo(requestDto);
+    public ResponseEntity<Guest> guestInfo(HttpServletRequest request) {
+        return guestService.guestInfo(request);
     }
 
 }
