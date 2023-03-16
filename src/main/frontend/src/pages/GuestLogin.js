@@ -31,6 +31,7 @@ const GuestLogin = () => {
   };
 
   // todo : url 파라미터에서 id 값을 빼와서 post 요청할 때 ownerId를 포함해서 수행하도록 했습니다.
+  // todo : 추가적으로 로그인 할 때 조금 느린 경향이 있어서 수빈이처럼 handler를 만들어서 딜레이 주는 것도 좋아보입니당
   const ownerId = new URL(window.location.href).searchParams.get("id");
   console.log(ownerId);
   const handleLogin = () => {
