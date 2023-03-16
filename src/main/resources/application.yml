@@ -23,15 +23,15 @@ spring:
       jdbc-url: ${spring.datasource.url}
       username: ${spring.datasource.username}
       password: ${spring.datasource.password}
-      data-source-properties:
-        rewriteBatchedStatements: true
+#      data-source-properties:
+#        rewriteBatchedStatements: true
   # JPA 설정
   jpa:
     open-in-view: true
-    generate-ddl: true
+    generate-ddl: true # true로 설정 시, Entity 어노테이션(@Entity)이 명시된 클래스를 찾아서 ddl을 생성하고 실행
     show-sql: true # 콘솔에서 sql 보기
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -43,12 +43,12 @@ spring:
         jdbc.batch_size: 20
         format_sql: true # 콘솔에서 sql 보기
   # data.sql로 DB에 내용 자동 삽입
-  defer-datasource-initialization: true
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:schema.sql
-      data-locations: classpath:data.sql
+#  defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: classpath:schema.sql
+#      data-locations: classpath:data.sql
 
   # Security OAuth
   security:
