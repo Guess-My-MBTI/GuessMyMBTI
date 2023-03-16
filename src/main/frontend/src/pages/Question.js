@@ -17,11 +17,32 @@ const Question = () => {
   const [answer, setAnswer] = useState([]);
   const list = data.filter((it) => parseInt(it.id) == parseInt(id));
 
-  const baseUrl = "http://localhost:8080/";
+  const nickname = localStorage.getItem("nickname");
+  const [guestId, setGuestId] = useState("");
 
+  const baseUrl = "http://localhost:8080/";
   const accessToken = localStorage.getItem("access_token");
 
-  // console.log(accessToken);
+  // 닉네임 포함해서 보내기
+  // token 필요없음
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}guest-info`,
+      params: { nickname: nickname },
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setGuestId(res.data.id);
+        localStorage.setItem("guest_id", res.data.id);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   useEffect(() => {
     axios({
