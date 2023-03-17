@@ -19,7 +19,7 @@ public class GuestController {
     private final GuestService guestService;
 
     @PostMapping("/guest-login")
-    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
+    public ResponseEntity<String> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
         return guestService.guestLogin(requestDto, request);
     }
 
