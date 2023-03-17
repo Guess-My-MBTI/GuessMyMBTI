@@ -1,50 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import Menu from "../components/Menu";
 import ListItem from "../components/ListItem";
 import axios from "axios";
 
-const dummyData = [
-  {
-    id: 1,
-    nickname: "다람쥐",
-    mbti: "ENFP",
-    accuracy: 75,
-    content: "너가 I였다고?!",
-  },
-  {
-    id: 2,
-    nickname: "김엉덩",
-    mbti: "INFP",
-    accuracy: 100,
-    content: "안뇽ㅋ",
-  },
-  {
-    id: 3,
-    nickname: "아자잣",
-    mbti: "ESFP",
-    accuracy: 50,
-    content: "졸려요",
-  },
-  {
-    id: 4,
-    nickname: "아자잣",
-    mbti: "ESFP",
-    accuracy: 50,
-    content: "졸려요",
-  },
-  {
-    id: 5,
-    nickname: "아자잣",
-    mbti: "ESFP",
-    accuracy: 50,
-    content: "졸려요",
-  },
-];
-
 const OwnerMain = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [createData, setCreateData] = useState([
+    {
+      id: 0,
+      nickname: "",
+      result: "",
+      accuracy: 0,
+      comment: "",
+    },
+  ]);
 
   const menuToggle = () => {
     setIsOpen(!isOpen);
@@ -54,6 +26,32 @@ const OwnerMain = () => {
   const accessToken = localStorage.getItem("access_token");
   const mbti = localStorage.getItem("mbti");
   const ownerId = localStorage.getItem("id");
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}main-page`,
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+      params: {
+        id: ownerId,
+      },
+    }).then((res) => {
+      const _createData = res.data.guests.map((it) => ({
+        id: it.id,
+        nickname: it.nickname,
+        result: it.result,
+        accuracy: it.accuracy,
+        comment: it.comment,
+      }));
+
+      setCreateData(createData.concat(_createData));
+    });
+  }, []);
+
   const shareLink = () => {
     axios({
       method: "GET",
@@ -105,8 +103,8 @@ const OwnerMain = () => {
       </div>
       <hr />
       <div className="list">
-        {dummyData.length > 1 ? (
-          <ListItem data={dummyData} />
+        {createData.slice(1).length > 1 ? (
+          <ListItem data={createData.slice(1)} />
         ) : (
           <>
             <div className="none-list">
