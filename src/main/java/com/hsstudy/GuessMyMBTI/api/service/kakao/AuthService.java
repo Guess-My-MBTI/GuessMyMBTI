@@ -203,9 +203,9 @@ public class AuthService {
 //        System.out.println("loginResponseDto = " + loginResponseDto);
         kakaoTokenSave(account.getId() ,kakaoAccessToken);
 
+        Account existOwner = accountRepository.findById(account.getId()).orElse(null);
         try {
-            // account가 null 이면 처음 로그인 하는 경우 -> 바로 db 저장
-            if (account.getMbti() == null) {
+            if (existOwner == null) {
                 System.out.println("처음 로그인 하는 회원입니다.");
                 accountRepository.save(account);
             }
