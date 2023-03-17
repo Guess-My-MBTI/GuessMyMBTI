@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.entity.explainMbti;
+package com.hsstudy.GuessMyMBTI.api.domain.explainMbti;
 
 import lombok.Builder;
 import lombok.Getter;

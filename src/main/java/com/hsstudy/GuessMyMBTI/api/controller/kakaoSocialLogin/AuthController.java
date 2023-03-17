@@ -1,8 +1,11 @@
 package com.hsstudy.GuessMyMBTI.api.controller.kakaoSocialLogin;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
+import com.hsstudy.GuessMyMBTI.api.domain.account.KakaoToken;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.LoginResponseDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SetOwnerResultDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupRequestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupResponseDto;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.AuthService;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.SecurityService;
 import lombok.RequiredArgsConstructor;
@@ -42,13 +45,10 @@ public class AuthController {
         return authService.kakaoLogin(kakaoAccessToken);
     }
 
-
-    // todo : 로그아웃 만들기
-
-    // todo : PutMapping으로 바꾸기
-    @PostMapping("/login/signup")
-    public ResponseEntity<SignupResponseDto> kakaoSignup(@RequestBody SignupRequestDto requestDto) {
-        return authService.kakaoSignup(requestDto);
+    // todo : 로그아웃 수정하기
+    @PostMapping("/owner/logout")
+    public ResponseEntity<String> kakaoLogout(@RequestBody KakaoToken kakaoToken) {
+        return authService.kakaoLogout(kakaoToken);
     }
 
     // todo : owner의 mbti 결과 -> EEEEJJJJ... , ESFJ 이거 두개 전달용
@@ -57,13 +57,11 @@ public class AuthController {
         return authService.ownerResultSave(requestDto);
     }
 
-    // Todo : 공유하기
     @GetMapping("/share")
     public String share(HttpServletRequest request) {
         return authService.share(request);
     }
 
-    // todo : 오너가 guest 정보 받아오기
     @GetMapping("/main-page")
     public ResponseEntity<String> mainPage(HttpServletRequest request) throws JsonProcessingException {
         return authService.mainPage(request);

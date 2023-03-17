@@ -2,8 +2,8 @@ package com.hsstudy.GuessMyMBTI.api.service.kakao;
 
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupRequestDto;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupRequestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.token.TokenDto;
 import com.hsstudy.GuessMyMBTI.api.exception.CEmailLoginFailedException;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.RefreshTokenRepository;
@@ -136,15 +136,13 @@ public class SecurityService {
     }
 
     /* 로그인 된 사용자에게 토큰 발급 : refresh token 은 DB 에 저장 */
-    public TokenDto login(String email) {
-        // 문제 발생 지점 -> 당연히 accountRepo에 정보가 없으니 문제 발생.
-        System.out.println("TokenDto login의 문제 발생 지점 email :" + email);
-        Account account = accountRepository.findByEmail(email)
+    public TokenDto login(Long kakaoId) {
+        Account account = accountRepository.findById(kakaoId)
                 .orElseThrow(CEmailLoginFailedException::new);
         System.out.println("SecurityService-login: 계정을 찾았습니다. " + account);
 
         // 토큰 발행
-        TokenDto tokenDto = jwtProvider.generateTokenDto(email);
+        TokenDto tokenDto = jwtProvider.generateTokenDto(kakaoId);
         System.out.println("토큰 발행 ..... :" + tokenDto);
 
         // RefreshToken 만 DB에 저장
@@ -158,14 +156,4 @@ public class SecurityService {
         return tokenDto;
     }
 
-    /**
-     * 회원가입 요청에 대해 Access Token 과 Refresh Token 을 발급하고,
-     * Refresh Token 을 Token Repository 에 저장합니다.
-     * try: account 가 저장되지 않은 상태에서 id 호출 불가능
-     * -> refreshToken save 를 auth 단으로 올릴 것인가?
-     */
-    public TokenDto signup(SignupRequestDto requestDto) {
-        Account account = requestDto.getAccount();
-        return jwtProvider.generateTokenDto(account.getEmail());
-    }
 }

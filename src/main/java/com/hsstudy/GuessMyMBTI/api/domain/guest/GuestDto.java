@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.entity.guest;
+package com.hsstudy.GuessMyMBTI.api.domain.guest;
 
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;

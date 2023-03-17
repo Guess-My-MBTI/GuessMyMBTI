@@ -1,8 +1,8 @@
 package com.hsstudy.GuessMyMBTI.api.controller.mbtiController;
 
 
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.service.guest.GuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,6 @@ public class GuestController {
         return guestService.guestLogin(requestDto, request);
     }
 
-    // todo : guest에서 정보(send 누를 때)를 보내면 저장하기 @PostMapping("/guest-send")
     @PostMapping("/guest-result")
     public ResponseEntity<Guest> guestResult(@RequestBody GuestDto requestDto) {
         return guestService.guestResult(requestDto);

@@ -1,7 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.service.guest;
 
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.GuestDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 

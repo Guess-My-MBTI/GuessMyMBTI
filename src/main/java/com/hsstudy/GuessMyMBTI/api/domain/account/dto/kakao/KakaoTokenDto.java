@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.domain.dto.kakao;
+package com.hsstudy.GuessMyMBTI.api.domain.account.dto.kakao;
 
 import lombok.*;
 

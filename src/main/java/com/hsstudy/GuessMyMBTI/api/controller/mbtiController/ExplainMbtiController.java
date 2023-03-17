@@ -1,6 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.controller.mbtiController;
 
-import com.hsstudy.GuessMyMBTI.api.entity.explainMbti.ExplainMbtiDTO;
+
+import com.hsstudy.GuessMyMBTI.api.domain.explainMbti.ExplainMbtiDTO;
 import com.hsstudy.GuessMyMBTI.api.service.explainMbti.ExplainMbtiService;
 import com.hsstudy.GuessMyMBTI.utils.Header;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.hsstudy.GuessMyMBTI.config.jwt;
 
 import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.token.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -128,14 +128,16 @@ public class JwtProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public TokenDto generateTokenDto(String email) {
+    public TokenDto generateTokenDto(Long kakaoId) {
 
         long now = (new Date()).getTime();
+
+        String subKakaoId = kakaoId.toString();
 
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
-                .setSubject(email) //payload "sub" : "name"
+                .setSubject(subKakaoId) //payload "sub" : "name"
                 .claim(AUTHORITIES_KEY, Authority.ROLE_USER) //payload "auth" : "ROLE_USER"
                 .setExpiration(accessTokenExpiresIn) //payload "exp" : 1234567890 (10자리)
                 .signWith(key, SignatureAlgorithm.HS512) //header "alg" : HS512 (해싱 알고리즘 HS512)
