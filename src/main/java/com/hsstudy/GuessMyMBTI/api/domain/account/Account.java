@@ -39,12 +39,12 @@ public class Account extends BaseTimeEntity { // 예약어가 이미 존재하�
     @Column
     private String nickname; //사용자별명
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
     /* 회원가입 과정에서는 프로필 사진을 나중에 등록할 수 있게 nullable */
     @Column
-    private String picture;
+    private String profilImage;
 
     // 오너의 mbti -> INFJ
     @Column

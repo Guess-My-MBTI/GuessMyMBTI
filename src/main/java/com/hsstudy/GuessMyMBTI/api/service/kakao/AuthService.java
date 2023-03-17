@@ -33,18 +33,11 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @sierrah 카카오 로그인 로직을 처리합니다.
- * login
- * signup
- * reissue
- * getKakaoAccessToken
- * getKakaoInfo
- */
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -156,30 +149,33 @@ public class AuthService {
         }
 
         // kakaoAccountDto 에서 필요한 정보 꺼내서 Account 객체로 매핑
-        String email = kakaoAccountDto.getKakao_account().getEmail();
-        String kakaoName = kakaoAccountDto.getKakao_account().getProfile().getNickname();
+        // todo : 이메일은 null 허용을 해야함 선택이라
+        Long kakaoId = kakaoAccountDto.getId();
 
         System.out.println("######## kakaoAccountDto에 담긴 정보 빼내서 Account 클래스에 builder 입력 #########");
-        System.out.println("email: " + email + " kakaoName: " + kakaoName);
 
         // todo: 처음 로그인인지 아닌지 분기 필요함 -> 해결했나?
-        Account existOwner = accountRepository.findByEmail(email).orElse(null);
+        Account existOwner = accountRepository.findById(kakaoId).orElse(null);
+        // 처음 로그인이 아닌 경우
         if (existOwner != null) {
             return Account.builder()
                     .id(kakaoAccountDto.getId())
                     .loginType("KAKAO")
-                    .email(email)
-                    .kakaoName(kakaoName)
+                    .email(kakaoAccountDto.getKakao_account().getEmail())
+                    .kakaoName(kakaoAccountDto.getKakao_account().getProfile().getNickname())
                     .authority(Authority.ROLE_USER)
                     .mbti(existOwner.getMbti())
                     .result(existOwner.getResult())
+                    // todo : 게스트 정보까지 가져와야하나?
                     .build();
-        } else {
+        }
+        // 처음 로그인 하는 경우
+        else {
             return Account.builder()
                     .id(kakaoAccountDto.getId())
                     .loginType("KAKAO")
-                    .email(email)
-                    .kakaoName(kakaoName)
+                    .email(kakaoAccountDto.getKakao_account().getEmail())
+                    .kakaoName(kakaoAccountDto.getKakao_account().getProfile().getNickname())
                     .authority(Authority.ROLE_USER)
                     .build();
         }
@@ -198,30 +194,34 @@ public class AuthService {
                 account.getId());
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
-        // todo : 카카오 엑세스 토큰은 db에만 저장하고 프론트에는 전달하지 않기
+        loginResponseDto.setLoginSuccess(true);
+        loginResponseDto.setAccount(account);
+        System.out.println("loginResponseDto = " + loginResponseDto);
+
+        // todo : 카카오 엑세스 토큰은 db에만 저장하고 프론트에는 전달하지 않기 -> 일단 약간 해결?
 //        loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
 //        System.out.println("loginResponseDto = " + loginResponseDto);
         kakaoTokenSave(account.getId() ,kakaoAccessToken);
 
-        loginResponseDto.setAccount(account);
-        System.out.println("loginResponseDto = " + loginResponseDto);
         try {
-            System.out.println("AccountRepository에 email로 유저 있는지 판단하기");
-            Account existAccount = accountRepository.findByEmail(account.getEmail()).orElse(null);
-            if (existAccount == null) {
+            // account가 null 이면 처음 로그인 하는 경우 -> 바로 db 저장
+            if (account.getId() == null) {
                 System.out.println("처음 로그인 하는 회원입니다.");
                 accountRepository.save(account);
             }
-            TokenDto tokenDto = securityService.login(account.getEmail());
+            TokenDto tokenDto = securityService.login(account.getId());
             loginResponseDto.setLoginSuccess(true);
             System.out.println("토큰 발급 성공");
-//            HttpHeaders headers = setTokenHeaders(tokenDto);
-//            System.out.println("headers :" + headers.toString());
-            return ResponseEntity.ok().body(loginResponseDto);
+
+            // 토큰을 프론트로 전달하기
+            HttpHeaders headers = setTokenHeaders(tokenDto);
+            System.out.println("headers :" + headers.toString());
+
+            return ResponseEntity.ok().headers(headers).body(loginResponseDto);
 
         } catch (CEmailLoginFailedException e) {
             loginResponseDto.setLoginSuccess(false);
-            return ResponseEntity.ok(loginResponseDto);
+            return ResponseEntity.badRequest().body(loginResponseDto);
         }
     }
 
@@ -238,44 +238,18 @@ public class AuthService {
     /* 토큰을 헤더에 배치 */
     public HttpHeaders setTokenHeaders(TokenDto tokenDto) {
         HttpHeaders headers = new HttpHeaders();
-        ResponseCookie cookie = ResponseCookie.from("RefreshToken", tokenDto.getRefreshToken())
-                .path("/")
-                .maxAge(60 * 60 * 24 * 7) // 쿠키 유효기간 7일로 설정했음
-                .secure(true)
-                .sameSite("None")
-                .httpOnly(true)
-                .build();
-        headers.add("Set-cookie", cookie.toString());
+        // todo: refresh token 을 프론트의 쿠키로 전달하는게 맞는걸까?
+//        ResponseCookie cookie = ResponseCookie.from("RefreshToken", tokenDto.getRefreshToken())
+//                .path("/")
+//                .maxAge(60 * 60 * 24 * 7) // 쿠키 유효기간 7일로 설정했음
+//                .secure(true)
+//                .sameSite("None")
+//                .httpOnly(true)
+//                .build();
+//        headers.add("Set-cookie", cookie.toString());
         headers.add("Authorization", tokenDto.getAccessToken());
 
         return headers;
-    }
-
-    /* 회원가입 요청 처리 */
-    public ResponseEntity<SignupResponseDto> kakaoSignup(@RequestBody SignupRequestDto requestDto) {
-        // 받아온 정보 DB에 저장
-        Account newAccount = Account.builder()
-                .loginType("kakao")
-                .authority(Authority.ROLE_USER)
-                .email(requestDto.getAccount().getEmail())
-                .kakaoName(requestDto.getAccount().getKakaoName())
-                .nickname(requestDto.getNickname())
-                .picture(requestDto.getPicture())
-                .build();
-
-        accountRepository.save(newAccount);
-
-        // 회원가입 상황에 대해 토큰을 발급하고 헤더와 쿠키에 배치
-        TokenDto tokenDto = securityService.signup(requestDto);
-        saveRefreshToken(newAccount, tokenDto);
-        HttpHeaders headers = setTokenHeaders(tokenDto);
-
-        // 응답 작성
-        SignupResponseDto responseDto = new SignupResponseDto();
-        responseDto.setAccount(accountRepository.findByEmail(requestDto.getAccount().getEmail())
-                .orElseThrow(CEmailLoginFailedException::new));
-        responseDto.setResult("회원가입이 완료되었습니다.");
-        return ResponseEntity.ok().headers(headers).body(responseDto);
     }
 
     public ResponseEntity<SetOwnerResultDto> ownerResultSave(@RequestBody SetOwnerResultDto requestDto) {
@@ -291,16 +265,6 @@ public class AuthService {
         return ResponseEntity.ok().body(setOwnerResultDto);
     }
 
-
-    /* Refresh Token 을 Repository 에 저장하는 메소드 */
-    public void saveRefreshToken(Account account, TokenDto tokenDto) {
-        RefreshToken refreshToken = RefreshToken.builder()
-                .key(account.getId())
-                .token(tokenDto.getRefreshToken())
-                .build();
-        tokenRepository.save(refreshToken);
-        System.out.println("토큰 저장이 완료되었습니다 : 계정 아이디 - " + account.getId() + ", refresh token - " + tokenDto.getRefreshToken());
-    }
 
     public String share(HttpServletRequest request) {
         String share = "http://localhost:3000/guest-login";
@@ -318,20 +282,30 @@ public class AuthService {
         Long id = Long.parseLong(request.getParameter("id"));
         Account account = accountRepository.findById(id).orElse(null);
 
-        // todo : guest가 결과 완료하지 않았따면 출력하지 않기
+        // todo : guest가 결과 완료하지 않았따면 출력하지 않기 -> 일단 약간 해결 완?
         if (account == null) {
             // 예외 처리 등
+
         }
 
         List<Guest> guests = account.getGuests();
 
         if (guests == null) {
             // 예외 처리 등
+            return null;
+        }
+
+        // guest 완료한사람만 출력하기
+        ArrayList<Guest> guestList = new ArrayList<>();
+        for (Guest guest : guests) {
+            if (guest.getResult() != null) {
+                guestList.add(guest);
+            }
         }
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("account", account);
-        resultMap.put("guests", guests);
+        resultMap.put("guests", guestList);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String result = objectMapper.writeValueAsString(resultMap);
@@ -362,29 +336,4 @@ public class AuthService {
 
         return logoutResponse;
     }
-
-
-//    /* 회원가입 */
-//    public Long kakaoSignUp(SignupRequestDto requestDto) {
-//
-//        KakaoAccountDto kakaoAccountDto = getKakaoInfo(requestDto.getKakaoAccessToken());
-//        Account account = mapKakaoInfo(kakaoAccountDto);
-//
-//        // 닉네임, 프로필사진 set
-//        String nickname = requestDto.getAccountName();
-//        String accountPicture = requestDto.getPicture();
-//        account.setNickname(nickname);
-//        account.setPicture(accountPicture);
-//
-//        // save
-//        accountRepository.save(account);
-//
-//        // 회원가입 결과로 회원가입한 accountId 리턴
-//        return account.getId();
-//    }
-//
-//    public Account accountFindById(Long id) {
-//        return accountRepository.findById(id)
-//                .orElseThrow(CUserNotFoundException::new);
-//    }
 }

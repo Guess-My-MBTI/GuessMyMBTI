@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000")
                 .allowedOriginPatterns("*")
                 .allowedHeaders("*")
-                // 내가 직접 만든 귀여운 헤더 이름을 받을 수 있도록 명시해줍시다
+                // 내가 직접 만든 헤더 이름을 받을 수 있도록 명시해줍시다
                 .exposedHeaders("Authorization", "Set-Cookie")
                 .allowedMethods("*")
                 .allowCredentials(true);
