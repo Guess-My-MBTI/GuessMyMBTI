@@ -45,6 +45,7 @@ const GuestLogin = () => {
           localStorage.setItem("nickname", state.nickName);
           localStorage.setItem("role", state.role);
           console.log(state);
+          console.log(res);
           navigate("/question");
         }
       })

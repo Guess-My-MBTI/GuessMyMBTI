@@ -41,12 +41,8 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final AccountRepository accountRepository;
-    private final RefreshTokenRepository tokenRepository;
     private final SecurityService securityService;
-    private final GuestRepository guestRepository;
     private final KakaoTokenRepository kakaoTokenRepository;
 
     /* 환경변수 가져오기 */
@@ -267,12 +263,10 @@ public class AuthService {
 
 
     public String share(HttpServletRequest request) {
-        String share = "http://localhost:3000/guest-login";
         String ownerId = request.getParameter("id");
 
         StringBuilder sb = new StringBuilder();
-        sb.append(share);
-        sb.append("?id=");
+        sb.append("http://localhost:3000/guest-login?id=");
         sb.append(ownerId);
 
         return sb.toString();
