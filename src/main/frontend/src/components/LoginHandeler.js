@@ -21,7 +21,12 @@ const LoginHandeler = (props) => {
         localStorage.setItem("role", res.data.account.authority);
         localStorage.setItem("name", res.data.account.kakaoName);
         localStorage.setItem("id", res.data.account.id);
-        navigate("/owner-question");
+        localStorage.setItem("mbti", res.data.account.mbti);
+        if (res.data.account.mbti.length > 0) {
+          navigate("/owner-main");
+        } else {
+          navigate("/owner-question");
+        }
       });
     };
     kakaoLogin();
