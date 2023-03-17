@@ -1,6 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.repository;
 
-import com.hsstudy.GuessMyMBTI.api.entity.explainMbti.ExplainMbti;
+import com.hsstudy.GuessMyMBTI.api.domain.explainMbti.ExplainMbti;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -2,8 +2,8 @@ package com.hsstudy.GuessMyMBTI.api.service.kakao;
 
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.SignupRequestDto;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupRequestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.token.TokenDto;
 import com.hsstudy.GuessMyMBTI.api.exception.CEmailLoginFailedException;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.RefreshTokenRepository;

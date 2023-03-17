@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.domain.dto.token;
+package com.hsstudy.GuessMyMBTI.api.domain.account.dto.token;
 
 import lombok.Builder;
 import lombok.Data;

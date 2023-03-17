@@ -2,8 +2,8 @@ package com.hsstudy.GuessMyMBTI.api.service.guest;
 
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.GuestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;

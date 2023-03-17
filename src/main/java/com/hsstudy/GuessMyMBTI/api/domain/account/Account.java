@@ -1,9 +1,8 @@
 package com.hsstudy.GuessMyMBTI.api.domain.account;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
 import lombok.*;
 
 import javax.persistence.*;

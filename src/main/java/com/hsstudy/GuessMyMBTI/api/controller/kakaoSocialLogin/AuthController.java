@@ -1,8 +1,11 @@
 package com.hsstudy.GuessMyMBTI.api.controller.kakaoSocialLogin;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
+import com.hsstudy.GuessMyMBTI.api.domain.account.KakaoToken;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.LoginResponseDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SetOwnerResultDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupRequestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupResponseDto;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.AuthService;
 import com.hsstudy.GuessMyMBTI.api.service.kakao.SecurityService;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +45,11 @@ public class AuthController {
         return authService.kakaoLogin(kakaoAccessToken);
     }
 
-
     // todo : 로그아웃 만들기
+    @PostMapping("/owner/logout")
+    public ResponseEntity<String> kakaoLogout(@RequestBody KakaoToken kakaoToken) {
+        return authService.kakaoLogout(kakaoToken);
+    }
 
     // todo : PutMapping으로 바꾸기
     @PostMapping("/login/signup")

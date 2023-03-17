@@ -1,11 +1,11 @@
-package com.hsstudy.GuessMyMBTI.api.domain.dto;
+package com.hsstudy.GuessMyMBTI.api.domain.account.dto;
 
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import lombok.Data;
 
 @Data
-public class RefreshResponseDto {
+public class SignupResponseDto {
 
-    String accessToken;
     Account account;
+    String result;
 }

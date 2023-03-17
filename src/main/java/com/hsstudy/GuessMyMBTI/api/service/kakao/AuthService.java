@@ -4,17 +4,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.*;
+import com.hsstudy.GuessMyMBTI.api.domain.account.KakaoToken;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.LoginResponseDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SetOwnerResultDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupRequestDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.SignupResponseDto;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import com.hsstudy.GuessMyMBTI.api.domain.account.RefreshToken;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoAccountDto;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.kakao.KakaoTokenDto;
-import com.hsstudy.GuessMyMBTI.api.domain.dto.token.TokenDto;
-import com.hsstudy.GuessMyMBTI.api.entity.guest.Guest;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.kakao.KakaoAccountDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.kakao.KakaoTokenDto;
+import com.hsstudy.GuessMyMBTI.api.domain.account.dto.token.TokenDto;
+import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.exception.CEmailLoginFailedException;
 import com.hsstudy.GuessMyMBTI.api.repository.AccountRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.GuestRepository;
+import com.hsstudy.GuessMyMBTI.api.repository.KakaoTokenRepository;
 import com.hsstudy.GuessMyMBTI.api.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +54,7 @@ public class AuthService {
     private final RefreshTokenRepository tokenRepository;
     private final SecurityService securityService;
     private final GuestRepository guestRepository;
+    private final KakaoTokenRepository kakaoTokenRepository;
 
     /* 환경변수 가져오기 */
     @Value("${spring.security.oauth2.client.registration.kakao.clientId}")
@@ -193,8 +199,9 @@ public class AuthService {
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         // todo : 카카오 엑세스 토큰은 db에만 저장하고 프론트에는 전달하지 않기
-        loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
-        System.out.println("loginResponseDto = " + loginResponseDto);
+//        loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
+//        System.out.println("loginResponseDto = " + loginResponseDto);
+        kakaoTokenSave(account.getId() ,kakaoAccessToken);
 
         loginResponseDto.setAccount(account);
         System.out.println("loginResponseDto = " + loginResponseDto);
@@ -208,13 +215,23 @@ public class AuthService {
             TokenDto tokenDto = securityService.login(account.getEmail());
             loginResponseDto.setLoginSuccess(true);
             System.out.println("토큰 발급 성공");
-            HttpHeaders headers = setTokenHeaders(tokenDto);
-            System.out.println("headers :" + headers.toString());
-            return ResponseEntity.ok().headers(headers).body(loginResponseDto);
+//            HttpHeaders headers = setTokenHeaders(tokenDto);
+//            System.out.println("headers :" + headers.toString());
+            return ResponseEntity.ok().body(loginResponseDto);
 
         } catch (CEmailLoginFailedException e) {
             loginResponseDto.setLoginSuccess(false);
             return ResponseEntity.ok(loginResponseDto);
+        }
+    }
+
+    private void kakaoTokenSave(Long id, String kakaoAccessToken) {
+        KakaoToken kakaoToken = kakaoTokenRepository.findById(id).orElse(null);
+        if (kakaoToken != null) {
+            kakaoToken.setKakaoAccessToken(kakaoAccessToken);
+        } else {
+            KakaoToken newKakaoToken = new KakaoToken(id, kakaoAccessToken);
+            kakaoTokenRepository.save(newKakaoToken);
         }
     }
 
@@ -320,6 +337,30 @@ public class AuthService {
         String result = objectMapper.writeValueAsString(resultMap);
 
         return ResponseEntity.ok().body(result);
+    }
+
+    public ResponseEntity<String> kakaoLogout(@RequestBody KakaoToken kakaoToken) {
+        Long kakaoUserId = kakaoToken.getId();
+        KakaoToken kakaoUser = kakaoTokenRepository.findById(kakaoUserId).orElse(null);
+        String kakaoAccessToken = kakaoUser.getKakaoAccessToken();
+
+        RestTemplate rt = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + kakaoAccessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        HttpEntity<MultiValueMap<String, String>> kakaoLogout = new HttpEntity<>(headers);
+
+        // POST 방식으로 API 서버에 요청 보내고, response 받아옴
+        ResponseEntity<String> logoutResponse = rt.exchange(
+                "https://kapi.kakao.com/v1/user/logout",
+                HttpMethod.POST,
+                kakaoLogout,
+                String.class
+        );
+
+        return logoutResponse;
     }
 
 

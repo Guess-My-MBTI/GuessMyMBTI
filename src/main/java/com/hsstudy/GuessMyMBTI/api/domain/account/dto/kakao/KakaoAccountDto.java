@@ -1,4 +1,4 @@
-package com.hsstudy.GuessMyMBTI.api.domain.dto.kakao;
+package com.hsstudy.GuessMyMBTI.api.domain.account.dto.kakao;
 
 // ChatGPT가 알려준 수정 코드
 import com.fasterxml.jackson.annotation.JsonIgnore;
