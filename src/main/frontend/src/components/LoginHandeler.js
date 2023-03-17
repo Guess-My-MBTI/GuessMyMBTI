@@ -1,32 +1,46 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+
 const LoginHandeler = (props) => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    // axios
-    //   .post(`${process.env.REACT_APP_REDIRECT_URL}kakaoLogin${code}`)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     // 토큰을 받아서 localStorage같은 곳에 저장하는 코드를 여기에 쓴다.
-    //     localStorage.setItem("name", res.data.user_name); // 일단 이름만 저장했다.
-    //     navigate("/question");
-    //   });
-
     const kakaoLogin = async () => {
-      await axios
-        .get(`${process.env.REACT_APP_REDIRECT_URL}?code=${code}`)
-        .then((res) => {
-          console.log(res);
-          localStorage.setItem("token", res.headers.authorization);
-          navigate("/question");
-        });
+      await axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_REDIRECT_URL}/?code=${code}`,
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }).then((res) => {
+        console.log(res); // todo : 나중에 삭제하기
+        localStorage.setItem("access_token", res.headers.authorization);
+        localStorage.setItem("role", res.data.account.authority);
+        localStorage.setItem("name", res.data.account.kakaoName);
+        localStorage.setItem("id", res.data.account.id);
+        localStorage.setItem("mbti", res.data.account.mbti);
+        if (res.data.account.mbti.length > 0) {
+          navigate("/owner-main");
+        } else {
+          navigate("/owner-question");
+        }
+      });
     };
     kakaoLogin();
   }, [props.history]);
-  return <div></div>;
+
+  return (
+    <div className="LoginHandeler">
+      <div className="notice">
+        <p>로그인 중입니다.</p>
+        <p>잠시만 기다려주세요.</p>
+        <div className="spinner"></div>
+      </div>
+    </div>
+  );
 };
 
 export default LoginHandeler;

@@ -1,18 +1,27 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ListName from "../components/ListName";
+import API from "../utils/API";
 
-// 'OO의 MBTI를 맞춰봐'에 들어감
-const dummyData = [{ ownerName: "아름" }];
+//localStorage에서 user name 불러오기
+const name = localStorage.getItem("name");
+// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+const nameData = [
+  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+];
 
 const GuestLogin = () => {
   const navigate = useNavigate();
-
   const nickNameInput = useRef();
-  const [state, setState] = useState({ nickName: "" });
+
+  // 중복 클릭 방지 (isLoding이 false면 disabled)
+  const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState({
+    nickName: "",
+    role: "ROLE_GUEST",
+  });
 
   const handleChangeState = (e) => {
-    // console.log(state);
     setState((state) => {
       return {
         ...state,
@@ -21,7 +30,30 @@ const GuestLogin = () => {
     });
   };
 
-  const handleSubmit = () => {
+  // todo : url 파라미터에서 id 값을 빼와서 post 요청할 때 ownerId를 포함해서 수행하도록 했습니다.
+  // todo : 추가적으로 로그인 할 때 조금 느린 경향이 있어서 수빈이처럼 handler를 만들어서 딜레이 주는 것도 좋아보입니당
+  const ownerId = new URL(window.location.href).searchParams.get("id");
+  console.log(ownerId);
+  const handleLogin = () => {
+    setIsLoading(true);
+    API.post(
+        "/guest-login/?id=" + ownerId,
+        { nickname: state.nickName, role: state.role }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          localStorage.setItem("nickname", state.nickName);
+          localStorage.setItem("role", state.role);
+          console.log(state);
+          console.log(res);
+          navigate("/question");
+        }
+      })
+      .catch((error) => console.log(error.res))
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleSubmit = (e) => {
     if (state.nickName.length < 1) {
       nickNameInput.current.focus();
       return;
@@ -30,8 +62,7 @@ const GuestLogin = () => {
       setState({ nickName: "" });
       return;
     } else {
-      console.log(state.nickName);
-      navigate("/Question");
+      handleLogin();
     }
   };
 
@@ -43,7 +74,7 @@ const GuestLogin = () => {
             src={process.env.PUBLIC_URL + `assets/pencil1.png`}
             className="pencil1"
           />
-          <ListName data={dummyData} />
+          <ListName key={nameData.id} data={nameData} />
           <p>의</p>
         </div>
 
@@ -89,7 +120,7 @@ const GuestLogin = () => {
           <button
             className="submitBtn"
             onClick={handleSubmit}
-            style={{ cursor: "pointer" }}
+            disabled={isLoading}
           >
             START
           </button>

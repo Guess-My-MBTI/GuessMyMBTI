@@ -6,10 +6,10 @@ spring:
   # 데이터 소스 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/oauth_login_tutorial?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-    url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://root:oA1bI1m5YtXOs7OKr8SD@containers-us-west-181.railway.app:7602/railway?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://root:TXZVo1ibfZGqoN0cAlHF@containers-us-west-49.railway.app:6599/railway?serverTimezone=Asia/Seoul
     username: root
-    password: oA1bI1m5YtXOs7OKr8SD
+    password: TXZVo1ibfZGqoN0cAlHF
     hikari:
       pool-name: jpa-hikari-pool
       maximum-pool-size: 10
@@ -23,14 +23,15 @@ spring:
       jdbc-url: ${spring.datasource.url}
       username: ${spring.datasource.username}
       password: ${spring.datasource.password}
-      data-source-properties:
-        rewriteBatchedStatements: true
+#      data-source-properties:
+#        rewriteBatchedStatements: true
   # JPA 설정
   jpa:
-    generate-ddl: true
-    show-sql: true
+    open-in-view: true
+    generate-ddl: true # true로 설정 시, Entity 어노테이션(@Entity)이 명시된 클래스를 찾아서 ddl을 생성하고 실행
+    show-sql: true # 콘솔에서 sql 보기
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -40,7 +41,15 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
         default_batch_fetch_size: ${chunkSize:100}
         jdbc.batch_size: 20
-        format_sql: true
+        format_sql: true # 콘솔에서 sql 보기
+  # data.sql로 DB에 내용 자동 삽입
+#  defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: classpath:schema.sql
+#      data-locations: classpath:data.sql
+
   # Security OAuth
   security:
     oauth2.client:
@@ -54,32 +63,14 @@ spring:
         kakao:
           clientId: 'a1698cd60aafa124b03e4117dd52549f'
           clientSecret: 'x2TJDMqr8vS7e20h5Tokr9iH3uWuYx7e'
-          clientAuthenticationMethod: post
+          clientAuthenticationMethod: client_secret_post
           authorizationGrantType: authorization_code
-          redirectUri: "http://localhost:8080/login/oauth2/callback/kakao"
-#          redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+          redirectUri: "http://localhost:3000/login/oauth2/callback/kakao"
           scope:
             - profile_nickname
-          #            - profile_image
+            #            - profile_image
             - account_email
           clientName: Kakao
-#        facebook:
-#          clientId: '{페이스북 client-id}'
-#          clientSecret: '{페이스북 client-secret}'
-#          scope:
-#            - email
-#            - public_profile
-#        naver:
-#          clientId: '{네이버 client-id}'
-#          clientSecret: '{네이버 client-secret}'
-#          clientAuthenticationMethod: post
-#          authorizationGrantType: authorization_code
-#          redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-#          scope:
-#            - nickname
-#            - email
-#            - profile_image
-#          clientName: Naver
 
       # Provider 설정
       provider:
@@ -88,12 +79,6 @@ spring:
           tokenUri: https://kauth.kakao.com/oauth/token
           userInfoUri: https://kapi.kakao.com/v2/user/me
           userNameAttribute: id
-#        naver:
-#          authorizationUri: https://nid.naver.com/oauth2.0/authorize
-#          tokenUri: https://nid.naver.com/oauth2.0/token
-#          userInfoUri: https://openapi.naver.com/v1/nid/me
-#          userNameAttribute: response
-
 
 # cors 설정
 cors:
@@ -102,18 +87,40 @@ cors:
   allowed-headers: '*'
   max-age: 3600
 
+
+## 토큰 관련 secret Key 및 RedirectUri 설정
+#app:
+#  auth:
+#    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+#    tokenExpiry: 1800000
+#    refreshTokenExpiry: 604800000
+#  oauth2:
+#    authorizedRedirectUris:
+#      - http://localhost:3000/oauth/redirect
+
+# Log
+logging:
+  file:
+    name: ${user.dir}/logs/  # 로깅 파일 위치이다.
+  level:  # 각 package 별로 로깅 레벨을 지정할 수 있다.
+    com/hsstudy/GuessMyMBTI : debug
+#    com.project.study.controller : debug
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB
+
+
 # jwt secret key 설정
-jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+jwt:
+  # 터미널에 openssl rand -hex 64 입력하면 생성해줌
+  # base64로 인코딩된 암호 키, HS512를 사용할 것이기 때문에, 512비트(64바이트) 이상이 되어야 함
+  secretKey: dc7666c597d4536c8cfdb1b5f0010b928aba44f9f0624015276763b15db4956862e2dae61b3b489450b689070c3d7a3beb305a1912f6556e657cc2750bad6992
 
-# 토큰 관련 secret Key 및 RedirectUri 설정
-app:
-  auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 1800000
-    refreshTokenExpiry: 604800000
-  oauth2:
-    authorizedRedirectUris:
-      - http://localhost:3000/oauth/redirect
+  access:
+    expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
+    header: Authorization
 
-
-# 테스트
+  refresh:
+    expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> 하루) * 14(2주))
+    header: Authorization-refresh

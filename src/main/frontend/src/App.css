@@ -42,6 +42,56 @@ body {
 
 /* --------------------------------수빈 css-------------------------------- */
 
+/* LoginHandeler */
+
+.LoginHandeler {
+  text-align: center;
+}
+
+.LoginHandeler p {
+  font-size: 30px;
+  color: rgba(149, 178, 163, 1);
+  text-shadow: -1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0),
+    0 -1px rgb(0, 0, 0);
+}
+
+.LoginHandeler .spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem;
+  border: 3px solid rgba(191, 205, 216, 1);
+
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+
+  -webkit-animation: spin 1000ms infinite linear;
+  -moz-animation: spin 1000ms infinite linear;
+  -ms-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-ms-keyframes spin {
+  100% {
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* OwnerLogin */
 
 .OwnerLogin {
@@ -173,6 +223,14 @@ body {
   cursor: pointer;
 }
 
+.OwnerLogin .googlebtn {
+  margin: 10px auto;
+  color: transparent;
+  width: 190px;
+  height: 45px;
+  cursor: pointer;
+}
+
 /* OwnerResult */
 
 .OwnerResult {
@@ -206,6 +264,12 @@ body {
   font-size: 80px;
   text-shadow: -2px 0 rgb(0, 0, 0), 0 2px rgb(0, 0, 0), 2px 0 rgb(0, 0, 0),
     0 -2px rgb(0, 0, 0);
+}
+
+@media (max-width: 350px) {
+  .OwnerResult .mbti {
+    font-size: 65px;
+  }
 }
 
 .OwnerResult .m {
@@ -244,7 +308,8 @@ body {
 }
 
 .OwnerResult .des {
-  padding-left: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
   color: rgba(102, 102, 102, 1);
   font-size: 20px;
 }
@@ -578,10 +643,9 @@ body {
   display: flex;
   padding-top: 50px;
   font-size: 50px;
-  margin-bottom: -30px;
+  margin-bottom: -35px;
   margin-left: -20px;
   text-align: start;
-  align-items: left;
   transform: rotate(-9deg);
 }
 
@@ -613,6 +677,7 @@ body {
   display: flex;
   font-size: 80px;
   margin: 0;
+  padding-top: 10px;
   padding-bottom: 20px;
 }
 
@@ -640,6 +705,7 @@ body {
 }
 
 .GuestLogin .r {
+  color: rgba(240, 205, 186, 1);
   font-size: 40px;
   transform: rotate(13deg);
   padding-top: 90px;
@@ -652,6 +718,7 @@ body {
     padding-top: 70px;
     font-size: 30px;
     margin: 0;
+    color: rgba(240, 205, 186, 1);
   }
 }
 .GuestLogin .pencil2 {
@@ -687,12 +754,6 @@ body {
   text-align: center;
   align-items: center;
   justify-content: center;
-}
-
-@media (min-width: 650px) {
-  .GuestLogin .write_Nick {
-    font-size: 25px;
-  }
 }
 
 @media (max-width: 650px) {
@@ -781,6 +842,7 @@ body {
   color: #666666;
   border: none;
   font-size: 14px;
+  cursor: pointer;
 }
 
 @media (max-width: 370px) {
@@ -906,7 +968,86 @@ body {
   color: #282828;
   white-space: pre-wrap;
   background-color: #f999a0;
+}
+
+.Question .proGraph_1 {
+  margin-right: 95%;
+}
+
+.Question .proGraph_2 {
   margin-right: 90%;
+}
+
+.Question .proGraph_3 {
+  margin-right: 85%;
+}
+
+.Question .proGraph_4 {
+  margin-right: 80%;
+}
+
+.Question .proGraph_5 {
+  margin-right: 75%;
+}
+
+.Question .proGraph_6 {
+  margin-right: 70%;
+}
+
+.Question .proGraph_7 {
+  margin-right: 65%;
+}
+
+.Question .proGraph_8 {
+  margin-right: 60%;
+}
+
+.Question .proGraph_9 {
+  margin-right: 55%;
+}
+
+.Question .proGraph_10 {
+  margin-right: 50%;
+}
+
+.Question .proGraph_11 {
+  margin-right: 45%;
+}
+
+.Question .proGraph_12 {
+  margin-right: 40%;
+}
+
+.Question .proGraph_13 {
+  margin-right: 35%;
+}
+
+.Question .proGraph_14 {
+  margin-right: 30%;
+}
+
+.Question .proGraph_15 {
+  margin-right: 25%;
+}
+
+.Question .proGraph_16 {
+  margin-right: 20%;
+}
+
+.Question .proGraph_17 {
+  margin-right: 15%;
+}
+
+.Question .proGraph_18 {
+  margin-right: 10%;
+}
+
+.Question .proGraph_19 {
+  margin-right: 5%;
+}
+
+.Question .proGraph_20 {
+  margin-right: 0%;
 }
 
 .Question .progress-btn {
@@ -946,6 +1087,14 @@ body {
   color: #666666;
 }
 
+.Question .answer-card-1:active,
+.answer-card-2:active {
+  /* background-color: #efc2c5; */
+  background-color: #c0d8cb;
+  color: white;
+  opacity: 0.8;
+}
+
 .Question .ans-text-1,
 .ans-text-2 {
   margin-left: 15px;
@@ -957,7 +1106,6 @@ body {
 /* ==============================GuestResult=============================== */
 
 .GuestResult {
-  display: grid;
 }
 
 .GuestResult .answer,
@@ -982,17 +1130,31 @@ body {
 .GuestResult .name,
 .c_name {
   color: #9e9e9e;
-  font-size: 25px;
+  font-size: 30px;
   display: flex;
   align-items: center;
   margin: 0;
   margin-left: -10px;
 }
 
+@media (max-width: 350px) {
+  .GuestResult .name,
+  .GuestResult .c_name {
+    font-size: 20px;
+  }
+}
+
 .GuestResult .mbti,
 .c_mbti {
   display: flex;
-  font-size: 35px;
+  font-size: 40px;
+}
+
+@media (max-width: 350px) {
+  .GuestResult .mbti,
+  .GuestResult .c_mbti {
+    font-size: 35px;
+  }
 }
 
 .GuestResult .m {
@@ -1027,21 +1189,6 @@ body {
   background: rgba(230, 230, 230, 0.65);
   box-shadow: 7px 5px 4px rgba(0, 0, 0, 0.12);
   border-radius: 30px;
-  margin-bottom: 20px;
-}
-
-@media (max-width: 450px) {
-  .GuestResult .answerCard,
-  .GuestResult .chooseCard {
-    width: 90vw;
-  }
-}
-
-@media (min-width: 900px) {
-  .GuestResult .answerCard,
-  .GuestResult .chooseCard {
-    width: 600px;
-  }
 }
 
 .GuestResult .answerCard .mbti,
@@ -1051,36 +1198,36 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-bottom: 15px;
   font-size: 80px;
-  text-shadow: -2px 0 #000000, 0 2px #000000, 2px 0 #000000, 0 -2px #000000;
+  text-shadow: -2px 0 rgb(0, 0, 0), 0 2px rgb(0, 0, 0), 2px 0 rgb(0, 0, 0),
+    0 -2px rgb(0, 0, 0);
 }
 
-@media (max-width: 450px) {
+@media (max-width: 350px) {
   .GuestResult .answerCard .mbti,
   .GuestResult .chooseCard .mbti {
-    font-size: 60px;
+    font-size: 65px;
   }
 }
 
 .GuestResult .answerCard .m,
 .chooseCard .m {
-  color: #fff6d6;
+  color: rgba(255, 246, 214, 1);
 }
 
 .GuestResult .answerCard .b,
 .chooseCard .b {
-  color: #dbe8f4;
+  color: rgba(219, 232, 244, 1);
 }
 
 .GuestResult .answerCard .t,
 .chooseCard .t {
-  color: #fce9e9;
+  color: rgba(252, 233, 233, 1);
 }
 
 .GuestResult .answerCard .i,
 .chooseCard .i {
-  color: #c0d8cb;
+  color: rgba(192, 216, 203, 1);
 }
 
 .GuestResult .accuracy {
@@ -1095,6 +1242,7 @@ body {
   align-items: center;
   color: #666666;
   font-size: 13px;
+  padding-top: 20px;
 }
 
 .GuestResult .zero {
@@ -1137,7 +1285,7 @@ body {
     color: #f999a0;
   }
   100% {
-    width: 80%;
+    width: 100%;
     opacity: 0.8;
   }
 }
@@ -1153,11 +1301,65 @@ body {
   font-weight: bold;
   white-space: pre-wrap;
   background-color: #f999a0;
-  border: 2px solid #000000;
+  border: 1px solid #282828;
   opacity: 0.8;
-  margin-right: 20%;
+
   /* 애니메이션 graph를 3초동안 실행시킴 (한번만 실행)*/
-  animation: graph 3s 1;
+  animation: graph 2s 1;
+}
+
+.GuestResult .graphAni_0 {
+  margin-right: 100%;
+}
+
+.GuestResult .graphAni_5,
+.GuestResult .graphAni_10 {
+  margin-right: 90%;
+}
+
+.GuestResult .graphAni_15,
+.GuestResult .graphAni_20 {
+  margin-right: 80%;
+}
+
+.GuestResult .graphAni_25,
+.GuestResult .graphAni_30 {
+  margin-right: 70%;
+}
+
+.GuestResult .graphAni_35,
+.GuestResult .graphAni_40 {
+  margin-right: 60%;
+}
+
+.GuestResult .graphAni_45,
+.GuestResult .graphAni_50 {
+  margin-right: 50%;
+}
+
+.GuestResult .graphAni_55,
+.GuestResult .graphAni_60 {
+  margin-right: 40%;
+}
+
+.GuestResult .graphAni_65,
+.GuestResult .graphAni_70 {
+  margin-right: 30%;
+}
+
+.GuestResult .graphAni_75,
+.GuestResult .graphAni_80 {
+  margin-right: 20%;
+}
+
+.GuestResult .graphAni_85,
+.GuestResult .graphAni_90,
+.GuestResult .graphAni_95 {
+  margin-right: 10%;
+}
+
+.GuestResult .graphAni_100 {
+  margin-right: 0%;
 }
 
 .GuestResult .sendMessage {
@@ -1192,9 +1394,6 @@ body {
   border: none;
   background-color: #e6e6e6;
   font-family: "UhBeeSe_hyun";
-  text-align: center;
-  align-items: center;
-  justify-content: center;
   position: relative;
   padding: 17px;
   color: #282828;
@@ -1208,7 +1407,7 @@ body {
 .GuestResult button {
   border: 2px solid #666666;
   color: #282828;
-  margin-top: 15px;
+  margin-top: 20px;
   margin-bottom: 20px;
   background-color: #e6e6e6;
   border-radius: 30px;
@@ -1218,6 +1417,7 @@ body {
   padding-top: 5px;
   font-family: "UhBeeSe_hyun";
   font-size: 14px;
+  cursor: pointer;
 }
 
 .GuestResult .button-wrapper {
@@ -1233,14 +1433,14 @@ body {
 .GuestResult .text {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 10px;
+  gap: 10px;
 }
 
 .GuestResult .icons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 40px;
-  gap: 10px 10px;
+  gap: 10px;
 }
 
 .GuestResult .Home {
