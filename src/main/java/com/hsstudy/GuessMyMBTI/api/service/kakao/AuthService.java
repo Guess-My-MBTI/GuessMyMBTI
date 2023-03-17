@@ -205,7 +205,7 @@ public class AuthService {
 
         try {
             // account가 null 이면 처음 로그인 하는 경우 -> 바로 db 저장
-            if (account.getId() == null) {
+            if (account.getMbti() == null) {
                 System.out.println("처음 로그인 하는 회원입니다.");
                 accountRepository.save(account);
             }
