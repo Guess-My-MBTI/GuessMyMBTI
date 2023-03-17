@@ -1,5 +1,6 @@
 package com.hsstudy.GuessMyMBTI.api.service.guest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.account.Authority;
 import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +27,7 @@ public class GuestServiceImpl implements GuestService {
     private AccountRepository accountRepository;
 
     @Override
-    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
+    public ResponseEntity<String> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
         Long ownerId = Long.parseLong(request.getParameter("id")); // ownerId를 가져와서 같이 저장하기
         System.out.println("ownerId = " + ownerId);
         try {
@@ -70,9 +73,17 @@ public class GuestServiceImpl implements GuestService {
 //                        newGuest.getOwner().getId()
 //                );
                 System.out.println("save 수행 완료");
-                return ResponseEntity.ok().body(newGuest);
+
+                Map<String, Object> resultMap = new HashMap<>();
+                resultMap.put("owner", sharedOwner);
+                resultMap.put("guest", newGuest);
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                String result = objectMapper.writeValueAsString(resultMap);
+
+                return ResponseEntity.ok().body(result);
             } else {
-                return ResponseEntity.ok().body(existGuest);
+                return ResponseEntity.ok().body(null);
             }
         } catch (Exception e) {
             System.out.println("게스트 로그인 실패");
