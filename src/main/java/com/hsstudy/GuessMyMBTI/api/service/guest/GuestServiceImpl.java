@@ -120,6 +120,7 @@ public class GuestServiceImpl implements GuestService {
 
         existGuest.setComment(requestDto.getComment());
         existGuest.setResult(requestDto.getResult());
+        existGuest.setAccuracy(requestDto.getAccuracy());
 
         guestRepository.save(existGuest);
 
