@@ -4,13 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ListName from "../components/ListName";
 import API from "../utils/API";
 import UrlAPI from "../utils/UrlAPI";
-
-//localStorage에서 user name 불러오기
-const name = localStorage.getItem("name");
-// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
-const nameData = [
-  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
-];
+import OwnerMain from "./OwnerMain";
 
 const GuestLogin = () => {
   const navigate = useNavigate();
@@ -22,6 +16,7 @@ const GuestLogin = () => {
     nickName: "",
     role: "ROLE_GUEST",
   });
+  const [ownerName, setOwnerName] = useState("");
 
   const ownerId = new URL(window.location.href).searchParams.get("id");
   const baseUrl = UrlAPI;
@@ -44,9 +39,20 @@ const GuestLogin = () => {
         id: ownerId,
       },
     }).then((res) => {
-      console.log(res);
+      console.log(res.data);
+      localStorage.setItem("name", res.data.kakaoName);
+      localStorage.setItem("owner_answer", res.data.result);
+      localStorage.setItem("mbti", res.data.mbti);
+      setOwnerName(res.data.kakaoName);
     });
   }, []);
+
+  const nameData = [
+    {
+      ownerName: ownerName.length >= 3 ? ownerName.slice(-2) : ownerName,
+      id: 1,
+    },
+  ];
 
   // todo : url 파라미터에서 id 값을 빼와서 post 요청할 때 ownerId를 포함해서 수행하도록 했습니다.
   // todo : 추가적으로 로그인 할 때 조금 느린 경향이 있어서 수빈이처럼 handler를 만들어서 딜레이 주는 것도 좋아보입니당
