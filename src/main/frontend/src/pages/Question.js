@@ -4,13 +4,6 @@ import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
 import UrlAPI from "../utils/UrlAPI";
 
-//localStorage에서 user name 불러오기
-const name = localStorage.getItem("name");
-// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
-const nameData = [
-  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
-];
-
 const Question = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -24,6 +17,12 @@ const Question = () => {
   const baseUrl = UrlAPI;
   const accessToken = localStorage.getItem("access_token");
 
+  //localStorage에서 user name 불러오기
+  const name = localStorage.getItem("name");
+  // 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+  const nameData = [
+    { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+  ];
   // 닉네임 포함해서 보내기
   // token 필요없음
   useEffect(() => {

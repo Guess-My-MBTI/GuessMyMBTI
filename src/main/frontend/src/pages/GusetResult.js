@@ -5,23 +5,23 @@ import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
 import API from "../utils/API";
 
-//localStorage에서 user name 불러오기
-const name = localStorage.getItem("name");
-// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
-const nameData = [
-  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
-];
-
 const GuestResult = () => {
   const navigate = useNavigate();
   const messageInput = useRef();
+
+  //localStorage에서 user name 불러오기
+  const name = localStorage.getItem("name");
+  // 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+  const nameData = [
+    { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+  ];
 
   const mbti = localStorage.getItem("mbti");
   const result = localStorage.getItem("guest_mbti");
   const nickname = localStorage.getItem("nickname");
   const guestId = localStorage.getItem("guest_id");
   const role = localStorage.getItem("role");
-  const owner_answer = JSON.parse(localStorage.getItem("owner_answer"));
+  const owner_answer = localStorage.getItem("owner_answer");
   const guest_answer = JSON.parse(localStorage.getItem("guest_answer"));
 
   // 중복 클릭 방지 (isLoding이 false면 disabled)
@@ -43,15 +43,15 @@ const GuestResult = () => {
   };
 
   const accuracy = calAcc();
-
   const [state, setState] = useState({
     result: result,
     accuracy: accuracy,
     comment: "",
   });
-
+  console.log(state);
   const handleSend = () => {
     setIsLoading(true);
+    console.log("시작");
     API.post("/guest-result", {
       nickname: nickname,
       result: state.result,
@@ -65,7 +65,6 @@ const GuestResult = () => {
         if (res.status === 200) {
           console.log(res);
           alert("전달 완료!");
-          navigate(`/`);
         }
       })
       .catch((error) => console.log(error.res))
