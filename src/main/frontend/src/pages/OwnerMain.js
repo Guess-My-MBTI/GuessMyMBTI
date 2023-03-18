@@ -14,7 +14,7 @@ const OwnerMain = () => {
       id: 0,
       nickname: "",
       result: "",
-      accuracy: 0,
+      accuracy: "",
       comment: "",
     },
   ]);
@@ -41,6 +41,7 @@ const OwnerMain = () => {
         id: ownerId,
       },
     }).then((res) => {
+      console.log(res);
       const _createData = res.data.guests.map((it) => ({
         id: it.id,
         nickname: it.nickname,
@@ -104,13 +105,13 @@ const OwnerMain = () => {
       </div>
       <hr />
       <div className="list">
-        {createData.slice(1).length > 1 ? (
+        {createData.length > 1 ? (
           <ListItem data={createData.slice(1)} />
         ) : (
           <>
             <div className="none-list">
               <p className="sharetext">공유하기</p>
-              <HiOutlineLink className="share" />
+              <HiOutlineLink className="share" onClick={shareLink} />
             </div>
           </>
         )}
