@@ -1,6 +1,7 @@
 package com.hsstudy.GuessMyMBTI.api.controller.mbtiController;
 
 
+import com.hsstudy.GuessMyMBTI.api.domain.account.Account;
 import com.hsstudy.GuessMyMBTI.api.domain.guest.Guest;
 import com.hsstudy.GuessMyMBTI.api.domain.guest.GuestDto;
 import com.hsstudy.GuessMyMBTI.api.service.guest.GuestService;
@@ -18,8 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 public class GuestController {
     private final GuestService guestService;
 
+    @GetMapping("/guest-login")
+    public ResponseEntity<Account> ownerInfo(HttpServletRequest request) {
+        Long ownerId = Long.parseLong(request.getParameter("id"));
+        return guestService.ownerInfo(ownerId);
+    }
+
     @PostMapping("/guest-login")
-    public ResponseEntity<String> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
+    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
         return guestService.guestLogin(requestDto, request);
     }
 
