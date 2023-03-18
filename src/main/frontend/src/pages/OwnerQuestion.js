@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UrlAPI from "../utils/UrlAPI";
 
 const OwnerQuestion = () => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const OwnerQuestion = () => {
   const [id, setId] = useState(0);
   const [answer, setAnswer] = useState([]);
 
-  const baseUrl = "http://localhost:8080/";
+  const baseUrl = UrlAPI;
 
   const accessToken = localStorage.getItem("access_token");
   const ownerId = localStorage.getItem("id");

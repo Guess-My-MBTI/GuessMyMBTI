@@ -2,13 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
-
-//localStorage에서 user name 불러오기
-const name = localStorage.getItem("name");
-// 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
-const nameData = [
-  { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
-];
+import UrlAPI from "../utils/UrlAPI";
 
 const Question = () => {
   const navigate = useNavigate();
@@ -20,9 +14,15 @@ const Question = () => {
   const nickname = localStorage.getItem("nickname");
   const [guestId, setGuestId] = useState("");
 
-  const baseUrl = "http://localhost:8080/";
+  const baseUrl = UrlAPI;
   const accessToken = localStorage.getItem("access_token");
 
+  //localStorage에서 user name 불러오기
+  const name = localStorage.getItem("name");
+  // 이름이 3글자 이상이면 뒤에 두 글자만 가져옴
+  const nameData = [
+    { ownerName: name.length >= 3 ? name.slice(-2) : name, id: 1 },
+  ];
   // 닉네임 포함해서 보내기
   // token 필요없음
   useEffect(() => {

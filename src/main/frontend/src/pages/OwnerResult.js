@@ -4,10 +4,12 @@ import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import { MdOutlineReplay } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import UrlAPI from "../utils/UrlAPI";
+
 const OwnerResult = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const baseUrl = "http://localhost:8080/";
+  const baseUrl = UrlAPI;
 
   const accessToken = localStorage.getItem("access_token");
   const mbti = localStorage.getItem("mbti");

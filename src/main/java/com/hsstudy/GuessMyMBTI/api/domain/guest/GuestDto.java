@@ -14,7 +14,7 @@ public class GuestDto {
     private Account owner;
     private String answer;
     private String comment;
-    private int accuracy;
+    private String accuracy;
     private String result;
 
 }

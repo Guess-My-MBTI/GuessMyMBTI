@@ -42,7 +42,7 @@ public class Guest {
     private String result;
 
     @Column(name = "GUEST_ACC") // 결과 % 정확도
-    private int accuracy;
+    private String accuracy;
 
     @Column(name = "GUEST_COMMENT")
     private String comment;
