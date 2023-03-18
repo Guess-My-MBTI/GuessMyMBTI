@@ -26,8 +26,16 @@ public class GuestServiceImpl implements GuestService {
     @Autowired
     private AccountRepository accountRepository;
 
+
     @Override
-    public ResponseEntity<String> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
+    public ResponseEntity<Account> ownerInfo(Long ownerId) {
+        // todo : try catch로 예외처리 -> url Owner가 없는 경우
+        Account urlOwner = accountRepository.findById(ownerId).orElse(null);
+
+        return ResponseEntity.ok().body(urlOwner);
+    }
+    @Override
+    public ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request) {
         Long ownerId = Long.parseLong(request.getParameter("id")); // ownerId를 가져와서 같이 저장하기
         System.out.println("ownerId = " + ownerId);
         try {
@@ -74,14 +82,14 @@ public class GuestServiceImpl implements GuestService {
 //                );
                 System.out.println("save 수행 완료");
 
-                Map<String, Object> resultMap = new HashMap<>();
-                resultMap.put("owner", sharedOwner);
-                resultMap.put("guest", newGuest);
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                String result = objectMapper.writeValueAsString(resultMap);
-
-                return ResponseEntity.ok().body(result);
+//                Map<String, Object> resultMap = new HashMap<>();
+//                resultMap.put("owner", sharedOwner);
+//                resultMap.put("guest", newGuest);
+//
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                String result = objectMapper.writeValueAsString(resultMap);
+                Guest guest = newGuest;
+                return ResponseEntity.ok().body(guest);
             } else {
                 return ResponseEntity.ok().body(null);
             }
