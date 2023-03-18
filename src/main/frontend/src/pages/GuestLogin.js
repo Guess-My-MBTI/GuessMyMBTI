@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ListName from "../components/ListName";
 import API from "../utils/API";
+import UrlAPI from "../utils/UrlAPI";
 
 //localStorage에서 user name 불러오기
 const name = localStorage.getItem("name");
@@ -21,6 +23,9 @@ const GuestLogin = () => {
     role: "ROLE_GUEST",
   });
 
+  const ownerId = new URL(window.location.href).searchParams.get("id");
+  const baseUrl = UrlAPI;
+
   const handleChangeState = (e) => {
     setState((state) => {
       return {
@@ -30,16 +35,29 @@ const GuestLogin = () => {
     });
   };
 
+  //mount시 owner정보 가져오기 이제 localstorage에서 가져오면 안됨
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `${baseUrl}guest-login`,
+      params: {
+        id: ownerId,
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   // todo : url 파라미터에서 id 값을 빼와서 post 요청할 때 ownerId를 포함해서 수행하도록 했습니다.
   // todo : 추가적으로 로그인 할 때 조금 느린 경향이 있어서 수빈이처럼 handler를 만들어서 딜레이 주는 것도 좋아보입니당
-  const ownerId = new URL(window.location.href).searchParams.get("id");
+
   console.log(ownerId);
   const handleLogin = () => {
     setIsLoading(true);
-    API.post(
-        "/guest-login/?id=" + ownerId,
-        { nickname: state.nickName, role: state.role }
-    )
+    API.post("/guest-login/?id=" + ownerId, {
+      nickname: state.nickName,
+      role: state.role,
+    })
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem("nickname", state.nickName);
