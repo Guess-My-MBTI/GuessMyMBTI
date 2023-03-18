@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListName from "../components/ListName";
+import UrlAPI from "../utils/UrlAPI";
 
 //localStorage에서 user name 불러오기
 const name = localStorage.getItem("name");
@@ -20,7 +21,7 @@ const Question = () => {
   const nickname = localStorage.getItem("nickname");
   const [guestId, setGuestId] = useState("");
 
-  const baseUrl = "http://localhost:8080/";
+  const baseUrl = UrlAPI;
   const accessToken = localStorage.getItem("access_token");
 
   // 닉네임 포함해서 보내기

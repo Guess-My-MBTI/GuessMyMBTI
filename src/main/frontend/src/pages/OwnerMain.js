@@ -4,6 +4,7 @@ import { HiOutlineLink } from "react-icons/hi";
 import Menu from "../components/Menu";
 import ListItem from "../components/ListItem";
 import axios from "axios";
+import UrlAPI from "../utils/UrlAPI";
 
 const OwnerMain = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ const OwnerMain = () => {
   const menuToggle = () => {
     setIsOpen(!isOpen);
   };
-  const baseUrl = "http://localhost:8080/";
+  const baseUrl = UrlAPI;
 
   const accessToken = localStorage.getItem("access_token");
   const mbti = localStorage.getItem("mbti");
