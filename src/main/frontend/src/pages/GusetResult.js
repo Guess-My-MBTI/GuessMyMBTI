@@ -4,6 +4,8 @@ import { AiFillHome } from "react-icons/ai";
 import { HiOutlineLink } from "react-icons/hi";
 import ListName from "../components/ListName";
 import API from "../utils/API";
+// import axios from "axios";
+// import UrlAPI from "../utils/UrlAPI";
 
 const GuestResult = () => {
   const navigate = useNavigate();
@@ -65,6 +67,7 @@ const GuestResult = () => {
         if (res.status === 200) {
           console.log(res);
           alert("전달 완료!");
+          navigate("/");
         }
       })
       .catch((error) => console.log(error.res))
