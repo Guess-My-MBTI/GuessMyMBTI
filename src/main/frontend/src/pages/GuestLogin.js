@@ -81,8 +81,8 @@ const GuestLogin = () => {
     if (state.nickName.length < 1) {
       nickNameInput.current.focus();
       return;
-    } else if (state.nickName.length > 10) {
-      alert("닉네임을 10자 이내로 설정해주세요!");
+    } else if (state.nickName.length > 15) {
+      alert("닉네임을 15자 이내로 설정해주세요!");
       setState({ nickName: "" });
       return;
     } else {
@@ -116,40 +116,47 @@ const GuestLogin = () => {
 
         <p className="guess">맞춰봐</p>
       </div>
-      <div className="Nick">
-        <div className="write_Nick">
-          <p className="N">N</p>
-          <p className="I">I</p>
-          <p className="C">C</p>
-          <p className="K">K</p>
-          <p className="N2">N</p>
-          <p className="A">A</p>
-          <p className="M">M</p>
-          <p className="E">E</p>
 
-          <p className="write"> 을 입력해주세요</p>
+      {isLoading == true ? (
+        <div className="wrapper">
+          <div className="spinner"></div>
         </div>
+      ) : (
+        <div className="Nick">
+          <div className="write_Nick">
+            <p className="N">N</p>
+            <p className="I">I</p>
+            <p className="C">C</p>
+            <p className="K">K</p>
+            <p className="N2">N</p>
+            <p className="A">A</p>
+            <p className="M">M</p>
+            <p className="E">E</p>
 
-        <form className="nickInput">
-          <input
-            placeholder="NICKNAME"
-            name="nickName"
-            ref={nickNameInput}
-            value={state.nickName}
-            onChange={handleChangeState}
-          />
-        </form>
+            <p className="write"> 을 입력해주세요</p>
+          </div>
 
-        <div className="submit">
-          <button
-            className="submitBtn"
-            onClick={handleSubmit}
-            disabled={isLoading}
-          >
-            START
-          </button>
+          <form className="nickInput">
+            <input
+              placeholder="NICKNAME"
+              name="nickName"
+              ref={nickNameInput}
+              value={state.nickName}
+              onChange={handleChangeState}
+            />
+          </form>
+
+          <div className="submit">
+            <button
+              className="submitBtn"
+              onClick={handleSubmit}
+              disabled={isLoading}
+            >
+              START
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
