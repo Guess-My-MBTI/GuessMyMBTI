@@ -33,10 +33,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +41,7 @@ public class AuthService {
     private final AccountRepository accountRepository;
     private final SecurityService securityService;
     private final KakaoTokenRepository kakaoTokenRepository;
+    private final GuestRepository guestRepository;
 
     /* 환경변수 가져오기 */
     @Value("${spring.security.oauth2.client.registration.kakao.clientId}")
@@ -330,4 +328,34 @@ public class AuthService {
 
         return logoutResponse;
     }
+
+
+    public ResponseEntity<String> deleteGuest(Long id) throws JsonProcessingException {
+
+        Account account = accountRepository.findById(id).orElse(null);
+        System.out.println("kakaoUser: " + account);
+        System.out.println("kakaoUser.getGuests: " + account.getGuests());
+
+        if (account == null) {
+            // 예외 처리 등
+
+        } else {
+            account.setMbti(null);
+        }
+
+        List<Guest> guests = account.getGuests();
+
+        for (Guest guest : guests) {
+            guest.setOwner(null);
+            guestRepository.deleteById(guest.getId());
+        }
+
+        accountRepository.save(account);
+
+        String result = "삭제 완료";
+        System.out.println(result);
+
+        return ResponseEntity.ok().body(result);
+    }
+
 }
