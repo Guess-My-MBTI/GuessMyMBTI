@@ -67,4 +67,9 @@ public class AuthController {
         return authService.mainPage(request);
     }
 
+    // todo : 오너가 다시하기를 하면, 게스트 데이터베이스에서 오너 아이디를 가진 게스트들 모두 삭제, 오너의 mbti와 result도 Null값으로 변경
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteGuest(@PathVariable("id") Long id) throws JsonProcessingException {
+        return authService.deleteGuest(id);
+    }
 }
