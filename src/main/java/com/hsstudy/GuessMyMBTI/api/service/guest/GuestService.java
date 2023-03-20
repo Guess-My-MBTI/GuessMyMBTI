@@ -13,4 +13,5 @@ public interface GuestService {
     ResponseEntity<Guest> guestLogin(@RequestBody GuestDto requestDto, HttpServletRequest request);
     ResponseEntity<Guest> guestResult(@RequestBody GuestDto requestDto);
     ResponseEntity<Guest> guestInfo(HttpServletRequest request);
+
 }
