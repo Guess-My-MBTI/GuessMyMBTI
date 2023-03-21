@@ -46,7 +46,7 @@ public class AuthController {
     }
 
     // todo : 로그아웃 수정하기
-    @PostMapping("/owner/logout")
+    @PostMapping("/owner/logout/{id}")
     public ResponseEntity<String> kakaoLogout(@PathVariable("id") Long id) {
         return authService.kakaoLogout(id);
     }
