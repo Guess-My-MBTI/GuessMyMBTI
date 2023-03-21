@@ -305,9 +305,8 @@ public class AuthService {
         return ResponseEntity.ok().body(result);
     }
 
-    public ResponseEntity<String> kakaoLogout(@RequestBody KakaoToken kakaoToken) {
-        Long kakaoUserId = kakaoToken.getId();
-        KakaoToken kakaoUser = kakaoTokenRepository.findById(kakaoUserId).orElse(null);
+    public ResponseEntity<String> kakaoLogout(Long ownerId) {
+        KakaoToken kakaoUser = kakaoTokenRepository.findById(ownerId).orElse(null);
         String kakaoAccessToken = kakaoUser.getKakaoAccessToken();
 
         RestTemplate rt = new RestTemplate();

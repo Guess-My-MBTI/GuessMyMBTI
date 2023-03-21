@@ -47,8 +47,8 @@ public class AuthController {
 
     // todo : 로그아웃 수정하기
     @PostMapping("/owner/logout")
-    public ResponseEntity<String> kakaoLogout(@RequestBody KakaoToken kakaoToken) {
-        return authService.kakaoLogout(kakaoToken);
+    public ResponseEntity<String> kakaoLogout(@PathVariable("id") Long id) {
+        return authService.kakaoLogout(id);
     }
 
     // todo : owner의 mbti 결과 -> EEEEJJJJ... , ESFJ 이거 두개 전달용

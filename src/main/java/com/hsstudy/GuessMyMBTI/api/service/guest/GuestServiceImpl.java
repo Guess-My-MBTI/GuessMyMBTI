@@ -43,6 +43,7 @@ public class GuestServiceImpl implements GuestService {
             System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
             System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
 
+            // todo : id는 owner의 id임 그리고 guest 로그인 하고 나서 게스트의 id를 조회하기까지에 중복된 사람이 잇을 수 있어서 existGuest가 여러개가 될 수 있는 오류가 발생
             Guest existGuest = guestRepository.findByNicknameAndId(requestDto.getNickname(), requestDto.getGuestId()).orElse(null);
 
             System.out.println("existGuest = " + existGuest);
