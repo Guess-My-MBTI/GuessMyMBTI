@@ -3,9 +3,9 @@ os: linux
 
 files:
   - source: /
-    destination: /opt/GuessMyMBTI
+    destination: /opt/testapp
 permissions:
-  - object: /opt/GuessMyMBTI/
+  - object: /opt/testapp/
     owner: ubuntu
     group: ubuntu
     mode: 755
