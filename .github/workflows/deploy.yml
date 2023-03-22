@@ -36,9 +36,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: $AKIA3NCJ7O6WVOST3LSD
-          aws-secret-access-key: $3PVgp/DyOL5XjMrQIde8msYdrsup6YlJXA0PjLPB
-          aws-region: $ap-northeast-2
+          aws-access-key-id: AKIA3NCJ7O6WVOST3LSD
+          aws-secret-access-key: 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
+          aws-region: ap-northeast-2
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://mbti-test-server/$PROJECT_NAME/$GITHUB_SHA.zip
