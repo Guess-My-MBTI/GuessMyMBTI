@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
                 // 내가 직접 만든 헤더 이름을 받을 수 있도록 명시해줍시다
                 .exposedHeaders("Authorization", "Set-Cookie")
                 .allowedMethods("*")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
+//                .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowCredentials(true);
     }
 }

@@ -10,5 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller // JSON, Page 전달 컨트롤러
 @RequiredArgsConstructor
 public class ViewController {
-
+    @GetMapping("/test")
+    public String test() {
+        return "hi";
+    }
 }
