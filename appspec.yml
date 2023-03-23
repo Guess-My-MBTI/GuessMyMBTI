@@ -3,9 +3,9 @@ os: linux
 
 files:
   - source: /
-    destination: /opt/mbti-test-test1
+    destination: /opt/CodeDeployTestApp
 permissions:
-  - object: /opt/mbti-test-test1/
+  - object: /opt/CodeDeployTestApp/
     owner: ubuntu
     group: ubuntu
     mode: 755
