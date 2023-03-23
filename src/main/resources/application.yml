@@ -68,7 +68,7 @@ spring:
           clientSecret: 'x2TJDMqr8vS7e20h5Tokr9iH3uWuYx7e'
           clientAuthenticationMethod: client_secret_post
           authorizationGrantType: authorization_code
-          redirectUri: "https://d3lz6vj0miwxeq.cloudfront.net/login/oauth2/callback/kakao"
+          redirectUri: "https://gmmserver.click/login/oauth2/callback/kakao"
           scope:
             - profile_nickname
             #            - profile_image
