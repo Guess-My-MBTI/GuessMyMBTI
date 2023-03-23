@@ -264,7 +264,7 @@ public class AuthService {
         String ownerId = request.getParameter("id");
 
         StringBuilder sb = new StringBuilder();
-        sb.append("http://localhost:3000/guest-login?id=");
+        sb.append("https://d3lz6vj0miwxeq.cloudfront.net/guest-login?id=");
         sb.append(ownerId);
 
         return sb.toString();
