@@ -36,7 +36,7 @@ public class AuthController {
      */
 
     // todo : 로그인 회원 정보 더 담기
-    @GetMapping("/login/oauth2/callback/kakao/")
+    @GetMapping("/login/oauth2/callback/kakao")
     public ResponseEntity<LoginResponseDto> kakaoLogin(HttpServletRequest request) {
         String code = request.getParameter("code");
         System.out.println("AuthController -> code : " + code);
