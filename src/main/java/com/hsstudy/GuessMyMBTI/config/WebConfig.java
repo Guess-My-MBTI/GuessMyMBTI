@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://d3lz6vj0miwxeq.cloudfront.net/")
+                .allowedOrigins("https://gmmclients.click/")
                 .allowedOriginPatterns("*")
                 .allowedHeaders("*")
                 // 내가 직접 만든 헤더 이름을 받을 수 있도록 명시해줍시다
