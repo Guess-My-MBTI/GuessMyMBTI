@@ -1,6 +1,7 @@
 server:
   port: ${port:8080}
 # 시크릿 지정하기
+# 깃이그노어 등록
 spring:
   profiles.active: local
   # 데이터 소스 설정
