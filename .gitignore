@@ -37,7 +37,6 @@ out/
 .vscode/
 
 *#
-*.jar
 *.sw?
 *~
 .#*
@@ -132,7 +131,6 @@ src/main/frontend/yarn-error.log*
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
