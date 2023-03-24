@@ -6,9 +6,9 @@ spring:
   # 데이터 소스 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${YML_DB_URL}
-    username: ${YML_DB_USERNAME}
-    password: ${YML_DB_PASSWORD}
+    url: ${secrets.YML_DB_URL}
+    username: ${secrets.YML_DB_USERNAME}
+    password: ${secrets.YML_DB_PASSWORD}
     hikari:
       pool-name: jpa-hikari-pool
       maximum-pool-size: 10
@@ -54,17 +54,17 @@ spring:
     oauth2.client:
       registration:
         google:
-          clientId: ${OAUTH_GOOGLE_CLIENT_ID}
-          clientSecret: ${OAUTH_GOOGLE_CLIENT_SECRET}
+          clientId: ${secrets.OAUTH_GOOGLE_CLIENT_ID}
+          clientSecret: ${secrets.OAUTH_GOOGLE_CLIENT_SECRET}
           scope:
             - email
             - profile
         kakao:
-          clientId: ${OAUTH_KAKAO_CLIENT_ID}
-          clientSecret: ${OAUTH_KAKAO_CLIENT_SECRET}
+          clientId: ${secrets.OAUTH_KAKAO_CLIENT_ID}
+          clientSecret: ${secrets.OAUTH_KAKAO_CLIENT_SECRET}
           clientAuthenticationMethod: client_secret_post
           authorizationGrantType: authorization_code
-          redirectUri: ${OAUTH_KAKAO_REDIRECT_URI}
+          redirectUri: ${secrets.OAUTH_KAKAO_REDIRECT_URI}
           scope:
             - profile_nickname
             #            - profile_image
@@ -103,7 +103,7 @@ logging:
 jwt:
   # 터미널에 openssl rand -hex 64 입력하면 생성해줌
   # base64로 인코딩된 암호 키, HS512를 사용할 것이기 때문에, 512비트(64바이트) 이상이 되어야 함
-  secretKey: ${YML_JWT_SECRET_KEY}
+  secretKey: ${secrets.YML_JWT_SECRET_KEY}
   access:
     expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
     header: Authorization
