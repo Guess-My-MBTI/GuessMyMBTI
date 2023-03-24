@@ -69,7 +69,6 @@ target
 secrets.yml
 .gradletasknamecache
 logs
-src/main/resources/application.yml
 
 # react
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -147,4 +146,3 @@ replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java
 /logs/
-src/main/resources/application.yml

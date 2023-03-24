@@ -1,0 +1,112 @@
+server:
+  port: ${port:8080}
+
+spring:
+  profiles.active: local
+  # 데이터 소스 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${YML_DB_URL}
+    username: ${YML_DB_USERNAME}
+    password: ${YML_DB_PASSWORD}
+    hikari:
+      pool-name: jpa-hikari-pool
+      maximum-pool-size: 10
+      connection-timeout: 5000
+      connection-init-sql: SELECT 1
+      validation-timeout: 2000
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      driver-class-name: ${spring.datasource.driver-class-name}
+      jdbc-url: ${spring.datasource.url}
+      username: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+#      data-source-properties:
+#        rewriteBatchedStatements: true
+  # JPA 설정
+  jpa:
+    open-in-view: true
+    generate-ddl: true # true로 설정 시, Entity 어노테이션(@Entity)이 명시된 클래스를 찾아서 ddl을 생성하고 실행
+    show-sql: true # 콘솔에서 sql 보기
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        default_batch_fetch_size: ${chunkSize:100}
+        jdbc.batch_size: 20
+        format_sql: true # 콘솔에서 sql 보기
+  # data.sql로 DB에 내용 자동 삽입
+#  defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: classpath:schema.sql
+#      data-locations: classpath:data.sql
+
+  # Security OAuth
+  security:
+    oauth2.client:
+      registration:
+        google:
+          clientId: ${OAUTH_GOOGLE_CLIENT_ID}
+          clientSecret: ${OAUTH_GOOGLE_CLIENT_SECRET}
+          scope:
+            - email
+            - profile
+        kakao:
+          clientId: ${OAUTH_KAKAO_CLIENT_ID}
+          clientSecret: ${OAUTH_KAKAO_CLIENT_SECRET}
+          clientAuthenticationMethod: client_secret_post
+          authorizationGrantType: authorization_code
+          redirectUri: ${OAUTH_KAKAO_REDIRECT_URI}
+          scope:
+            - profile_nickname
+            #            - profile_image
+            - account_email
+          clientName: Kakao
+
+      # Provider 설정
+      provider:
+        kakao:
+          authorizationUri: https://kauth.kakao.com/oauth/authorize
+          tokenUri: https://kauth.kakao.com/oauth/token
+          userInfoUri: https://kapi.kakao.com/v2/user/me
+          userNameAttribute: id
+
+# cors 설정
+cors:
+  allowed-origins: 'https://gmmclients.click/'
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: '*'
+  max-age: 3600
+
+# Log
+logging:
+  file:
+    name: ${user.dir}/logs/  # 로깅 파일 위치이다.
+  level:  # 각 package 별로 로깅 레벨을 지정할 수 있다.
+    com/hsstudy/GuessMyMBTI : debug
+#    com.project.study.controller : debug
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB
+
+
+# jwt secret key 설정
+jwt:
+  # 터미널에 openssl rand -hex 64 입력하면 생성해줌
+  # base64로 인코딩된 암호 키, HS512를 사용할 것이기 때문에, 512비트(64바이트) 이상이 되어야 함
+  secretKey: ${YML_JWT_SECRET_KEY}
+  access:
+    expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
+    header: Authorization
+  refresh:
+    expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> 하루) * 14(2주))
+    header: Authorization-refresh
