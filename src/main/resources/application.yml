@@ -22,10 +22,6 @@ spring:
       jdbc-url: ${spring.datasource.url}
       username: ${spring.datasource.username}
       password: ${spring.datasource.password}
-#      driver-class-name: ${spring.datasource.driver-class-name}
-#      jdbc-url: ${spring.datasource.url}
-#      username: ${spring.datasource.username}
-#      password: ${spring.datasource.password}
 #      data-source-properties:
 #        rewriteBatchedStatements: true
   # JPA 설정
@@ -90,17 +86,6 @@ cors:
   allowed-headers: '*'
   max-age: 3600
 
-
-## 토큰 관련 secret Key 및 RedirectUri 설정
-#app:
-#  auth:
-#    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-#    tokenExpiry: 1800000
-#    refreshTokenExpiry: 604800000
-#  oauth2:
-#    authorizedRedirectUris:
-#      - http://localhost:3000/oauth/redirect
-
 # Log
 logging:
   file:
@@ -119,11 +104,9 @@ jwt:
   # 터미널에 openssl rand -hex 64 입력하면 생성해줌
   # base64로 인코딩된 암호 키, HS512를 사용할 것이기 때문에, 512비트(64바이트) 이상이 되어야 함
   secretKey: dc7666c597d4536c8cfdb1b5f0010b928aba44f9f0624015276763b15db4956862e2dae61b3b489450b689070c3d7a3beb305a1912f6556e657cc2750bad6992
-
   access:
     expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
     header: Authorization
-
   refresh:
     expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> 하루) * 14(2주))
     header: Authorization-refresh
