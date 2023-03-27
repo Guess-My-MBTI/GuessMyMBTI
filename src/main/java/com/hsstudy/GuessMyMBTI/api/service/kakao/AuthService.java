@@ -342,7 +342,6 @@ public class AuthService {
         } else {
             account.setMbti(null);
             account.setResult(null);
-            accountRepository.save(account);
         }
 
         List<Guest> guests = account.getGuests();
@@ -354,10 +353,11 @@ public class AuthService {
         for (Guest guest : guests) {
             guest.setOwner(null);
             guest.setNickname(null);
-//            guestRepository.deleteById(guest.getId());
+            guestRepository.deleteById(guest.getId());
             // todo : save가 없어서 그런가? DB에서 삭제가 안됨.
 //            guestRepository.delete(guest);
         }
+        accountRepository.save(account);
         String result = "삭제 완료";
         System.out.println(result);
 
