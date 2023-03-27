@@ -34,7 +34,7 @@ public class UserDetailsImpl implements UserDetails {
         return null;
     }
 
-    // todo : 이메일을 필수 요건으로 사용했는데 바꿔야 할 필요가 있음
+    // todo : 이메일을 필수 요건으로 사용했는데 바꿔야 할 필요가 있음 -> 해결 완
     @Override
     public String getUsername() {
         return account.getEmail();

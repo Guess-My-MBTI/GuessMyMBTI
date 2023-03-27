@@ -3,15 +3,16 @@ server:
 # 시크릿 지정하기
 spring:
   profiles.active: local
-  # 데이터 소스 설정
+  # todo : 데이터 소스 설정
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://root:TXZVo1ibfZGqoN0cAlHF@containers-us-west-49.railway.app:6599/railway?serverTimezone=Asia/Seoul
-    username: root
-    password: TXZVo1ibfZGqoN0cAlHF
+    driver-class-name: ${spring.datasource.driver-class-name}
+    url: ${spring.datasource.url}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
     hikari:
       pool-name: jpa-hikari-pool
-      maximum-pool-size: 10
+      # todo : connection pool 을 이용해 DB 속도 빠르게 하기. 10->50으로 바꿀 예정
+      maximum-pool-size: 50
       connection-timeout: 5000
       connection-init-sql: SELECT 1
       validation-timeout: 2000
@@ -54,21 +55,19 @@ spring:
     oauth2.client:
       registration:
         google:
-          clientId: '468310449780-mp1v8li5o22vr6k76l3kppp7buu9iqg7.apps.googleusercontent.com'
-          clientSecret: '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'
+          clientId: ${spring.security.oauth2.client.registration.google.clientId}
+          clientSecret: ${spring.security.oauth2.client.registration.google.clientSecret}
           scope:
             - email
             - profile
         kakao:
-          clientId: 'a1698cd60aafa124b03e4117dd52549f'
-          clientSecret: 'x2TJDMqr8vS7e20h5Tokr9iH3uWuYx7e'
+          clientId: ${spring.security.oauth2.client.registration.kakao.clientId}
+          clientSecret: ${spring.security.oauth2.client.registration.kakao.clientSecret}
           clientAuthenticationMethod: client_secret_post
           authorizationGrantType: authorization_code
-          redirectUri: "https://gmmclients.click/login/oauth2/callback/kakao"
+          redirectUri: ${spring.security.oauth2.client.registration.kakao.redirectUri}
           scope:
             - profile_nickname
-            #            - profile_image
-            - account_email
           clientName: Kakao
 
       # Provider 설정
@@ -103,7 +102,7 @@ logging:
 jwt:
   # 터미널에 openssl rand -hex 64 입력하면 생성해줌
   # base64로 인코딩된 암호 키, HS512를 사용할 것이기 때문에, 512비트(64바이트) 이상이 되어야 함
-  secretKey: dc7666c597d4536c8cfdb1b5f0010b928aba44f9f0624015276763b15db4956862e2dae61b3b489450b689070c3d7a3beb305a1912f6556e657cc2750bad6992
+  secretKey: ${jwt.secretKey}
   access:
     expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
     header: Authorization
