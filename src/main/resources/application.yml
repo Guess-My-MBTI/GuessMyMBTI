@@ -2,6 +2,9 @@ server:
   port: ${port:8080}
 # 시크릿 지정하기
 spring:
+  config:
+    import:
+    - classpath:/application-secret.yml
   profiles.active: local
   # todo : 데이터 소스 설정
   datasource:
