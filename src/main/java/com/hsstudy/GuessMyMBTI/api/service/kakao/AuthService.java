@@ -339,9 +339,9 @@ public class AuthService {
 
         if (account == null) {
             // 예외 처리 등
-
         } else {
             account.setMbti(null);
+            account.setResult(null);
             accountRepository.save(account);
         }
 
@@ -349,11 +349,11 @@ public class AuthService {
 
         for (Guest guest : guests) {
             guest.setOwner(null);
+            guest.setNickname(null);
 //            guestRepository.deleteById(guest.getId());
             // todo : save가 없어서 그런가? DB에서 삭제가 안됨.
-            guestRepository.delete(guest);
+//            guestRepository.delete(guest);
         }
-
         String result = "삭제 완료";
         System.out.println(result);
 
