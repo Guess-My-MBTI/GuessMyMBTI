@@ -30,11 +30,11 @@ spring:
 #        rewriteBatchedStatements: true
   # JPA 설정
   jpa:
-    open-in-view: true
+    open-in-view: false # todo : dev일 때 true로
     generate-ddl: true # true로 설정 시, Entity 어노테이션(@Entity)이 명시된 클래스를 찾아서 ddl을 생성하고 실행
-    show-sql: true # 콘솔에서 sql 보기
+    show-sql: false # 콘솔에서 sql 보기 # todo : dev일 때 true로
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate # todo : dev일 때 update, create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -44,7 +44,7 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
         default_batch_fetch_size: ${chunkSize:100}
         jdbc.batch_size: 20
-        format_sql: true # 콘솔에서 sql 보기
+        format_sql: false # 콘솔에서 sql 보기 # todo : dev일 때 true로
   # data.sql로 DB에 내용 자동 삽입
 #  defer-datasource-initialization: true
 #  sql:
