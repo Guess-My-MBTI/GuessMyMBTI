@@ -246,6 +246,7 @@ public class AuthService {
         return headers;
     }
 
+    // todo : Guest-result에서도 아래 로직(먼저 저장)과 비슷하게 하기
     public ResponseEntity<SetOwnerResultDto> ownerResultSave(@RequestBody SetOwnerResultDto requestDto) {
         System.out.println("requestDto.getId() = " + requestDto.getId());
         Account existOwner = accountRepository.findById(requestDto.getId()).orElse(null);
@@ -263,6 +264,7 @@ public class AuthService {
     public String share(HttpServletRequest request) {
         String ownerId = request.getParameter("id");
 
+        // todo : id에 이상한 값 여러개 붙여서 넘긴다음 자르면 되지 않을까?
         StringBuilder sb = new StringBuilder();
         sb.append("http://localhost:3000/guest-login?id=");
         sb.append(ownerId);
@@ -337,20 +339,21 @@ public class AuthService {
 
         if (account == null) {
             // 예외 처리 등
-
         } else {
             account.setMbti(null);
+            account.setResult(null);
+            accountRepository.save(account);
         }
 
         List<Guest> guests = account.getGuests();
 
         for (Guest guest : guests) {
             guest.setOwner(null);
-            guestRepository.deleteById(guest.getId());
+            guest.setNickname(null);
+//            guestRepository.deleteById(guest.getId());
+            // todo : save가 없어서 그런가? DB에서 삭제가 안됨.
+//            guestRepository.delete(guest);
         }
-
-        accountRepository.save(account);
-
         String result = "삭제 완료";
         System.out.println(result);
 
