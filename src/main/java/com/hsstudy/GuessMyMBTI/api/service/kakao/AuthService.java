@@ -284,10 +284,6 @@ public class AuthService {
 
         List<Guest> guests = account.getGuests();
 
-//        if (guests.size() > 1) {
-//            // 예외 처리 등
-//            return ResponseEntity.ok().body("none Guests");
-//        }
 
         // guest 완료한사람만 출력하기
         ArrayList<Guest> guestList = new ArrayList<>();
