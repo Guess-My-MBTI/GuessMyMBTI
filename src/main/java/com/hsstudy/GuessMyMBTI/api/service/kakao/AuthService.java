@@ -284,10 +284,10 @@ public class AuthService {
 
         List<Guest> guests = account.getGuests();
 
-        if (guests == null) {
-            // 예외 처리 등
-            return null;
-        }
+//        if (guests.size() > 1) {
+//            // 예외 처리 등
+//            return ResponseEntity.ok().body("none Guests");
+//        }
 
         // guest 완료한사람만 출력하기
         ArrayList<Guest> guestList = new ArrayList<>();
@@ -342,18 +342,22 @@ public class AuthService {
         } else {
             account.setMbti(null);
             account.setResult(null);
-            accountRepository.save(account);
         }
 
         List<Guest> guests = account.getGuests();
 
+//        if (guests.size() > 1) {
+//            return ResponseEntity.ok().body("none guestes");
+//        }
+
         for (Guest guest : guests) {
             guest.setOwner(null);
             guest.setNickname(null);
-//            guestRepository.deleteById(guest.getId());
+            guestRepository.deleteById(guest.getId());
             // todo : save가 없어서 그런가? DB에서 삭제가 안됨.
 //            guestRepository.delete(guest);
         }
+        accountRepository.save(account);
         String result = "삭제 완료";
         System.out.println(result);
 

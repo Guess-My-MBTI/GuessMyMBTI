@@ -40,6 +40,7 @@ public class GuestServiceImpl implements GuestService {
         Long ownerId = Long.parseLong(request.getParameter("id")); // ownerId를 가져와서 같이 저장하기
         System.out.println("ownerId = " + ownerId);
         try {
+            // todo : 로직 뜯어고치기
             System.out.println("AuthService : guestLogin 실행 -> requestDto = " + requestDto);
             System.out.println("GuestRepository 에 nickname로 유저 있는지 판단하기");
 
