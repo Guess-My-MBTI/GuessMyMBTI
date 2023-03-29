@@ -256,7 +256,8 @@ public class AuthService {
 
         // todo : id에 이상한 값 여러개 붙여서 넘긴다음 자르면 되지 않을까?
         StringBuilder sb = new StringBuilder();
-        sb.append("http://localhost:3000/guest-login?id=");
+//        sb.append("http://localhost:3000/guest-login?id=");
+        sb.append("https://gmmclients.click/guest-login?id=");
         sb.append(ownerId);
 
         return sb.toString();
