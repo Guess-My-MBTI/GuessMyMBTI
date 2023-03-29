@@ -179,22 +179,12 @@ public class AuthService {
     public ResponseEntity<LoginResponseDto> kakaoLogin(String kakaoAccessToken) { // 토큰은 잘 전달됐음
         // kakaoAccessToken 으로 회원정보 받아오기
         Account account = getKakaoInfo(kakaoAccessToken); // 제일 처음 수행하는 부분에서 에러가 발생했음
-        System.out.println("빌더로 생성한 account :" +
-                account.getKakaoName() + " " +
-                account.getNickname() + " " +
-                account.getLoginType() + " " +
-                account.getEmail() + " " +
-                account.getAuthority() + " " +
-                account.getId());
 
         LoginResponseDto loginResponseDto = new LoginResponseDto();
         loginResponseDto.setLoginSuccess(true);
         loginResponseDto.setAccount(account);
-        System.out.println("loginResponseDto = " + loginResponseDto);
 
         // todo : 카카오 엑세스 토큰은 db에만 저장하고 프론트에는 전달하지 않기 -> 일단 약간 해결?
-//        loginResponseDto.setKakaoAccessToken(kakaoAccessToken);
-//        System.out.println("loginResponseDto = " + loginResponseDto);
         kakaoTokenSave(account.getId() ,kakaoAccessToken);
 
         Account existOwner = accountRepository.findById(account.getId()).orElse(null);
@@ -248,11 +238,11 @@ public class AuthService {
 
     // todo : Guest-result에서도 아래 로직(먼저 저장)과 비슷하게 하기
     public ResponseEntity<SetOwnerResultDto> ownerResultSave(@RequestBody SetOwnerResultDto requestDto) {
-        System.out.println("requestDto.getId() = " + requestDto.getId());
         Account existOwner = accountRepository.findById(requestDto.getId()).orElse(null);
-        System.out.println("existOwner = " + existOwner.getId() + " " + existOwner.getEmail());
+
         existOwner.setMbti(requestDto.getMbti());
         existOwner.setResult(requestDto.getResult());
+
         accountRepository.save(existOwner);
 
         SetOwnerResultDto setOwnerResultDto = new SetOwnerResultDto();
@@ -341,10 +331,6 @@ public class AuthService {
         }
 
         List<Guest> guests = account.getGuests();
-
-//        if (guests.size() > 1) {
-//            return ResponseEntity.ok().body("none guestes");
-//        }
 
         for (Guest guest : guests) {
             guest.setOwner(null);

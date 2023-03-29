@@ -65,11 +65,12 @@ public class GuestServiceImpl implements GuestService {
         return ResponseEntity.ok().body(existGuest);
     }
 
+
+    // todo : 얘는 필요 없을 것 같음
     @Override
     public ResponseEntity<Guest> guestInfo(HttpServletRequest request) {
         String nickname = request.getParameter("nickname");
         Long guestId = Long.parseLong(request.getParameter("guestId"));
-        // todo : 중복되면 에러뜸
         Guest currentGuest = guestRepository.findByNicknameAndId(nickname, guestId).orElse(null);
         return ResponseEntity.ok().body(currentGuest);
     }
