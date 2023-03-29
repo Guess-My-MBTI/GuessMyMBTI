@@ -24,17 +24,6 @@ public class AuthController {
     private final AuthService authService;
     private final SecurityService securityService;
 
-    /**
-     * @sierrah 인가코드로 카카오 서버에 액세스 토큰을 요청하고,
-     * 해당 토큰으로 사용자 정보를 받아와 DB에 저장하는 API 입니다.
-     * GET 방식으로 param 에 들어오는 인가코드를 추출하여 처리 로직을 수행합니다.
-     * <p>
-     * 🤔 생각해볼 것 :
-     * - 유저 정보를 불러오는 과정은 다른 컨트롤러 단으로 분리? (=> 해결 완료!)
-     * - 로그인 요청이 들어오면, JWT 를 매번 발급? (=> 해야지 임뫄..)
-     * - refresh token 만료시?
-     */
-
     // todo : 로그인 회원 정보 더 담기
     @GetMapping("/login/oauth2/callback/kakao")
     public ResponseEntity<LoginResponseDto> kakaoLogin(HttpServletRequest request) {

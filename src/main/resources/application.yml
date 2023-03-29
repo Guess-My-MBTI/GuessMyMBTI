@@ -23,8 +23,8 @@ spring:
       jdbc-url: ${spring.datasource.url}
       username: ${spring.datasource.username}
       password: ${spring.datasource.password}
-#      data-source-properties:
-#        rewriteBatchedStatements: true
+  #      data-source-properties:
+  #        rewriteBatchedStatements: true
   # JPA 설정
   jpa:
     open-in-view: true # todo : dev일 때 true로
@@ -43,12 +43,12 @@ spring:
         jdbc.batch_size: 20
         format_sql: true # 콘솔에서 sql 보기 # todo : dev일 때 true로
   # data.sql로 DB에 내용 자동 삽입
-#  defer-datasource-initialization: true
-#  sql:
-#    init:
-#      mode: always
-#      schema-locations: classpath:schema.sql
-#      data-locations: classpath:data.sql
+  #  defer-datasource-initialization: true
+  #  sql:
+  #    init:
+  #      mode: always
+  #      schema-locations: classpath:schema.sql
+  #      data-locations: classpath:data.sql
 
   # Security OAuth
   security:
@@ -65,6 +65,7 @@ spring:
           clientSecret: 'x2TJDMqr8vS7e20h5Tokr9iH3uWuYx7e'
           clientAuthenticationMethod: client_secret_post
           authorizationGrantType: authorization_code
+#          redirectUri: "http://localhost:3000/login/oauth2/callback/kakao"
           redirectUri: "https://gmmclients.click/login/oauth2/callback/kakao"
           scope:
             - profile_nickname
@@ -80,23 +81,23 @@ spring:
 
 # cors 설정
 cors:
-  allowed-origins: 'https://gmmclients.click/'
+#  allowed-origins: "http://localhost:3000/"
+  allowed-origins: "https://gmmclients.click/"
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-  allowed-headers: '*'
+  allowed-headers: "*"
   max-age: 3600
 
 # Log
 logging:
   file:
-    name: ${user.dir}/logs/  # 로깅 파일 위치이다.
-  level:  # 각 package 별로 로깅 레벨을 지정할 수 있다.
-    com/hsstudy/GuessMyMBTI : debug
-#    com.project.study.controller : debug
+    name: ${user.dir}/logs/ # 로깅 파일 위치이다.
+  level: # 각 package 별로 로깅 레벨을 지정할 수 있다.
+    com/hsstudy/GuessMyMBTI: debug
+  #    com.project.study.controller : debug
   logback:
     rollingpolicy:
       max-history: 7
       max-file-size: 10MB
-
 
 # jwt secret key 설정
 jwt:
