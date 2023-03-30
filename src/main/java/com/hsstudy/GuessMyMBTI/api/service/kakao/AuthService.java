@@ -70,9 +70,9 @@ public class AuthService {
         // Http Body 객체 생성
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code"); //카카오 공식문서 기준 authorization_code 로 고정
-        params.add("client_id", KAKAO_CLIENT_ID); //카카오 앱 REST API 키
+        params.add("client_id", KAKAO_CLIENT_ID); // 카카오 앱 REST API 키
         params.add("redirect_uri", KAKAO_REDIRECT_URI);
-        params.add("code", code); //인가 코드 요청시 받은 인가 코드값, 프론트에서 받아오는 그 코드
+        params.add("code", code); // 인가 코드 요청시 받은 인가 코드값, 프론트에서 받아오는 그 코드
         params.add("client_secret", KAKAO_CLIENT_SECRET);
 
         // 헤더와 바디 합치기 위해 Http Entity 객체 생성
