@@ -11,6 +11,7 @@ SpringBoot, React
 - Kakao Social Login
 - JWT Authentication
 - REST API 
+- AWS 배포 및 GitHub Actions 와 CD 구축
 
 
 ### 개요
