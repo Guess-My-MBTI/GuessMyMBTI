@@ -8,14 +8,12 @@ MBTI로 소통가능한 웹서비스 페이지
 
 ## Getting Started
 
-```
 [www.gmmclients.click](https://www.gmmclients.click)
-```
 
 ## Deployment
-
+```
 AWS EC2, S3, CodeDeploy & GitHub Actions
-
+```
 ## Built With
 
 * Spring Boot Gradle
