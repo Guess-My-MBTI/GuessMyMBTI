@@ -2,13 +2,21 @@
 
 Made by 남윤형 서아름 양종욱 임수빈
 
-## 사용 스택
+### 사용 스택
 
 SpringBoot, React
 
 <br/>
+## Back End -양종욱 -남윤형
 
-## 개요
+### 사용 기술
+- Spring Security
+- Kakao Social Login
+- JWT Authentication
+- REST API 
+
+
+### 개요
 
 MBTI로 소통가능한 웹서비스 페이지
 
@@ -27,16 +35,5 @@ Owner 화면
 <br>
 User 화면
 <img width="1058" alt="스크린샷 2023-01-24 오후 11 44 16" src="https://user-images.githubusercontent.com/67284987/214324953-f7ce7475-a75d-49a4-8830-32abc833bbd2.png">
-
-
 <br/>
-
-## Back End -양종욱 -남윤형
-
-### 사용 기술
-- Spring Security
-- Kakao Social Login
-- JWT Authentication
-- REST API 
-
 
