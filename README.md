@@ -4,8 +4,7 @@ Made by 남윤형 서아름 양종욱 임수빈
 
 ## 사용 스택
 
-SpringBoot<br>
-React
+SpringBoot, React
 
 <br/>
 
@@ -17,8 +16,6 @@ MBTI로 소통가능한 웹서비스 페이지
 ## Client
 
 Front End -서아름 -임수빈
-
----
 
 <br>
 Owner 화면
@@ -34,6 +31,12 @@ User 화면
 
 <br/>
 
-## Back End -양종욱 -
+## Back End -양종욱 -남윤형
+
+### 사용 기술
+- Spring Security
+- Kakao Social Login
+- JWT Authentication
+- REST API 
 
 
