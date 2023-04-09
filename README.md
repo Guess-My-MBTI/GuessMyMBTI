@@ -9,7 +9,7 @@ MBTI로 소통가능한 웹서비스 페이지
 ## Getting Started
 
 ```
-www.gmmclients.click
+[www.gmmclients.click](https://www.gmmclients.click)
 ```
 
 ## Deployment
