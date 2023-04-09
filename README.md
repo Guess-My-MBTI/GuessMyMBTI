@@ -10,7 +10,7 @@ SpringBoot, React
 - Spring Security
 - Kakao Social Login
 - JWT Authentication
-- REST API 
+- REST API 설계 기반
 - AWS 배포 및 GitHub Actions 와 CD 구축
 
 
