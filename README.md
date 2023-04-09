@@ -1,12 +1,9 @@
 # GuessMyMBTI
-
 Made by 남윤형 서아름 양종욱 임수빈
 
 ### 사용 스택
-
 SpringBoot, React
 
-<br/>
 ### Back End -양종욱 -남윤형
 
 ### 사용 기술
