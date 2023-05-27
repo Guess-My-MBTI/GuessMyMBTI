@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     /* 프론트 서버와의 CORS 이슈를 해결하기 위한 메소드입니다.*/
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
+        registry.addMapping("/login/oauth2/callback/kakao")
 //                .allowedOrigins("http://localhost:3000/")
                 .allowedOrigins("https://gmmclients.click/")
                 .allowedOriginPatterns("*")
