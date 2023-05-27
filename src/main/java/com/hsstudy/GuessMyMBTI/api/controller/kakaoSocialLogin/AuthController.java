@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "https://gmmclients.click",allowedHeaders = "*")
 public class AuthController {
 
     private final AuthService authService;
