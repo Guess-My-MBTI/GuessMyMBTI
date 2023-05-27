@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/opt/CodeDeployTestApp
+REPOSITORY=/opt/GMM-CodeDeploy-App
 cd $REPOSITORY
 
 APP_NAME=GuessMyMBTI
