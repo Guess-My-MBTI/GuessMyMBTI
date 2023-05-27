@@ -3,9 +3,9 @@ os: linux
 
 files:
   - source: /
-    destination: /opt/CodeDeployTestApp
+    destination: /opt/GMM-CodeDeploy-App
 permissions:
-  - object: /opt/CodeDeployTestApp/
+  - object: /opt/GMM-CodeDeploy-App/
     owner: ubuntu
     group: ubuntu
     mode: 755
