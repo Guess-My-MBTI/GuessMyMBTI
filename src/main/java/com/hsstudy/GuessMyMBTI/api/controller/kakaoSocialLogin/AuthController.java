@@ -25,8 +25,8 @@ public class AuthController {
     private final SecurityService securityService;
 
     @GetMapping("/aws")
-    public String awsGet() {
-        return "200";
+    public ResponseEntity awsGet() {
+        return ResponseEntity.ok(200);
     }
     // todo : 로그인 회원 정보 더 담기
     @GetMapping("/login/oauth2/callback/kakao")
