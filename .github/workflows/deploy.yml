@@ -10,7 +10,7 @@ env:
 jobs:
   deploy:
     name: DEPLOY
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -41,7 +41,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://bucket-server-test/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://gmm-s3-bucket/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name CodeDeployTestApp --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=bucket-server-test,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name GMM-CodeDeploy-App --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=gmm-s3-bucket,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
