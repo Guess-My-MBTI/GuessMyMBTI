@@ -8,10 +8,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        // registry.addMapping("/**")
+        //         .allowedOriginPatterns("https://gmmclients.click")
+        //         .allowedHeaders("Authorization", "Set-Cookie")
+        //         .exposedHeaders("Authorization", "Set-Cookie")
+        //         .allowedMethods("*")
+        //         .allowCredentials(true);
         registry.addMapping("/**")
-                .allowedOriginPatterns("https://gmmclients.click")
-                .allowedHeaders("Authorization", "Set-Cookie")
-                .exposedHeaders("Authorization", "Set-Cookie")
+                .allowedOriginPatterns("*")
+                .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true);
     }
